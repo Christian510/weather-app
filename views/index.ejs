@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <header>
+    <div id="logo">
+      <a >Logo</a>
+    </div>
+    <div class="searchWeather">
+      <form action="/" method="get">
+        <label for="currentWeather">Get Current Weather:</label>
+        <input type="text" id="city" name="city_field" value="City">
+        <input type="text" id="state" name="state_field" value="State">
+        <input type="submit" value="Get Weather">
+      </form>
+    </div>
+  </header>
+  <h1><%= title %></h1>
+  <section>
+    <h2>Current Weather for <%= city %> , <%= state %></h2>
+    <h3>Late updated on <%= date %> </h3>
+    <div><img src="<%= icon %>" alt="weather icon" ></img></div>
+    <p>Current Temperature: <%= temp %> F</p>
+    <p>Current windspeed: <%= windSpeed %> mph</p>
+  </section>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
