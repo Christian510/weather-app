@@ -1,0 +1,1552 @@
+[
+    {
+        "id": 5553955,
+        "name": "Rathdrum",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.89196,
+            "lat": 47.813728
+        }
+    },
+    {
+        "id": 5583714,
+        "name": "Aberdeen",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.838333,
+            "lat": 42.94408
+        }
+    },
+    {
+        "id": 5583739,
+        "name": "Ada County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.126221,
+            "lat": 43.416561
+        }
+    },
+    {
+        "id": 5583814,
+        "name": "Albion",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.578056,
+            "lat": 42.412689
+        }
+    },
+    {
+        "id": 5583981,
+        "name": "American Falls",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.854439,
+            "lat": 42.786018
+        }
+    },
+    {
+        "id": 5583997,
+        "name": "Ammon",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.966637,
+            "lat": 43.469639
+        }
+    },
+    {
+        "id": 5584200,
+        "name": "Arco",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.300278,
+            "lat": 43.63657
+        }
+    },
+    {
+        "id": 5584299,
+        "name": "Ashton",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.448288,
+            "lat": 44.071579
+        }
+    },
+    {
+        "id": 5584508,
+        "name": "Baker",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.734512,
+            "lat": 45.09465
+        }
+    },
+    {
+        "id": 5584639,
+        "name": "Bannock County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.212189,
+            "lat": 42.650749
+        }
+    },
+    {
+        "id": 5585000,
+        "name": "Bear Lake County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.313538,
+            "lat": 42.312431
+        }
+    },
+    {
+        "id": 5585010,
+        "name": "Bear Lake Sands",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.253532,
+            "lat": 42.051601
+        }
+    },
+    {
+        "id": 5585265,
+        "name": "Bellevue",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.260597,
+            "lat": 43.46352
+        }
+    },
+    {
+        "id": 5585304,
+        "name": "Benewah County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.626282,
+            "lat": 47.208241
+        }
+    },
+    {
+        "id": 5585826,
+        "name": "Bingham County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.311638,
+            "lat": 43.17408
+        }
+    },
+    {
+        "id": 5586093,
+        "name": "Blackfoot",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.344978,
+            "lat": 43.190472
+        }
+    },
+    {
+        "id": 5586437,
+        "name": "Boise",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.203453,
+            "lat": 43.613499
+        }
+    },
+    {
+        "id": 5586489,
+        "name": "Bonner County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.001343,
+            "lat": 48.83326
+        }
+    },
+    {
+        "id": 5586496,
+        "name": "Bonners Ferry",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.316307,
+            "lat": 48.69133
+        }
+    },
+    {
+        "id": 5586500,
+        "name": "Bonneville County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.50106,
+            "lat": 43.41658
+        }
+    },
+    {
+        "id": 5586587,
+        "name": "Boulder City (historical)",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.069351,
+            "lat": 48.602718
+        }
+    },
+    {
+        "id": 5586641,
+        "name": "Boundary County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.00135,
+            "lat": 48.95826
+        }
+    },
+    {
+        "id": 5587232,
+        "name": "Buhl",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.759491,
+            "lat": 42.599072
+        }
+    },
+    {
+        "id": 5587385,
+        "name": "Burley",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.792793,
+            "lat": 42.53574
+        }
+    },
+    {
+        "id": 5587585,
+        "name": "Cabarton",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.040131,
+            "lat": 44.435452
+        }
+    },
+    {
+        "id": 5587698,
+        "name": "Caldwell",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.687363,
+            "lat": 43.662941
+        }
+    },
+    {
+        "id": 5587779,
+        "name": "Cambridge",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.675987,
+            "lat": 44.572659
+        }
+    },
+    {
+        "id": 5587975,
+        "name": "Canyon County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.95932,
+            "lat": 43.87516
+        }
+    },
+    {
+        "id": 5588062,
+        "name": "Cardwell",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.563499,
+            "lat": 47.209068
+        }
+    },
+    {
+        "id": 5588160,
+        "name": "Cascade",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.041801,
+            "lat": 44.516281
+        }
+    },
+    {
+        "id": 5588204,
+        "name": "Cassia County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.563622,
+            "lat": 42.31908
+        }
+    },
+    {
+        "id": 5588524,
+        "name": "Challis",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.231728,
+            "lat": 44.504639
+        }
+    },
+    {
+        "id": 5588842,
+        "name": "Chubbuck",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.466087,
+            "lat": 42.92075
+        }
+    },
+    {
+        "id": 5588908,
+        "name": "Clark County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.709167,
+            "lat": 44.500191
+        }
+    },
+    {
+        "id": 5589173,
+        "name": "Coeur d'Alene",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.780472,
+            "lat": 47.677681
+        }
+    },
+    {
+        "id": 5589857,
+        "name": "Council",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.438202,
+            "lat": 44.729889
+        }
+    },
+    {
+        "id": 5590266,
+        "name": "Crystal (historical)",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.32589,
+            "lat": 44.267422
+        }
+    },
+    {
+        "id": 5590383,
+        "name": "Custer County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.221741,
+            "lat": 44.875198
+        }
+    },
+    {
+        "id": 5590453,
+        "name": "Dalton Gardens",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.770187,
+            "lat": 47.72963
+        }
+    },
+    {
+        "id": 5591399,
+        "name": "Driggs",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.111328,
+            "lat": 43.723251
+        }
+    },
+    {
+        "id": 5591649,
+        "name": "Dubois",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.23082,
+            "lat": 44.1763
+        }
+    },
+    {
+        "id": 5591778,
+        "name": "Eagle",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.354012,
+            "lat": 43.695438
+        }
+    },
+    {
+        "id": 5592170,
+        "name": "Eastport",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.181313,
+            "lat": 48.999401
+        }
+    },
+    {
+        "id": 5592510,
+        "name": "Elmore County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.43869,
+            "lat": 43.312119
+        }
+    },
+    {
+        "id": 5592562,
+        "name": "Emmett",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.499298,
+            "lat": 43.873501
+        }
+    },
+    {
+        "id": 5592697,
+        "name": "Fairfield",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.791733,
+            "lat": 43.346569
+        }
+    },
+    {
+        "id": 5592973,
+        "name": "Filer",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.607819,
+            "lat": 42.57019
+        }
+    },
+    {
+        "id": 5593399,
+        "name": "Fort Hall",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.438309,
+            "lat": 43.033249
+        }
+    },
+    {
+        "id": 5593620,
+        "name": "Fremont County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.376068,
+            "lat": 44.750198
+        }
+    },
+    {
+        "id": 5593708,
+        "name": "Fruitland",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.91655,
+            "lat": 44.00766
+        }
+    },
+    {
+        "id": 5593764,
+        "name": "Gale",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.719414,
+            "lat": 43.76519
+        }
+    },
+    {
+        "id": 5593814,
+        "name": "Garden City",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.238167,
+            "lat": 43.622108
+        }
+    },
+    {
+        "id": 5594090,
+        "name": "Glengary",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.374634,
+            "lat": 48.22187
+        }
+    },
+    {
+        "id": 5594092,
+        "name": "Glenns Ferry",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.300903,
+            "lat": 42.954899
+        }
+    },
+    {
+        "id": 5594307,
+        "name": "Gooding",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.713112,
+            "lat": 42.938789
+        }
+    },
+    {
+        "id": 5594474,
+        "name": "Grangeville",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.122368,
+            "lat": 45.926552
+        }
+    },
+    {
+        "id": 5594956,
+        "name": "Hailey",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.315323,
+            "lat": 43.51963
+        }
+    },
+    {
+        "id": 5595086,
+        "name": "Hansen",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.30101,
+            "lat": 42.530682
+        }
+    },
+    {
+        "id": 5595277,
+        "name": "Havens",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.59082,
+            "lat": 43.27047
+        }
+    },
+    {
+        "id": 5595320,
+        "name": "Hayden",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.786583,
+            "lat": 47.766022
+        }
+    },
+    {
+        "id": 5595503,
+        "name": "Heman",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.79747,
+            "lat": 43.956299
+        }
+    },
+    {
+        "id": 5595591,
+        "name": "Heyburn",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.763901,
+            "lat": 42.558521
+        }
+    },
+    {
+        "id": 5595728,
+        "name": "Hillcrest",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.182892,
+            "lat": 43.563499
+        }
+    },
+    {
+        "id": 5595881,
+        "name": "Homedale",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.933762,
+            "lat": 43.617661
+        }
+    },
+    {
+        "id": 5596230,
+        "name": "Howard",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.298203,
+            "lat": 46.276279
+        }
+    },
+    {
+        "id": 5596462,
+        "name": "Idaho City",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.834549,
+            "lat": 43.828499
+        }
+    },
+    {
+        "id": 5596467,
+        "name": "Idaho County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.626213,
+            "lat": 45.958248
+        }
+    },
+    {
+        "id": 5596475,
+        "name": "Idaho Falls",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.034142,
+            "lat": 43.466579
+        }
+    },
+    {
+        "id": 5596512,
+        "name": "Idaho",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.251183,
+            "lat": 44.500198
+        }
+    },
+    {
+        "id": 5596741,
+        "name": "Iona",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.933022,
+            "lat": 43.526299
+        }
+    },
+    {
+        "id": 5597034,
+        "name": "Jerome",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.518646,
+            "lat": 42.724072
+        }
+    },
+    {
+        "id": 5597538,
+        "name": "Kamiah",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.029312,
+            "lat": 46.227119
+        }
+    },
+    {
+        "id": 5597606,
+        "name": "Kellogg",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.119331,
+            "lat": 47.538261
+        }
+    },
+    {
+        "id": 5597711,
+        "name": "Ketchum",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.363663,
+            "lat": 43.68074
+        }
+    },
+    {
+        "id": 5597783,
+        "name": "Kimberly",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.364761,
+            "lat": 42.533798
+        }
+    },
+    {
+        "id": 5597922,
+        "name": "Kootenai County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.626297,
+            "lat": 47.708241
+        }
+    },
+    {
+        "id": 5597955,
+        "name": "Kuna",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.42012,
+            "lat": 43.491829
+        }
+    },
+    {
+        "id": 5598185,
+        "name": "Lapwai",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.804871,
+            "lat": 46.404888
+        }
+    },
+    {
+        "id": 5598264,
+        "name": "Latah County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.001282,
+            "lat": 47.125172
+        }
+    },
+    {
+        "id": 5598464,
+        "name": "Lemhi County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.00119,
+            "lat": 45.666592
+        }
+    },
+    {
+        "id": 5598527,
+        "name": "Lewis County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.626259,
+            "lat": 46.16655
+        }
+    },
+    {
+        "id": 5598538,
+        "name": "Lewiston",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.017662,
+            "lat": 46.41655
+        }
+    },
+    {
+        "id": 5598542,
+        "name": "Lewiston Orchards",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.975433,
+            "lat": 46.38044
+        }
+    },
+    {
+        "id": 5598674,
+        "name": "Lincoln",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.964409,
+            "lat": 43.51297
+        }
+    },
+    {
+        "id": 5599665,
+        "name": "Lowell",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.595688,
+            "lat": 46.14407
+        }
+    },
+    {
+        "id": 5599930,
+        "name": "Madison County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.876083,
+            "lat": 43.91658
+        }
+    },
+    {
+        "id": 5600035,
+        "name": "Malad City",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.250801,
+            "lat": 42.191589
+        }
+    },
+    {
+        "id": 5600229,
+        "name": "Marsing",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.813202,
+            "lat": 43.545441
+        }
+    },
+    {
+        "id": 5600363,
+        "name": "McCall",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.09874,
+            "lat": 44.911011
+        }
+    },
+    {
+        "id": 5600685,
+        "name": "Meridian",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.39151,
+            "lat": 43.61211
+        }
+    },
+    {
+        "id": 5600729,
+        "name": "Mica",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.8713,
+            "lat": 47.620461
+        }
+    },
+    {
+        "id": 5600748,
+        "name": "Michaud",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.614433,
+            "lat": 42.89019
+        }
+    },
+    {
+        "id": 5600890,
+        "name": "Middleton",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.62014,
+            "lat": 43.706829
+        }
+    },
+    {
+        "id": 5601299,
+        "name": "Montpelier",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.297699,
+            "lat": 42.322151
+        }
+    },
+    {
+        "id": 5601462,
+        "name": "Moreland",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.442482,
+            "lat": 43.222691
+        }
+    },
+    {
+        "id": 5601538,
+        "name": "Moscow",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.000168,
+            "lat": 46.732391
+        }
+    },
+    {
+        "id": 5601615,
+        "name": "Mountain Home",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.6912,
+            "lat": 43.13295
+        }
+    },
+    {
+        "id": 5601827,
+        "name": "Murphy",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.552338,
+            "lat": 43.21822
+        }
+    },
+    {
+        "id": 5601933,
+        "name": "Nampa",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.563461,
+            "lat": 43.540722
+        }
+    },
+    {
+        "id": 5602080,
+        "name": "New Plymouth",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.819038,
+            "lat": 43.969891
+        }
+    },
+    {
+        "id": 5602115,
+        "name": "Nez Perce County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.626259,
+            "lat": 46.625172
+        }
+    },
+    {
+        "id": 5602128,
+        "name": "Nezperce",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.2407,
+            "lat": 46.23489
+        }
+    },
+    {
+        "id": 5602844,
+        "name": "Oneida County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.50386,
+            "lat": 42.234921
+        }
+    },
+    {
+        "id": 5602909,
+        "name": "Orofino",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.255142,
+            "lat": 46.479351
+        }
+    },
+    {
+        "id": 5602934,
+        "name": "Osburn",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.999329,
+            "lat": 47.506039
+        }
+    },
+    {
+        "id": 5603018,
+        "name": "Owyhee County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.061768,
+            "lat": 42.55962
+        }
+    },
+    {
+        "id": 5603240,
+        "name": "Paris",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.401039,
+            "lat": 42.22715
+        }
+    },
+    {
+        "id": 5603310,
+        "name": "Parma",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.943207,
+            "lat": 43.78516
+        }
+    },
+    {
+        "id": 5603391,
+        "name": "Paul",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.783348,
+            "lat": 42.60796
+        }
+    },
+    {
+        "id": 5603393,
+        "name": "Payette",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.933769,
+            "lat": 44.07822
+        }
+    },
+    {
+        "id": 5603860,
+        "name": "Pinehurst",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.237389,
+            "lat": 47.538811
+        }
+    },
+    {
+        "id": 5604033,
+        "name": "Plummer",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.888512,
+            "lat": 47.335178
+        }
+    },
+    {
+        "id": 5604045,
+        "name": "Pocatello",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.445534,
+            "lat": 42.8713
+        }
+    },
+    {
+        "id": 5604222,
+        "name": "Ponderay",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.533798,
+            "lat": 48.305481
+        }
+    },
+    {
+        "id": 5604353,
+        "name": "Post Falls",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.951591,
+            "lat": 47.71796
+        }
+    },
+    {
+        "id": 5604439,
+        "name": "Power County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.818321,
+            "lat": 42.693249
+        }
+    },
+    {
+        "id": 5604473,
+        "name": "Preston",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.876617,
+            "lat": 42.09631
+        }
+    },
+    {
+        "id": 5604510,
+        "name": "Priest River",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.909363,
+            "lat": 48.18074
+        }
+    },
+    {
+        "id": 5605008,
+        "name": "Reclamation Village",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.488701,
+            "lat": 43.335449
+        }
+    },
+    {
+        "id": 5605242,
+        "name": "Rexburg",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.789688,
+            "lat": 43.826019
+        }
+    },
+    {
+        "id": 5605321,
+        "name": "Rigby",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.91497,
+            "lat": 43.672409
+        }
+    },
+    {
+        "id": 5605582,
+        "name": "Rock Creek",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.305588,
+            "lat": 42.43214
+        }
+    },
+    {
+        "id": 5605923,
+        "name": "Rouse",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.479149,
+            "lat": 43.226582
+        }
+    },
+    {
+        "id": 5606000,
+        "name": "Rupert",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.677231,
+            "lat": 42.61908
+        }
+    },
+    {
+        "id": 5606187,
+        "name": "Saint Anthony",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.682182,
+            "lat": 43.966301
+        }
+    },
+    {
+        "id": 5606232,
+        "name": "Saint Maries",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.562668,
+            "lat": 47.31435
+        }
+    },
+    {
+        "id": 5606275,
+        "name": "Salmon",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.895897,
+            "lat": 45.175751
+        }
+    },
+    {
+        "id": 5606338,
+        "name": "Sampson",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.008469,
+            "lat": 45.51767
+        }
+    },
+    {
+        "id": 5606401,
+        "name": "Sandpoint",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.553253,
+            "lat": 48.276588
+        }
+    },
+    {
+        "id": 5606743,
+        "name": "Selle",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.489639,
+            "lat": 48.356869
+        }
+    },
+    {
+        "id": 5607051,
+        "name": "Shelley",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -112.123306,
+            "lat": 43.381302
+        }
+    },
+    {
+        "id": 5607205,
+        "name": "Shoshone",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.405884,
+            "lat": 42.93602
+        }
+    },
+    {
+        "id": 5607807,
+        "name": "Snow (historical)",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.791809,
+            "lat": 46.299881
+        }
+    },
+    {
+        "id": 5607916,
+        "name": "Soda Springs",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.604668,
+            "lat": 42.654369
+        }
+    },
+    {
+        "id": 5608388,
+        "name": "Spirit Lake",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.86853,
+            "lat": 47.96629
+        }
+    },
+    {
+        "id": 5608754,
+        "name": "Star",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.493462,
+            "lat": 43.692108
+        }
+    },
+    {
+        "id": 5609169,
+        "name": "Sugar City",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.748299,
+            "lat": 43.872971
+        }
+    },
+    {
+        "id": 5609286,
+        "name": "Sun Valley",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.351723,
+            "lat": 43.697128
+        }
+    },
+    {
+        "id": 5609454,
+        "name": "Swan Valley",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.341621,
+            "lat": 43.456032
+        }
+    },
+    {
+        "id": 5609855,
+        "name": "Teton County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.37606,
+            "lat": 43.91658
+        }
+    },
+    {
+        "id": 5609907,
+        "name": "The String",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.088547,
+            "lat": 43.584641
+        }
+    },
+    {
+        "id": 5610054,
+        "name": "Three Creek",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.1595,
+            "lat": 42.071301
+        }
+    },
+    {
+        "id": 5610350,
+        "name": "Torreys",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.602287,
+            "lat": 44.253529
+        }
+    },
+    {
+        "id": 5610655,
+        "name": "Troy",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.7696,
+            "lat": 46.736839
+        }
+    },
+    {
+        "id": 5610810,
+        "name": "Twin Falls",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.460869,
+            "lat": 42.562969
+        }
+    },
+    {
+        "id": 5610815,
+        "name": "Twin Falls County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.644493,
+            "lat": 42.35046
+        }
+    },
+    {
+        "id": 5610980,
+        "name": "Ucon",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.96386,
+            "lat": 43.596298
+        }
+    },
+    {
+        "id": 5611156,
+        "name": "Valley County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.126244,
+            "lat": 45.12767
+        }
+    },
+    {
+        "id": 5611251,
+        "name": "Victor",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -111.111328,
+            "lat": 43.602699
+        }
+    },
+    {
+        "id": 5611375,
+        "name": "Wallace",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -115.92794,
+            "lat": 47.474091
+        }
+    },
+    {
+        "id": 5611570,
+        "name": "Washington County",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -117.001282,
+            "lat": 44.75016
+        }
+    },
+    {
+        "id": 5611730,
+        "name": "Weiser",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.96933,
+            "lat": 44.250999
+        }
+    },
+    {
+        "id": 5611758,
+        "name": "Wendell",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -114.704224,
+            "lat": 42.775742
+        }
+    },
+    {
+        "id": 5612431,
+        "name": "Wilder",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -116.911819,
+            "lat": 43.676552
+        }
+    },
+    {
+        "id": 5612492,
+        "name": "Williams Lake Resort",
+        "state": "ID",
+        "country": "US",
+        "coord": {
+            "lon": -113.965897,
+            "lat": 45.011871
+        }
+    }
+]

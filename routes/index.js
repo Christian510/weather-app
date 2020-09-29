@@ -5,12 +5,18 @@ let WeatherData = require('../models/WeatherData');
 /* GET home page. */
 // router.get('/', getWeatherData);
 router.get('/', function (req, res, next) {
+  // use these values to set the city and state for the weather url
+  const city = req.query.city_field;
+  const state = req.query.state_field;
 
-  WeatherData.locateCityState(cityData => {
-      console.log("arg: ", cityData);
-      // const location = cityData(l => l.city == city && l.state == state);
-      // cb(location);
-  });
+  // console.log("input city: ",city);
+  // console.log("input state: ",state);
+
+  WeatherData.setLocation(city, state);
+
+  // WeatherData.locateCityState(cityData => {
+
+  // });
 
   WeatherData.fetchData(data => {
     // const dateObj = new Date(data.dt);
