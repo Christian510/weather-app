@@ -21,9 +21,10 @@ const getCityData = cb => {
     });
 }
 
-const getCurrentWeather = (city, state, cb) => {
+const getCurrentWeather = (id, cb) => {
+    // console.log("id arg: ",id);
     const key = '483d4bdaf7c3a0f5ee0c0297e784ecb5';
-    const cityID = '5586437';
+    let cityID = id;
     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
         .then(function (response) {
             cb(response);
@@ -34,19 +35,16 @@ const getCurrentWeather = (city, state, cb) => {
 }
 
 module.exports = class WeatherData {
-    // pass url args and set location
-    static setLocation(city, state, cb) {
-        getCurrentWeather(city, state, cb);
-    }
+
     // Fetches current weather
-    static fetchData(cb) {
-        getCurrentWeather(cb);
-    }
+    static getWeather(city, state, cb) {
+        getCityData(function(cityData) {
+            
+            const cityID = cityData.find(c => c.name == city);
+            let id = cityID.id
+            console.log("id: ", id);
 
-    // Fetch city, state, country for input lookup
-
-    static locateCityState(cb) {
-        getCityData(cb);
-        getCurrentWeather(city, state, cb);
+            getCurrentWeather(id, cb);
+        }); 
     }
 }
