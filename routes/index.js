@@ -4,8 +4,12 @@ var weatherController = require('../controllers/weather')
 
 /* GET home page. */
 
-router.get('/', weatherController.getWeather);
+router.get('/city', weatherController.getWeatherByCity);
 
+router.post('/city', (req, res, next) => {
+    console.log(req.body);
+    res.redirect('/');
+})
 // route to display weather.
 
 // route to save favorite cities.
