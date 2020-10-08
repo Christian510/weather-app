@@ -3,6 +3,22 @@ var router = express.Router();
 var weatherController = require('../controllers/weather');
 const WeatherData = require('../models/WeatherData');
 
+
+const location = {
+    city: '',
+    state: '',
+};
+
+function cleanUpData(str){
+
+    // if(req.body !=)
+    let parsedReq = str.split(", ");
+    // console.log("parsedReq: ",parsedReq);
+    let cleanReq = parsedReq.filter(value => value !== '' );
+    location.city = cleanReq[0];
+    location.state = cleanReq[1];
+}
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
 
@@ -13,23 +29,33 @@ router.get('/', (req, res, next) => {
 
 // Display current weather for a city
 router.post('/weather', (req, res, next) => {
-    console.log("req.body: ",req.body);
-    // 1. pass req.body to WeatherData
-    // 2. sanitize data.
-    // 3. split string into city and state vars
-    // 4. find matching city in json data and return it's id.
-    // 5. render the data to the page.
-
-    res.render('weather/current-weather', {
-        title: "Weather Me Now",
-        city: 'City',
-        state: 'State',
-        temp: 'Temperature',
-        windSpeed: 'Windspeed', 
-        // icon: `http://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`,
-        icon: 'weather image goes here',
-        date: 'date of weather reading',
+    // sanitize data.
+    let str = req.body.city_state.toLowerCase();
+    cleanUpData(str);    
+    // render the data to the page.
+    WeatherData.getWeather( location, apiResp => {
+        const weather = apiResp.data;
+        // console.log("weather: ",weather);
+        
+        let dt = weather.dt;
+        const timeOfWeatherReading = new Date(dt * 1000);
+        let options = { month: 'short', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric', timeZoneName: 'short'};
+        let time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
+        console.log(time);
+        let date_time = `Current conditions for ${time}`;
+        // console.log(date_time);
+        res.render('weather/current-weather', {
+            title: "Weather Me Now",
+            time: date_time,
+            city: weather.name,
+            state: weather.state,
+            temp: weather.main.temp,
+            windSpeed: weather.wind.speed, 
+            icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
+            date: 'date of weather reading',
+        });
     });
+
 });
 
 // route to save favorite cities.

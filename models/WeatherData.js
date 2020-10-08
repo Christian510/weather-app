@@ -1,3 +1,4 @@
+
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -37,12 +38,13 @@ const getCurrentWeather = (id, cb) => {
 module.exports = class WeatherData {
 
     // Fetches current weather
-    static getWeather(city, state, cb) {
+    static getWeather(l, cb) {
+        // console.log(l.city);
+        let city = l.city;
+        let state = l.state;
         getCityData(function(cityData) {
-
-            const cityID = cityData.find(c => c.name == city);
+            const cityID = cityData.find(d => d.name.toLowerCase() == city && d.state.toLowerCase() == state);
             let id = cityID.id
-            console.log("id: ", id);
 
             getCurrentWeather(id, cb);
         }); 
