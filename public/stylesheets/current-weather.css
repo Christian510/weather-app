@@ -1,0 +1,12 @@
+.icon {
+    width: 100%;
+}
+img {
+    display: inherit;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.city {
+    text-align: center;
+}

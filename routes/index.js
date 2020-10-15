@@ -23,7 +23,7 @@ function cleanUpData(str){
 router.get('/', (req, res, next) => {
 
     res.render('weather/index', {
-      title: 'Weather Me Now'
+      title: 'Weather Basics'
     }); 
 });
 
@@ -35,30 +35,56 @@ router.post('/weather', (req, res, next) => {
     // render the data to the page.
     WeatherData.getWeather( location, apiResp => {
         const weather = apiResp.data;
-        // console.log("weather: ",weather);
+        console.log("weather: ",weather);
         
         let dt = weather.dt;
-        const timeOfWeatherReading = new Date(dt * 1000);
+        const timeOfWeatherReading = new Date( dt * 1000 );
         let options = { month: 'short', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric', timeZoneName: 'short'};
-        let time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
-        console.log(time);
-        let date_time = `Current conditions for ${time}`;
-        // console.log(date_time);
+        let date_time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
         res.render('weather/current-weather', {
-            title: "Weather Me Now",
+            title: "Weather Basics",
             time: date_time,
             city: weather.name,
             state: weather.state,
-            temp: weather.main.temp,
-            windSpeed: weather.wind.speed, 
+            temp: Math.round(weather.main.temp),
+            windSpeed: Math.round(weather.wind.speed),
+            windDir: weather.wind.deg,
+            sunrise: weather.sys.sunrise,
+            sunset: weather.sys.sunset,
+            clouds: weather.clouds.all,
             icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
-            date: 'date of weather reading',
+            main: weather.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
+            rain: weather.rain,
+            snow: weather.snow,
         });
     });
 
 });
+router.get('/5-day-forecast', (req, res, next) => {
+    res.write('<body>');
+    res.write('<h1>5 Day Forecast</h1>')
+    res.write('<ul>');
+    res.write('<li>5-day forecast card</li>');
+    res.write('<li>forecast details</li>');
+    res.write('<li></li>');
+    res.write('</ul>');
+    res.write('</body>');
+    res.end();
+});
 
-// route to save favorite cities.
+router.get('/edit-city-list', (req, res, next) => {
+    res.write('<body>');
+    res.write('<h1>Edit City List</h1>')
+    res.write('<ul>');
+    res.write('<li>city card</li>');
+    res.write('<li>Delete button</li>');
+    res.write('<li>Edit Name button</li>');
+    res.write('</ul>');
+    res.write('</body>');
+    res.end();
+});
+
+
 
 
 module.exports = router;

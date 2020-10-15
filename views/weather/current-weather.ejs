@@ -1,16 +1,60 @@
-
-<%- include('../includes/head.ejs') %> 
-
+<%- include('../includes/head.ejs') %>
+<link rel='stylesheet' href='/stylesheets/current-weather.css' />
 </head>
 
 <body>
-<%- include('../includes/navigation.ejs') %> 
-<section>
-    <div><img src="<%= icon %>" alt="weather icon" ></img></div>
-    <p> <%= time %>  </p>
-    <p>Current Weather for <%= city %> , <%= state %></p>
-    <p>Last updated on <%= date %> </p>
-    <p>Current Temperature: <%= temp %> F</p>
-    <p>Current windspeed: <%= windSpeed %> mph</p>
-</section>
-<%- include('../includes/end.ejs') %> 
+    <%- include('../includes/navigation.ejs') %>
+    <section>
+        <section>
+            <div>
+                <div>
+                    <h3 class="city"><%= city %></h3>
+                </div>
+                <div>
+                    <div class="icon">
+                        <img src="<%= icon %>" alt="weather icon"></img>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2> <%= temp %> F</h2>
+            </div>
+            <div>
+                <p> <%= time %> </p>
+            </div>
+            <div>
+                <p>Wind <%= windSpeed %> mph</p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <p>Sunrise</p>
+            </div>
+            <div>
+                <p>Sunset</p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <p>Precipitation</p>
+                <div>
+                    
+                </div>
+            </div>
+            <div>
+                <p>Chance of Rain </p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <p>Pressure</p>
+            </div>
+            <div>
+                <p>Humidity</p>
+            </div>
+        </section>
+    </section>
+    <%- include('../includes/end.ejs') %>
