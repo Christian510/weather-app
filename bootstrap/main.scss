@@ -1,0 +1,44 @@
+$default-bg: #b7cefb;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+.home-bg-color {
+    background-color:$default-bg;
+}
+
+.form-control {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.btn {
+    text-align: left;
+}
+
+.btn-lg {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+}
+.list-group {
+    padding-right: 0;
+}
+
+.flex-center {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+.align-items {
+    display: flex;
+    align-content: center;
+}
+

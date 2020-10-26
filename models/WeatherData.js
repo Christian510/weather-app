@@ -36,10 +36,30 @@ const getCurrentWeather = (id, cb) => {
 }
 
 module.exports = class WeatherData {
+    constructor(custom_title, city, state, time, temp, windDir, windSpeed, sunrise, sunset, clouds, rain, snow, icon) {
+        this.custom_title = this.custom_title;
+        this.city = city;
+        this.state = state;
+        this.time = time;
+        this.description = this.description;
+        this.temp = temp;
+        this.humidity = this.humidity;
+        
+        this.windSpeed = windSpeed;
+        this.windDir = windDir;
+        this.sunrise = sunrise;
+        this.sunset = this.sunset;
+        this.clouds = clouds;
+        this.rain = rain;
+        this.snow = snow;
+        this.icon = icon;
+    }
 
+    save() {
+
+    }
     // Fetches current weather
     static getWeather(l, cb) {
-        // console.log(l.city);
         let city = l.city;
         let state = l.state;
         getCityData(function(cityData) {

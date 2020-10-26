@@ -2,46 +2,53 @@
 <link rel='stylesheet' href='/stylesheets/current-weather.css' />
 </head>
 
-<body>
-    <%- include('../includes/navigation.ejs') %>
+<body class="current-weather">
     <section>
-        <section>
-            <div>
-                <div>
-                    <h3 class="city"><%= city %></h3>
+        <section class="container">
+            <div style="background-color: deepskyblue;" class="row">
+                <div style="background-color: forestgreen;" class="col-xm">
+                    <div>
+                        <h2 class="city"><%= city %></h2>
+                        <p><%= observation %> </p>
+                    </div>
+                    <div>
+                        <p> <%= time %> </p>
+                    </div>
                 </div>
-                <div>
+                <div class="col-xm">
                     <div class="icon">
                         <img src="<%= icon %>" alt="weather icon"></img>
                     </div>
+                </div>
+                <div class="col-xm">
                     <div>
-                        
+                        <h2> <%= temp %> F</h2>
+                    </div>
+                    <div>
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-up-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path fill-rule="evenodd" d="M10.828 10.828a.5.5 0 0 1-.707 0L6.025 6.732V9.5a.5.5 0 0 1-1 0V5.525a.5.5 0 0 1 .5-.5H9.5a.5.5 0 0 1 0 1H6.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
+                          </svg>
+                    </div>
+                    <div>
+                        <p>Wind <%= windSpeed %> mph NNE</p>
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
             <div>
-                <h2> <%= temp %> F</h2>
+                <p>Sunrise: <%= sunrise %> </p>
             </div>
             <div>
-                <p> <%= time %> </p>
-            </div>
-            <div>
-                <p>Wind <%= windSpeed %> mph</p>
+                <p>Sunset: <%= sunset %> </p>
             </div>
         </section>
         <section>
             <div>
-                <p>Sunrise</p>
-            </div>
-            <div>
-                <p>Sunset</p>
-            </div>
-        </section>
-        <section>
-            <div>
-                <p>Precipitation</p>
+                <p>Humidity: <%= humidity %> </p>
                 <div>
-                    
+
                 </div>
             </div>
             <div>
@@ -50,10 +57,10 @@
         </section>
         <section>
             <div>
-                <p>Pressure</p>
+                <p>Pressure: <%= pressure %> mmHg</p>
             </div>
             <div>
-                <p>Humidity</p>
+                <p>Humidity <%= humidity %> %</p>
             </div>
         </section>
     </section>

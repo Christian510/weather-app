@@ -13,7 +13,7 @@ function cleanUpData(str){
 
     // if(req.body !=)
     let parsedReq = str.split(", ");
-    // console.log("parsedReq: ",parsedReq);
+    console.log("parsedReq: ",parsedReq);
     let cleanReq = parsedReq.filter(value => value !== '' );
     location.city = cleanReq[0];
     location.state = cleanReq[1];
@@ -31,7 +31,8 @@ router.get('/', (req, res, next) => {
 router.post('/weather', (req, res, next) => {
     // sanitize data.
     let str = req.body.city_state.toLowerCase();
-    cleanUpData(str);    
+    cleanUpData(str); 
+    // console.log("location: ", location);   
     // render the data to the page.
     WeatherData.getWeather( location, apiResp => {
         const weather = apiResp.data;
@@ -39,14 +40,17 @@ router.post('/weather', (req, res, next) => {
         
         let dt = weather.dt;
         const timeOfWeatherReading = new Date( dt * 1000 );
-        let options = { month: 'short', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric', timeZoneName: 'short'};
+        let options = { month: 'short', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric'};
         let date_time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
         res.render('weather/current-weather', {
             title: "Weather Basics",
             time: date_time,
+            observation: weather.weather[0].main,
             city: weather.name,
             state: weather.state,
             temp: Math.round(weather.main.temp),
+            humidity: weather.main.humidity,
+            pressure: weather.main.pressure,
             windSpeed: Math.round(weather.wind.speed),
             windDir: weather.wind.deg,
             sunrise: weather.sys.sunrise,
