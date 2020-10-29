@@ -2,19 +2,39 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const { listenerCount } = require('process');
 const appDir = path.dirname(process.mainModule.filename);
 
-const p = path.join(
-    path.dirname(appDir),
-    'data',
-    // 'city_list.json',
-    'sample_list.json'
-    );
+const p = {
+    "findCity": path.join(
+        path.dirname(appDir),
+        'data',
+        // 'city_list.json',
+        'sample_list.json'
+        ),
+    "savedSearches": path.join(
+        path.dirname(appDir),
+        'data',
+        // 'city_list.json',
+        'saved_searches.json'
+        )
+}
+
+
 
 const getCityData = cb => {
-    fs.readFile(p, (err, fileContent) => {
+    fs.readFile(p.findCity, (err, fileContent) => {
         if(err){
             console.log(err);
+            cb([]);
+        } else {
+            cb(JSON.parse(fileContent));
+        }
+    });
+}
+const getSavedSearches = cb => {
+    fs.readFile(p.savedSearches, (err, fileContent) => {
+        if(err){
             cb([]);
         } else {
             cb(JSON.parse(fileContent));
@@ -36,26 +56,22 @@ const getCurrentWeather = (id, cb) => {
 }
 
 module.exports = class WeatherData {
-    constructor(custom_title, city, state, time, temp, windDir, windSpeed, sunrise, sunset, clouds, rain, snow, icon) {
+    constructor(custom_title, city, city_id, state, lat, long) {
         this.custom_title = this.custom_title;
         this.city = city;
+        this.city_id = city_id;
         this.state = state;
-        this.time = time;
-        this.description = this.description;
-        this.temp = temp;
-        this.humidity = this.humidity;
-        
-        this.windSpeed = windSpeed;
-        this.windDir = windDir;
-        this.sunrise = sunrise;
-        this.sunset = this.sunset;
-        this.clouds = clouds;
-        this.rain = rain;
-        this.snow = snow;
-        this.icon = icon;
+        this.lat = lat;
+        this.long = long;
     }
 
     save() {
+        getSavedSearches(location => {
+            locations.push(this);
+            fs.writeFile(p, JSON.stringify(location), err => {
+                console.log(err);
+            });
+        });
 
     }
     // Fetches current weather
@@ -69,4 +85,8 @@ module.exports = class WeatherData {
             getCurrentWeather(id, cb);
         }); 
     }
+
+    static getSavedLocations(cb) {
+        getSavedSearches(cb);
+    };
 }

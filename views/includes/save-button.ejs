@@ -1,1 +1,6 @@
-<button type="button" class="btn btn-success save-button">Save Weather</button>
+<form action="/save-weather" method="post">
+    <button type="submit" class="btn btn-success save-button">Save Weather</button>
+    <input type="hidden" name="city" value="<%= city %>">
+    <input type="hidden" name="city_id" value="<%= cityID %>">
+    <input type="hidden" name="state" value="<%= state %>">
+</form>
