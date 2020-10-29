@@ -1,12 +1,37 @@
-.icon {
-    width: 100%;
+
+.current-weather{
+    background-color:var(--sky-blue);
+    color: var(--white);
 }
+
 img {
     display: inherit;
     margin-left: auto;
     margin-right: auto;
 }
 
-.city {
-    text-align: center;
+.weather-description {
+    padding-top: 1rem;
 }
+
+.col-rt {
+    width: 50%;
+    padding-left: 1.5rem;
+}
+.col-lft {
+    width: 50%;
+    padding-right: 1.5rem;
+}
+
+.white-ln-btm {
+    border-bottom: 1px solid white;
+    margin-bottom: 16px;
+}
+
+.white-ln-top {
+    border-top: 1px solid white;
+}
+
+
+
+

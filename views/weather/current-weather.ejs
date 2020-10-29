@@ -1,67 +1,79 @@
 <%- include('../includes/head.ejs') %>
-<link rel='stylesheet' href='/stylesheets/current-weather.css' />
+<link type="text/css" rel='stylesheet' href='/css/current-weather.css' />
 </head>
 
 <body class="current-weather">
-    <section>
-        <section class="container">
-            <div style="background-color: deepskyblue;" class="row">
-                <div style="background-color: forestgreen;" class="col-xm">
+    <section class="container mt-3">
+        <div>
+            <div class="row">
+                <div class="col pr-0">
                     <div>
                         <h2 class="city"><%= city %></h2>
                         <p><%= observation %> </p>
                     </div>
                     <div>
-                        <p> <%= time %> </p>
+                        <p class="font-14"> <%= time %> </p>
                     </div>
                 </div>
-                <div class="col-xm">
-                    <div class="icon">
+                <div class="col-xs d-flex align-items-center px-0">
+                    <div>
                         <img src="<%= icon %>" alt="weather icon"></img>
                     </div>
                 </div>
-                <div class="col-xm">
-                    <div>
-                        <h2> <%= temp %> F</h2>
+                <div class="col pl-0 d-flex flex-column justify-content-center">
+                    <div class="d-flex justify-content-center">
+                        <h2> <%= temp %>&deg F</h2>
                     </div>
-                    <div>
-                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-up-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path fill-rule="evenodd" d="M10.828 10.828a.5.5 0 0 1-.707 0L6.025 6.732V9.5a.5.5 0 0 1-1 0V5.525a.5.5 0 0 1 .5-.5H9.5a.5.5 0 0 1 0 1H6.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
-                          </svg>
+                    <div class="mb-2 d-flex justify-content-center">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-up-left-circle"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path fill-rule="evenodd"
+                                d="M10.828 10.828a.5.5 0 0 1-.707 0L6.025 6.732V9.5a.5.5 0 0 1-1 0V5.525a.5.5 0 0 1 .5-.5H9.5a.5.5 0 0 1 0 1H6.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+                        </svg>
                     </div>
-                    <div>
-                        <p>Wind <%= windSpeed %> mph NNE</p>
+                    <div class="text-center">
+                        <p class="font-14">Wind <%= windSpeed %> mph NNE</p>
                     </div>
                 </div>
             </div>
-        </section>
-        <section>
-            <div>
-                <p>Sunrise: <%= sunrise %> </p>
-            </div>
-            <div>
-                <p>Sunset: <%= sunset %> </p>
-            </div>
-        </section>
-        <section>
-            <div>
-                <p>Humidity: <%= humidity %> </p>
-                <div>
-
+        </div>
+        <div class="weather-description white-ln-top white-ln-btm">
+            <p>Today: Snow conditions with loc visibility. The high will be 33°.  Partly cloudy tonight with a low of 23°</p>
+        </div>
+        <div class="container weather-data">
+            <div class="row">
+                <div class="col-xm col-lft">
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light">SUNSET: </p>
+                        <p class="mb-0"><%= sunrise %> </p>
+                    </div>
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light">CHANCE OF RAIN</p>
+                        <p class="mb-0">20%</p>
+                    </div>
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light">PRESSURE:</p>
+                        <p class="mb-0"><%= pressure %> mmHg</p>
+                    </div>
+                </div>
+                <div class="col-xm col-rt">
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light">SUNSET:</p>
+                        <p class="mb-0"><%= sunset %> </p>
+                    </div>
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light">HUMIDITY:</p>
+                        <p class="mb-0"> <%= humidity %> </p>
+                    </div>
                 </div>
             </div>
-            <div>
-                <p>Chance of Rain </p>
+            <div class="save-weather">
+                <%- include('../includes/save-button.ejs') %>
             </div>
-        </section>
-        <section>
-            <div>
-                <p>Pressure: <%= pressure %> mmHg</p>
-            </div>
-            <div>
-                <p>Humidity <%= humidity %> %</p>
-            </div>
-        </section>
+        </div>
+        <%- include('../includes/nav-bottom.ejs') %> 
     </section>
+    <%- include('../includes/footer.ejs') %> 
     <%- include('../includes/end.ejs') %>

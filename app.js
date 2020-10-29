@@ -5,24 +5,18 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const nodeSassMiddleware = require('node-sass-middleware');
+// const compileSass = require('express-compile-sass');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
 
+// Sass Compiler
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// Express-Bootstrap
-app.use(nodeSassMiddleware({
-  src: path.join(__dirname, 'bootstrap'),
-  dest: path.join(__dirname, 'public/css'),
-  // debug: true,
-  indentedSyntax: false,
-  sourceMap: true
-}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
