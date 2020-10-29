@@ -96,20 +96,20 @@
 
 
 .margin-lft {
-    margin-left: 12rem;
+    margin-left: 8.6rem;
 }
 
 .btn {
     text-align: left;
 }
 
-.btn-delete {
+.button-edit {
     color: var(--white);
     background-color: var(--gray-3);
 }
 
-.btn-delete div {
-    margin-left: 15.5rem;
+.button-edit div {
+    margin-left: 8.6rem;
 }
 
 .save-button {
@@ -118,4 +118,8 @@
 }
 .save-weather {
     margin-top: 1rem;
+}
+
+.button-title {
+    width: 150px;
 }

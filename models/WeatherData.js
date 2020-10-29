@@ -56,19 +56,17 @@ const getCurrentWeather = (id, cb) => {
 }
 
 module.exports = class WeatherData {
-    constructor(custom_title, city, city_id, state, lat, long) {
-        this.custom_title = this.custom_title;
+    constructor(city, city_id, state, custom_title) {
         this.city = city;
-        this.city_id = city_id;
+        this.id = city_id;
         this.state = state;
-        this.lat = lat;
-        this.long = long;
     }
 
     save() {
-        getSavedSearches(location => {
+        getSavedSearches(locations => {
+            console.log("this: ",this);
             locations.push(this);
-            fs.writeFile(p, JSON.stringify(location), err => {
+            fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
                 console.log(err);
             });
         });

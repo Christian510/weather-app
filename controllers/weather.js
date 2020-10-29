@@ -15,7 +15,7 @@ function cleanUpData(str){
 
 exports.getIndex = (req, res, next) => {
   WeatherData.getSavedLocations(locations => {
-    console.log(locations);
+    console.log("getIndex: ",locations);
     res.render('weather/index', {
       title: 'Basic Weather',
       searches: locations
@@ -68,4 +68,6 @@ exports.saveWeather = (req, res, next) => {
   let {city, city_id, state} = req.body;
 
   savedSearch = new WeatherData(city, city_id, state);
+  savedSearch.save();
+  res.redirect('/');
 }

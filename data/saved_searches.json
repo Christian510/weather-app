@@ -1,17 +1,47 @@
 [
     {
+        "id": "5604033",
         "city": "plummer",
-        "city_id":"5604033",
         "state": "id"
     },
     {
         "city": "ridby",
-        "city_id":"5605321",
+        "city_id": "5605321",
         "state": "id"
     },
     {
         "city": "wallace",
-        "city_id":"5611375",
+        "city_id": "5611375",
+        "state": "id"
+    },
+    {
+        "city": "Sandpoint",
+        "id": "5606401",
+        "state": "id"
+    },
+    {
+        "city": "Sandpoint",
+        "id": "5606401",
+        "state": "id"
+    },
+    {
+        "city": "Ammon",
+        "id": "5583997",
+        "state": "id"
+    },
+    {
+        "city": "Bellevue",
+        "id": "5585265",
+        "state": "id"
+    },
+    {
+        "city": "Burley",
+        "id": "5587385",
+        "state": "id"
+    },
+    {
+        "city": "Sun Valley",
+        "id": "5609286",
         "state": "id"
     }
 ]
