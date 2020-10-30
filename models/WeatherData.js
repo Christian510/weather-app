@@ -56,10 +56,10 @@ const getCurrentWeather = (id, cb) => {
 }
 
 module.exports = class WeatherData {
-    constructor(city, city_id, state, custom_title) {
+    constructor(city, id, state) {
         this.city = city;
-        this.id = city_id;
         this.state = state;
+        this.id = id;
     }
 
     save() {
@@ -73,7 +73,7 @@ module.exports = class WeatherData {
 
     }
     // Fetches current weather
-    static getWeather(l, cb) {
+    static getWeatherByName(l, cb) {
         let city = l.city;
         let state = l.state;
         getCityData(function(cityData) {
@@ -82,6 +82,17 @@ module.exports = class WeatherData {
 
             getCurrentWeather(id, cb);
         }); 
+    }
+
+    static getWeatherById(arg, cb) {
+        console.log("ID: ",arg);
+        getCityData( function(cityData) {
+            // console.log("cityData: ", cityData);
+            const cityID = cityData.find(city => city.id == arg);
+            // console.log("id = ", cityID.id);
+            const id = cityID.id;
+            getCurrentWeather(id, cb);
+        });
     }
 
     static getSavedLocations(cb) {

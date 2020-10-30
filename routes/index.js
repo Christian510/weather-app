@@ -7,8 +7,11 @@ var weatherController = require('../controllers/weather');
 /* GET home page. */
 router.get('/', weatherController.getIndex);
 
-// Display current weather for a city
-router.post('/weather', weatherController.postWeather);
+// DISPLAY WEATHER BY CITY NAME
+router.post('/weather', weatherController.postWeatherByName);
+
+// DISPLAY WEATHER BY CITY ID
+router.post('/weather:id', weatherController.postWeatherById);
 
 router.get('/5-day-forecast', (req, res, next) => {
     res.write('<body>');
@@ -35,7 +38,5 @@ router.get('/edit-city-list', (req, res, next) => {
 });
 
 router.post("/save-weather", weatherController.saveWeather);
-
-
 
 module.exports = router;

@@ -1,3 +1,4 @@
+/* Typography */
 :root {
     --white: #ffffff;
     --black: #000000;
@@ -19,16 +20,12 @@
     --sky-blue: #b7cefb;
 
 }
-
-/* Typography */
-
 .font-14 {
     font-size: 14px;
 }
 .font-12 {
     font-size: 12px;
 }
-
 /* End Typography */
 
 .home-bg-color {
@@ -40,16 +37,19 @@
     margin-right: 10px;
 }
 
+/* Save Search List Content */
 .list-group-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
     background-color: transparent;
     border: none;
 }
 .list-group {
     padding-right: 0;
 }
+/* END Save Search List Content */
 
 /* Navbar bottom component */
-
 .nav-bottom {
     position: absolute;
     left: 0;
@@ -73,10 +73,6 @@
 /* Footer component bw = basic weather */
 .footer-wrapper {
     background-color: var(--gray-2);
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
 }
 .footer-icons {
     width: 220px;
@@ -92,20 +88,18 @@
     fill: var(--white);
 }
 
-/* Buttons  */
-
-
 .margin-lft {
     margin-left: 8.6rem;
 }
+/* BUTTON STYLES  */
 
 .btn {
     text-align: left;
 }
 
 .button-edit {
-    color: var(--white);
-    background-color: var(--gray-3);
+    color: var(--gray-3);
+    background-color: var(--gray-5);
 }
 
 .button-edit div {
@@ -122,4 +116,22 @@
 
 .button-title {
     width: 150px;
+}
+/* END BUTTON STYLES */
+
+/* HEADER STYLES */
+.stick-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.bw-header {
+    background-color: var(--sky-blue);
+}
+/* END HEADER STYLES */
+
+.contain-all {
+    margin-bottom: 65px;
 }
