@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const { listenerCount } = require('process');
 const appDir = path.dirname(process.mainModule.filename);
-
 const p = {
     "findCity": path.join(
         path.dirname(appDir),
@@ -19,8 +18,6 @@ const p = {
         'saved_searches.json'
         )
 }
-
-
 
 const getCityData = cb => {
     fs.readFile(p.findCity, (err, fileContent) => {
@@ -60,17 +57,18 @@ module.exports = class WeatherData {
         this.city = city;
         this.state = state;
         this.id = id;
+        this.visibility = true;
     }
 
     save() {
         getSavedSearches(locations => {
-            console.log("this: ",this);
+            // console.log("this: ",this);
+            this.visibility = false;
             locations.push(this);
             fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
                 console.log(err);
             });
         });
-
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {
@@ -85,7 +83,7 @@ module.exports = class WeatherData {
     }
 
     static getWeatherById(arg, cb) {
-        console.log("ID: ",arg);
+        // console.log("ID: ",arg);
         getCityData( function(cityData) {
             // console.log("cityData: ", cityData);
             const cityID = cityData.find(city => city.id == arg);
@@ -93,6 +91,10 @@ module.exports = class WeatherData {
             const id = cityID.id;
             getCurrentWeather(id, cb);
         });
+    }
+
+    static validateById(cb){
+        getSavedSearches(cb);
     }
 
     static getSavedLocations(cb) {

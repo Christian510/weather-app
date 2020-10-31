@@ -1,1 +1,20 @@
-[{"city":"Sandpoint","state":"id","id":"5606401"},{"city":"Boise","state":"id","id":"5586437"},{"city":"Wallace","state":"id","id":"5611375"}]
+[
+    {
+        "city": "Sandpoint",
+        "state": "id",
+        "id": "5606401",
+        "visibility": false
+    },
+    {
+        "city": "Boise",
+        "state": "id",
+        "id": "5586437",
+        "visibility": false
+    },
+    {
+        "city": "Wallace",
+        "state": "id",
+        "id": "5611375",
+        "visibility": false
+    }
+]
