@@ -10,7 +10,7 @@ router.get('/', weatherController.getIndex);
 router.post('/weather', weatherController.postWeatherByName);
 
 // DISPLAY WEATHER BY CITY ID
-router.post('/weather:id', weatherController.postWeatherById);
+router.get('/weather/:cityID', weatherController.getSavedWeatherById);
 
 router.get('/5-day-forecast', (req, res, next) => {
     res.write('<body>');

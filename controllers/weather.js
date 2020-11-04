@@ -15,7 +15,6 @@ function cleanUpData(str) {
 
 exports.getIndex = (req, res, next) => {
   WeatherData.getSavedLocations(locations => {
-    // console.log("getIndex: ",locations);
     res.render('weather/index', {
       title: 'Basic Weather',
       searches: locations,
@@ -29,11 +28,9 @@ exports.postWeatherByName = (req, res, next) => {
   // sanitize data.
   let str = req.body.city_state.toLowerCase();
   cleanUpData(str);
-  // console.log("location: ", location);   
-  // render the data to the page.
+ 
   WeatherData.getWeatherByName(location, apiResp => {
     const weather = apiResp.data;
-    // console.log("weather: ",weather);
 
     let dt = weather.dt;
     const timeOfWeatherReading = new Date(dt * 1000);
@@ -70,14 +67,12 @@ exports.postWeatherByName = (req, res, next) => {
 };
 
 // DISPLAYS SAVED WEATHER STATIONS
-exports.postWeatherById = (req, res, next) => {
-  // console.log("postWeatherById: ", req.body.city_id);
-  const id = req.body.id;
+exports.getSavedWeatherById = (req, res, next) => {
+  const id = req.params.cityID;
+  console.log("cityID: ", id);
 
   WeatherData.getWeatherById(id, apiResp => {
     const weather = apiResp.data;
-    // console.log("getWeatherById: ", id);
-    // console.log("weather: ",weather);
 
     let dt = weather.dt;
     const timeOfWeatherReading = new Date(dt * 1000);
@@ -111,6 +106,7 @@ exports.postWeatherById = (req, res, next) => {
 exports.saveWeather = (req, res, next) => {
   console.log("SaveWeather: req.body", req.body);
   let { city, state, id } = req.body;
+  console.log("saved id: ",id);
 
   savedSearch = new WeatherData(city, id, state);
   savedSearch.save();

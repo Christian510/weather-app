@@ -29,7 +29,7 @@ const getCityData = cb => {
         }
     });
 }
-const getSavedSearches = cb => {
+const getSavedData = cb => {
     fs.readFile(p.savedSearches, (err, fileContent) => {
         if(err){
             cb([]);
@@ -61,13 +61,27 @@ module.exports = class WeatherData {
     }
 
     save() {
-        getSavedSearches(locations => {
+        getSavedData(locations => {
             // console.log("this: ",this);
             this.visibility = false;
             locations.push(this);
             fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
                 console.log(err);
             });
+        });
+    }
+
+    static delete(id) {
+        getSavedData(locations => {
+            for(let i = 0; i < locations.length; i++) {
+                if(locations[i].id == id) {
+                    locations.splice(i, 1);
+                    console.log(locations);
+                    fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
+                        console.log("fs error msg: ",err);
+                    });
+                }
+            }
         });
     }
     // Fetches current weather
@@ -83,7 +97,7 @@ module.exports = class WeatherData {
     }
 
     static getWeatherById(arg, cb) {
-        // console.log("ID: ",arg);
+        console.log("ID: ",arg);
         getCityData( function(cityData) {
             // console.log("cityData: ", cityData);
             const cityID = cityData.find(city => city.id == arg);
@@ -94,10 +108,10 @@ module.exports = class WeatherData {
     }
 
     static validateById(cb){
-        getSavedSearches(cb);
+        getSavedData(cb);
     }
 
     static getSavedLocations(cb) {
-        getSavedSearches(cb);
+        getSavedData(cb);
     };
 }
