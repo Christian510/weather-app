@@ -1,4 +1,5 @@
 const WeatherData = require('../models/WeatherData');
+const WeatherDate = require('../models/WeatherDate');
 
 const location = {
   city: '',
@@ -12,9 +13,22 @@ function cleanUpData(str) {
   location.city = cleanReq[0];
   location.state = cleanReq[1];
 }
+function checkPrecip(rain, snow) {
+  let precipitation;
+  if (rain !== undefined) {
+    return precipitation = rain['1h'];
+  }
+  if (snow !== undefined) {
+    return precipitation = snow['1h'];
+  } else {
+    return precipitation = '0';
+  }
+}
+
 
 exports.getIndex = (req, res, next) => {
   WeatherData.getSavedLocations(locations => {
+    // console.log(locations);
     res.render('weather/index', {
       title: 'Basic Weather',
       searches: locations,
@@ -28,87 +42,104 @@ exports.postWeatherByName = (req, res, next) => {
   // sanitize data.
   let str = req.body.city_state.toLowerCase();
   cleanUpData(str);
- 
-  WeatherData.getWeatherByName(location, apiResp => {
-    const weather = apiResp.data;
 
+  WeatherData.getWeatherByName(location, apiResp => {
+    console.log("response: ", apiResp);
+    const weather = apiResp.data;
     let dt = weather.dt;
-    const timeOfWeatherReading = new Date(dt * 1000);
-    let options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    let date_time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
     let id = weather.id;
+
+    let sunr = weather.sys.sunrise;
+    let suns = weather.sys.sunset;
+    const getDate = WeatherDate.convertUTC(dt, sunr, suns);
+
+    let r = weather.rain;
+    let s = weather.snow;
+    let c = weather.clouds;
+    // console.log(r,s,c);
+    let precipitation = checkPrecip(r, s);
+    // console.log(precipitation);
+
+
     WeatherData.validateById(validate => {
       let validated = validate.find(l => l.id == id);
-      let isVisable = validated === undefined ? true : false; 
-
+      let isVisable = validated === undefined ? true : false;
       res.render('weather/current-weather', {
         title: "Weather Basics",
-        visibility: isVisable,
-        time: date_time,
+        visibile: isVisable,
+        time: getDate.date,
         observation: weather.weather[0].main,
+        typeOfPrecip: "rain",
+        precip: precipitation,
+        name: `${weather.name} ${location.state.toUpperCase()}`,
         city: weather.name,
         cityID: weather.id,
         state: location.state,
         temp: Math.round(weather.main.temp),
         humidity: weather.main.humidity,
         pressure: weather.main.pressure,
+        visibility: Math.round(weather.visibility / 1000),
         windSpeed: Math.round(weather.wind.speed),
         windDir: weather.wind.deg,
-        sunrise: weather.sys.sunrise,
-        sunset: weather.sys.sunset,
+        sunrise: getDate.sunrise,
+        sunset: getDate.sunset,
         clouds: weather.clouds.all,
         icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
-        main: weather.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
-        rain: weather.rain,
-        snow: weather.snow,
+        main: weather.weather[0].main, // Basic description: "rain", "snow", etc.
       });
     });
-    });
+  });
 };
 
-// DISPLAYS SAVED WEATHER STATIONS
+// DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
-  const id = req.params.cityID;
-  console.log("cityID: ", id);
+  const id = req.query.id;
 
   WeatherData.getWeatherById(id, apiResp => {
     const weather = apiResp.data;
 
     let dt = weather.dt;
-    const timeOfWeatherReading = new Date(dt * 1000);
-    let options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    let date_time = timeOfWeatherReading.toLocaleTimeString("en-US", options);
+    let sunr = weather.sys.sunrise;
+    let suns = weather.sys.sunset;
+    const getDate = WeatherDate.convertUTC(dt, sunr, suns);
+
+    let r = weather.rain;
+    let s = weather.snow;
+    let precipitation = checkPrecip(r, s);
+    // console.log(precipitation);
+
     res.render('weather/current-weather', {
-      visibility: false,
+      visibile: false, // for display of save btn
       title: "Weather Basics",
-      time: date_time,
+      time: getDate.date,
       observation: weather.weather[0].main,
       city: weather.name,
       cityID: weather.id,
-      state: location.state,
+      state: req.query.state,
+      name: req.query.custom_name,
       temp: Math.round(weather.main.temp),
       humidity: weather.main.humidity,
       pressure: weather.main.pressure,
       windSpeed: Math.round(weather.wind.speed),
       windDir: weather.wind.deg,
-      sunrise: weather.sys.sunrise,
-      sunset: weather.sys.sunset,
+      sunrise: getDate.sunrise,
+      sunset: getDate.sunset,
       clouds: weather.clouds.all,
+      visibility: Math.round(weather.visibility / 1000),
       icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
       main: weather.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
-      rain: weather.rain,
-      snow: weather.snow,
+      precip: precipitation,
     });
   });
 };
 
 // Save city weather search
 exports.saveWeather = (req, res, next) => {
-  console.log("SaveWeather: req.body", req.body);
+  // console.log("SaveWeather: req.body", req.body);
   let { city, state, id } = req.body;
-  console.log("saved id: ",id);
+  // console.log("saved id: ",id);
 
-  savedSearch = new WeatherData(city, id, state);
-  savedSearch.save();
+  let saveSearch = new WeatherData(city, id, state);
+  saveSearch.save();
   res.redirect('/');
 }

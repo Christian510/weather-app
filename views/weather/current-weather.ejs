@@ -8,7 +8,13 @@
             <div class="row">
                 <div class="col pr-0">
                     <div>
-                        <h2 class="city"><%= city %></h2>
+                        <h3>
+                            <% if([null, undefined, ' ', ''].includes(name)) { %>
+                            <%= city %> <%= state.toUpperCase() %>
+                            <% } else { %>
+                            <%= name %>
+                            <% } %>
+                        </h3>
                         <p><%= observation %> </p>
                     </div>
                     <div>
@@ -20,12 +26,12 @@
                         <img src="<%= icon %>" alt="weather icon"></img>
                     </div>
                 </div>
-                <div class="col pl-0 d-flex flex-column justify-content-center">
+                <div class="col pl-0 d-flex flex-column justify-content-between">
                     <div class="d-flex justify-content-center">
                         <h2> <%= temp %>&deg F</h2>
                     </div>
                     <div class="mb-2 d-flex justify-content-center">
-                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-up-left-circle"
+                        <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-arrow-up-left-circle"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -40,32 +46,41 @@
             </div>
         </div>
         <div class="weather-description white-ln-top white-ln-btm">
-            <p>Today: Snow conditions with loc visibility. The high will be 33°.  Partly cloudy tonight with a low of 23°</p>
+            <p>Today: Snow conditions with loc visibility. The high will be 33°. Partly cloudy tonight with a low of 23°
+            </p>
         </div>
         <div class="container weather-data">
             <div class="row">
                 <div class="col-xm col-lft">
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light">SUNSET: </p>
-                        <p class="mb-0"><%= sunrise %> </p>
+                        <p class="mb-0 font-weight-light font-12">SUNRISE</p>
+                        <h5 class="mb-0"><%= sunrise %> </h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light">CHANCE OF RAIN</p>
-                        <p class="mb-0">20%</p>
+                        <p class="mb-0 font-weight-light font-12">CHANCE OF rain</p>
+                        <h5 class="mb-0"> % </h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light">PRESSURE:</p>
-                        <p class="mb-0"><%= pressure %> mmHg</p>
+                        <p class="mb-0 font-weight-light font-12">PRECIPITATION</p>
+                        <h5 class="mb-0"><%= precip %> in</h5>
+                    </div>
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light font-12">PRESSURE</p>
+                        <h5 class="mb-0"><%= pressure %> mmHg</h5>
                     </div>
                 </div>
                 <div class="col-xm col-rt">
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light">SUNSET:</p>
-                        <p class="mb-0"><%= sunset %> </p>
+                        <p class="mb-0 font-weight-light font-12">SUNSET</p>
+                        <h5 class="mb-0"><%= sunset %> </h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light">HUMIDITY:</p>
-                        <p class="mb-0"> <%= humidity %> </p>
+                        <p class="mb-0 font-weight-light font-12">HUMIDITY</p>
+                        <h5 class="mb-0"> <%= humidity %> %</h5>
+                    </div>
+                    <div class="white-ln-btm">
+                        <p class="mb-0 font-weight-light font-12">VISIBILITY</p>
+                        <h5 class="mb-0"> <%= visibility %> miles</h5>
                     </div>
                 </div>
             </div>
@@ -73,7 +88,7 @@
                 <%- include('../includes/save-button.ejs') %>
             </div>
         </div>
-        <%- include('../includes/nav-bottom.ejs') %> 
+        <%- include('../includes/nav-bottom.ejs') %>
     </section>
-    <%- include('../includes/footer.ejs') %> 
+    <%- include('../includes/footer.ejs') %>
     <%- include('../includes/end.ejs') %>

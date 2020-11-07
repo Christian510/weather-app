@@ -5,10 +5,6 @@ const WeatherData = require('../models/WeatherData');
 exports.editList = (req, res, next) => {
 
     WeatherData.getSavedLocations(listOfSavedLocations => {
-        // console.log(listOfSavedLocations.city);
-        // let cityList = listOfSavedLocations.map(c => c.city);
-        // console.log(cityList);
-
         res.render('admin/edit-list',{
             title: 'Basic Weather',
             content: listOfSavedLocations,
@@ -18,8 +14,14 @@ exports.editList = (req, res, next) => {
 
 // Delete Item from Saved Locations
 exports.deleteItem = (req, res, next) => {
-    let array = req.body.id.split(' ');
-    let id = array[0];
+    let id = req.body.id;
     WeatherData.delete(id);
+    res.redirect('/');
+}
+
+exports.editName = (req, res, next) => {
+    let id = req.params.id;
+    let name = req.body.new_name;
+    WeatherData.editName(id, name);
     res.redirect('/');
 }

@@ -40,7 +40,6 @@ const getSavedData = cb => {
 }
 
 const getCurrentWeather = (id, cb) => {
-    // console.log("id arg: ",id);
     const key = process.env.TOKEN;
     let cityID = id;
     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
@@ -52,22 +51,26 @@ const getCurrentWeather = (id, cb) => {
         });
 }
 
+const writeFile = (locations) => {
+    fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
+        console.log("error msg: ",err);
+    });
+}
+
 module.exports = class WeatherData {
     constructor(city, id, state) {
         this.city = city;
         this.state = state;
         this.id = id;
         this.visibility = true;
+        this.customName = null;
     }
 
     save() {
         getSavedData(locations => {
-            // console.log("this: ",this);
             this.visibility = false;
             locations.push(this);
-            fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
-                console.log(err);
-            });
+            writeFile(locations);
         });
     }
 
@@ -76,10 +79,18 @@ module.exports = class WeatherData {
             for(let i = 0; i < locations.length; i++) {
                 if(locations[i].id == id) {
                     locations.splice(i, 1);
-                    console.log(locations);
-                    fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
-                        console.log("fs error msg: ",err);
-                    });
+                    writeFile(locations);
+                }
+            }
+        });
+    }
+
+    static editName(id, name) {
+        getSavedData(locations => {
+            for(let i = 0; i < locations.length; i++) {
+                if(locations[i].id == id) {
+                    locations[i].customName = name;
+                    writeFile(locations);
                 }
             }
         });
@@ -89,19 +100,17 @@ module.exports = class WeatherData {
         let city = l.city;
         let state = l.state;
         getCityData(function(cityData) {
-            const cityID = cityData.find(d => d.name.toLowerCase() == city && d.state.toLowerCase() == state);
-            let id = cityID.id
-
+            const data = cityData.find(d => d.name.toLowerCase() == city && d.state.toLowerCase() == state);
+            // console.log(data);
+            let id = data.id
+            // let lat = data.
             getCurrentWeather(id, cb);
         }); 
     }
 
     static getWeatherById(arg, cb) {
-        console.log("ID: ",arg);
         getCityData( function(cityData) {
-            // console.log("cityData: ", cityData);
             const cityID = cityData.find(city => city.id == arg);
-            // console.log("id = ", cityID.id);
             const id = cityID.id;
             getCurrentWeather(id, cb);
         });

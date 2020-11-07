@@ -1548,5 +1548,25 @@
             "lon": -113.965897,
             "lat": 45.011871
         }
+    },
+    {
+        "id": 5746545,
+        "name": "Portland",
+        "state": "OR",
+        "country": "US",
+        "coord": {
+            "lon": -122.676208,
+            "lat": 45.523449
+        }
+    },
+    {
+        "id": 5655240,
+        "name": "Great Falls",
+        "state": "MT",
+        "country": "US",
+        "coord": {
+            "lon": -111.300812,
+            "lat": 47.50024
+        }
     }
 ]

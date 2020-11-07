@@ -110,9 +110,10 @@
     padding-left: 7.85rem;
     padding-right: 7.85rem;
 }
-.save-weather {
+/* .save-weather {
     margin-top: 1rem;
-}
+    margin-bottom: 1rem;
+} */
 
 .button-title {
     width: 150px;
@@ -123,7 +124,6 @@
     margin: 1.1rem 1.1rem;
 }
 .back-btn .btn {
-    /* padding: .5rem 6rem; */
     padding-right: 5rem;
     border: none;
     border-radius: 100px 100px 100px 100px;
