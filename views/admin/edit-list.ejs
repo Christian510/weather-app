@@ -12,12 +12,13 @@
       <% for(let saved of content){ %>
       <li class="list-group-item d-flex flex-column">
         <% if(saved.customName !== null) { %>
-          <label for="Edit-Search"><%= saved.customName %></label>
+        <label for="Edit-Search"><%= saved.customName %></label>
         <% } else { %>
-          <label for="Edit-Search"><%= saved.city %> <%= saved.state.toUpperCase(); %></label>
-       <% } %> 
+        <label for="Edit-Search"><%= saved.city %> <%= saved.state.toUpperCase(); %></label>
+        <% } %>
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal">Edit
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
+            data-edit="<% saved.customName !== null ? saved.customName : saved.city %>">Edit
             Name</button>
           <form action="/admin/delete" method="POST">
             <button type="submit" class="btn btn-secondary">Delete</button>
@@ -37,18 +38,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/admin/edit-name/<%= saved.id %>" method="POST">
-                <input 
-                  type="text" 
-                  name="new_name" 
-                  class="form-control"
-                  <% if(saved.customName !== null) { %>
-                    placeholder="<%= saved.customName %>"
-                  <% } else { %>
-                    placeholder="<%= saved.city %>" 
-                  <% } %> 
-                  aria-label="Edit Name"
-                  aria-describedby="Edit-name">
+              <form action="/admin/edit-name" method="POST">
+                <input type="text" class="form-control" aria-label="Edit Name"
+                  aria-describedby="Edit-name" id="edit-name">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

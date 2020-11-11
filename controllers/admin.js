@@ -14,13 +14,13 @@ exports.editList = (req, res, next) => {
 
 // Delete Item from Saved Locations
 exports.deleteItem = (req, res, next) => {
-    let id = req.body.id;
+    let id = req.params.id;
     WeatherData.delete(id);
     res.redirect('/');
 }
 
 exports.editName = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.body.id;
     let name = req.body.new_name;
     WeatherData.editName(id, name);
     res.redirect('/');

@@ -38,13 +38,12 @@ exports.getIndex = (req, res, next) => {
 
 // DISPLAY WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
-  // console.log(req.body);
   // sanitize data.
   let str = req.body.city_state.toLowerCase();
   cleanUpData(str);
 
   WeatherData.getWeatherByName(location, apiResp => {
-    console.log("response: ", apiResp);
+    // console.log("response: ", apiResp);
     const weather = apiResp.data;
     let dt = weather.dt;
     let id = weather.id;
@@ -56,10 +55,7 @@ exports.postWeatherByName = (req, res, next) => {
     let r = weather.rain;
     let s = weather.snow;
     let c = weather.clouds;
-    // console.log(r,s,c);
     let precipitation = checkPrecip(r, s);
-    // console.log(precipitation);
-
 
     WeatherData.validateById(validate => {
       let validated = validate.find(l => l.id == id);
@@ -140,6 +136,13 @@ exports.saveWeather = (req, res, next) => {
   // console.log("saved id: ",id);
 
   let saveSearch = new WeatherData(city, id, state);
-  saveSearch.save();
-  res.redirect('/');
+  saveSearch.save()
+    .then(result => {
+      // console.log(result);
+      console.log("Search Saved");
+      res.redirect('/');
+    })
+    .catch(err => {
+      console.log("saved search err: ", err);
+    });
 }

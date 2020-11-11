@@ -4,8 +4,8 @@ const adminController = require('../controllers/admin');
 
 router.get('/edit-list', adminController.editList);
 
-router.post('/delete', adminController.deleteItem);
+router.post('/delete/:id', adminController.deleteItem);
 
-router.post('/edit-name/:id', adminController.editName);
+router.post('/edit-name', adminController.editName);
 
 module.exports = router

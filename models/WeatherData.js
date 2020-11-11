@@ -1,5 +1,6 @@
 
 const axios = require('axios');
+const getDb = require('../util/database').getDb;
 const fs = require('fs');
 const path = require('path');
 const { listenerCount } = require('process');
@@ -10,18 +11,18 @@ const p = {
         'data',
         // 'city_list.json',
         'sample_list.json'
-        ),
+    ),
     "savedSearches": path.join(
         path.dirname(appDir),
         'data',
         // 'city_list.json',
         'saved_searches.json'
-        )
+    )
 }
 
 const getCityData = cb => {
     fs.readFile(p.findCity, (err, fileContent) => {
-        if(err){
+        if (err) {
             console.log(err);
             cb([]);
         } else {
@@ -31,7 +32,7 @@ const getCityData = cb => {
 }
 const getSavedData = cb => {
     fs.readFile(p.savedSearches, (err, fileContent) => {
-        if(err){
+        if (err) {
             cb([]);
         } else {
             cb(JSON.parse(fileContent));
@@ -53,7 +54,7 @@ const getCurrentWeather = (id, cb) => {
 
 const writeFile = (locations) => {
     fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
-        console.log("error msg: ",err);
+        console.log("error msg: ", err);
     });
 }
 
@@ -67,17 +68,18 @@ module.exports = class WeatherData {
     }
 
     save() {
-        getSavedData(locations => {
-            this.visibility = false;
-            locations.push(this);
-            writeFile(locations);
-        });
+        this.visibility = false;
+        const db = getDb();
+        return db.collection('saved_searches').insertOne(this)
+            .then(result => {
+                console.log("save result: ", result);
+            });
     }
 
     static delete(id) {
         getSavedData(locations => {
-            for(let i = 0; i < locations.length; i++) {
-                if(locations[i].id == id) {
+            for (let i = 0; i < locations.length; i++) {
+                if (locations[i].id == id) {
                     locations.splice(i, 1);
                     writeFile(locations);
                 }
@@ -87,8 +89,8 @@ module.exports = class WeatherData {
 
     static editName(id, name) {
         getSavedData(locations => {
-            for(let i = 0; i < locations.length; i++) {
-                if(locations[i].id == id) {
+            for (let i = 0; i < locations.length; i++) {
+                if (locations[i].id == id) {
                     locations[i].customName = name;
                     writeFile(locations);
                 }
@@ -99,28 +101,40 @@ module.exports = class WeatherData {
     static getWeatherByName(l, cb) {
         let city = l.city;
         let state = l.state;
-        getCityData(function(cityData) {
+        getCityData(function (cityData) {
             const data = cityData.find(d => d.name.toLowerCase() == city && d.state.toLowerCase() == state);
             // console.log(data);
             let id = data.id
             // let lat = data.
             getCurrentWeather(id, cb);
-        }); 
+        });
     }
 
     static getWeatherById(arg, cb) {
-        getCityData( function(cityData) {
+        getCityData(function (cityData) {
             const cityID = cityData.find(city => city.id == arg);
             const id = cityID.id;
             getCurrentWeather(id, cb);
         });
     }
 
-    static validateById(cb){
+    static validateById(cb) {
         getSavedData(cb);
     }
 
     static getSavedLocations(cb) {
         getSavedData(cb);
+        const db = getDb();
+        return db
+        .collection('saved_searches')
+        .find()
+        .toArray()
+        .then(locations => {
+            console.log(locations);
+            return locations;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     };
 }

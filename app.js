@@ -6,13 +6,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 // const compileSass = require('express-compile-sass');
+const mongoConnect = require('./util/database').mongoConnect;
 
-const adminRouter = require('./routes/admin');
-const usersRouter = require('./routes/users');
-const indexRouter = require('./routes/index');
 
 const app = express();
 
+// Routers
+const adminRouter = require('./routes/admin');
+const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 // Sass Compiler
 
 // view engine setup
@@ -46,6 +48,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+mongoConnect(() => {
+  
 });
 
 module.exports = app;
