@@ -4,7 +4,12 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = cb => {
-    MongoClient.connect('mongodb+srv://Christian:jZA1v0npOVPRECCy@weatherappdb.cq3qr.mongodb.net/WeatherAppDB?retryWrites=true&w=majority')
+    MongoClient.connect('mongodb+srv://Christian:ewv7KxfQ@weatherappdb.cq3qr.mongodb.net/WeatherAppDB?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    },
+    )
     .then(client => {
         console.log('Connected!');
         _db = client.db();

@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 // const compileSass = require('express-compile-sass');
-const mongoConnect = require('./util/database').mongoConnect;
+// const mongoConnect = require('./util/database').mongoConnect;
 
 
 const app = express();
@@ -50,8 +50,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoConnect(() => {
-  
-});
+
 
 module.exports = app;

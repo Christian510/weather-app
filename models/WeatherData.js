@@ -21,23 +21,30 @@ const p = {
 }
 
 const getCityData = cb => {
-    fs.readFile(p.findCity, (err, fileContent) => {
-        if (err) {
-            console.log(err);
-            cb([]);
-        } else {
-            cb(JSON.parse(fileContent));
-        }
-    });
+    const db = getDb();
+    db
+        .find()
+        .then(weather => {
+            console.log("weather: ", weather);
+        })
+        .catch(err => {
+            console.log("err message: ",err);
+        });
 }
+
 const getSavedData = cb => {
-    fs.readFile(p.savedSearches, (err, fileContent) => {
-        if (err) {
-            cb([]);
-        } else {
-            cb(JSON.parse(fileContent));
-        }
-    });
+    const db = getDb();
+    db
+        .collection('saved_searches')
+        .find()
+        .toArray()
+        .then(locations => {
+            console.log("locations: ", locations);
+            cb(locations);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 const getCurrentWeather = (id, cb) => {
@@ -67,12 +74,15 @@ module.exports = class WeatherData {
         this.customName = null;
     }
 
-    save() {
+    save(name, id) {
         this.visibility = false;
         const db = getDb();
-        return db.collection('saved_searches').insertOne(this)
+        return db.collection('saved_searches')
+            .find({ city: this.city, id: this.id })
+            .insertOne(this)
             .then(result => {
                 console.log("save result: ", result);
+
             });
     }
 
@@ -124,17 +134,5 @@ module.exports = class WeatherData {
 
     static getSavedLocations(cb) {
         getSavedData(cb);
-        const db = getDb();
-        return db
-        .collection('saved_searches')
-        .find()
-        .toArray()
-        .then(locations => {
-            console.log(locations);
-            return locations;
-        })
-        .catch(err => {
-            console.log(err);
-        });
     };
 }
