@@ -102,7 +102,6 @@ exports.getSavedWeatherById = (req, res, next) => {
     let r = weather.rain;
     let s = weather.snow;
     let precipitation = checkPrecip(r, s);
-    // console.log(precipitation);
 
     res.render('weather/current-weather', {
       visibile: false, // for display of save btn
@@ -133,9 +132,8 @@ exports.getSavedWeatherById = (req, res, next) => {
 exports.saveWeather = (req, res, next) => {
   // console.log("SaveWeather: req.body", req.body);
   let { city, state, id } = req.body;
-  // console.log("saved id: ",id);
-
-  let saveSearch = new WeatherData(city, id, state);
+  let parsedID = parseInt(id);
+  let saveSearch = new WeatherData(city, parsedID, state);
   saveSearch.save()
     .then(result => {
       // console.log(result);

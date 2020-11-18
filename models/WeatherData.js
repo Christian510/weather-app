@@ -20,15 +20,22 @@ const p = {
     )
 }
 
-const getCityData = cb => {
+const getCityData = (c, s, cb) => {
+    console.log(s);
+    let state = s.toUpperCase();
+    let city = c.charAt(0).toUpperCase() + c.slice(1);
+
     const db = getDb();
     db
-        .find()
+        .collection('city_list')
+        .find({ "name": city, "state": state }) // need both city and state values
+        .toArray()
         .then(weather => {
-            console.log("weather: ", weather);
+            cb(weather);
+            // console.log("weather: ", weather);
         })
         .catch(err => {
-            console.log("err message: ",err);
+            console.log("err message: ", err);
         });
 }
 
@@ -39,7 +46,7 @@ const getSavedData = cb => {
         .find()
         .toArray()
         .then(locations => {
-            console.log("locations: ", locations);
+            // console.log("locations: ", locations);
             cb(locations);
         })
         .catch(err => {
@@ -68,32 +75,35 @@ const writeFile = (locations) => {
 module.exports = class WeatherData {
     constructor(city, id, state) {
         this.city = city;
-        this.state = state;
+        this.state = state.toUpperCase();
         this.id = id;
         this.visibility = true;
         this.customName = null;
     }
 
-    save(name, id) {
+    save() {
+        // Need to add an Update //
         this.visibility = false;
         const db = getDb();
         return db.collection('saved_searches')
-            .find({ city: this.city, id: this.id })
             .insertOne(this)
             .then(result => {
-                console.log("save result: ", result);
-
+                // console.log("save result: ", result);
+            })
+            .catch(err => {
+                console.log("error msg: ", err);
             });
     }
 
     static delete(id) {
         getSavedData(locations => {
-            for (let i = 0; i < locations.length; i++) {
-                if (locations[i].id == id) {
-                    locations.splice(i, 1);
-                    writeFile(locations);
-                }
-            }
+            console.log(id, " ", locations);
+            // for (let i = 0; i < locations.length; i++) {
+            //     if (locations[i].id == id) {
+            //         locations.splice(i, 1);
+            //         writeFile(locations);
+            //     }
+            // }
         });
     }
 
@@ -109,23 +119,16 @@ module.exports = class WeatherData {
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {
-        let city = l.city;
-        let state = l.state;
-        getCityData(function (cityData) {
-            const data = cityData.find(d => d.name.toLowerCase() == city && d.state.toLowerCase() == state);
-            // console.log(data);
-            let id = data.id
-            // let lat = data.
+
+        getCityData(l.city, l.state, cityInfo => {
+            let id = cityInfo[0].id;
             getCurrentWeather(id, cb);
         });
     }
 
-    static getWeatherById(arg, cb) {
-        getCityData(function (cityData) {
-            const cityID = cityData.find(city => city.id == arg);
-            const id = cityID.id;
-            getCurrentWeather(id, cb);
-        });
+    static getWeatherById(cityId, cb) {
+        let id = Number(cityId);
+        getCurrentWeather(id, cb);
     }
 
     static validateById(cb) {
