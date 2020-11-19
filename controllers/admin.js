@@ -22,6 +22,7 @@ exports.deleteItem = (req, res, next) => {
 exports.editName = (req, res, next) => {
     let id = req.body.id;
     let name = req.body.new_name;
+    console.log(req.body);
     WeatherData.editName(id, name);
     res.redirect('/');
 }

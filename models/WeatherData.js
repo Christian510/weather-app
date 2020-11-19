@@ -1,6 +1,8 @@
 
 const axios = require('axios');
+const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
+const { ObjectID } = require('mongodb');
 const fs = require('fs');
 const path = require('path');
 const { listenerCount } = require('process');
@@ -79,6 +81,7 @@ module.exports = class WeatherData {
         this.id = id;
         this.visibility = true;
         this.customName = null;
+        // this._id = new mongodb.ObjectID(id);
     }
 
     save() {
@@ -88,7 +91,7 @@ module.exports = class WeatherData {
         return db.collection('saved_searches')
             .insertOne(this)
             .then(result => {
-                // console.log("save result: ", result);
+                console.log("save result: ", result);
             })
             .catch(err => {
                 console.log("error msg: ", err);
@@ -108,18 +111,19 @@ module.exports = class WeatherData {
     }
 
     static editName(id, name) {
+        console.log(id, name);
         getSavedData(locations => {
             for (let i = 0; i < locations.length; i++) {
                 if (locations[i].id == id) {
                     locations[i].customName = name;
-                    writeFile(locations);
+                    console.log(locations);
                 }
             }
         });
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {
-
+        console.log(l);
         getCityData(l.city, l.state, cityInfo => {
             let id = cityInfo[0].id;
             getCurrentWeather(id, cb);
