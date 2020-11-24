@@ -3,24 +3,7 @@ const axios = require('axios');
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
-const fs = require('fs');
-const path = require('path');
 const { listenerCount } = require('process');
-const appDir = path.dirname(process.mainModule.filename);
-const p = {
-    "findCity": path.join(
-        path.dirname(appDir),
-        'data',
-        // 'city_list.json',
-        'sample_list.json'
-    ),
-    "savedSearches": path.join(
-        path.dirname(appDir),
-        'data',
-        // 'city_list.json',
-        'saved_searches.json'
-    )
-}
 
 const getCityData = (c, s, cb) => {
     console.log(s);
@@ -68,12 +51,6 @@ const getCurrentWeather = (id, cb) => {
         });
 }
 
-const writeFile = (locations) => {
-    fs.writeFile(p.savedSearches, JSON.stringify(locations), err => {
-        console.log("error msg: ", err);
-    });
-}
-
 module.exports = class WeatherData {
     constructor(city, id, state) {
         this.city = city;
@@ -81,7 +58,7 @@ module.exports = class WeatherData {
         this.id = id;
         this.visibility = true;
         this.customName = null;
-        // this._id = new mongodb.ObjectID(id);
+        this._id = new mongodb.ObjectID(id);
     }
 
     save() {
@@ -99,27 +76,30 @@ module.exports = class WeatherData {
     }
 
     static delete(id) {
-        getSavedData(locations => {
-            console.log(id, " ", locations);
-            // for (let i = 0; i < locations.length; i++) {
-            //     if (locations[i].id == id) {
-            //         locations.splice(i, 1);
-            //         writeFile(locations);
-            //     }
-            // }
-        });
+        const db = getDb();
+        return db.collection("saved_searches").deleteOne({ _id: new mongodb.ObjectID(id) })
+            .then(result => {
+                if (result.deletedCount === 1) {
+                    console.log("Delete Successful!")
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     static editName(id, name) {
         console.log(id, name);
-        getSavedData(locations => {
-            for (let i = 0; i < locations.length; i++) {
-                if (locations[i].id == id) {
-                    locations[i].customName = name;
-                    console.log(locations);
-                }
-            }
-        });
+        
+        //  Update One Document by ID
+        const db = getDb();
+        db.collection("saved_searches").updateOne({ _id: new mongodb.ObjectID(id)})
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {

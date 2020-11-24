@@ -4,25 +4,38 @@ const WeatherData = require('../models/WeatherData');
 // Displays all saved Locations on edit page.
 exports.editList = (req, res, next) => {
 
-    WeatherData.getSavedLocations(listOfSavedLocations => {
-        res.render('admin/edit-list',{
+    WeatherData.getSavedLocations(SavedSearches => {
+        // console.log(SavedSearches);
+        res.render('admin/edit-list', {
             title: 'Basic Weather',
-            content: listOfSavedLocations,
+            content: SavedSearches,
         });
     });
 }
 
 // Delete Item from Saved Locations
 exports.deleteItem = (req, res, next) => {
-    let id = req.params.id;
-    WeatherData.delete(id);
-    res.redirect('/');
+    console.log("req body: ", req.body);
+    let id = req.body.idInput;
+    WeatherData.delete(id)
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 exports.editName = (req, res, next) => {
-    let id = req.body.id;
-    let name = req.body.new_name;
-    console.log(req.body);
-    WeatherData.editName(id, name);
-    res.redirect('/');
+    let id = req.body.editIdInput;
+    let name = req.body.editNameInput;
+
+    WeatherData.editName(id, name)
+        .then( result => {
+            console.log(result);
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }

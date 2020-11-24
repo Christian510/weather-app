@@ -9,52 +9,79 @@
   <section class="container">
     <% if (content.length > 0) { %>
     <ul class=" list-group row">
-      <% for(let saved of content){ %>
+      <% for(let the of content){ %>
       <li class="list-group-item d-flex flex-column">
-        <% if(saved.customName !== null) { %>
-        <label for="Edit-Search"><%= saved.customName %></label>
+        <% if(the.customName !== null) { %>
+        <label for="Edit-Search"><%= the.customName %></label>
         <% } else { %>
-        <label for="Edit-Search"><%= saved.city %> <%= saved.state.toUpperCase(); %></label>
+        <label for="Edit-Search"><%= the.city %> <%= the.state.toUpperCase(); %></label>
         <% } %>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
-            data-edit="<% saved.customName !== null ? saved.customName : saved.city %>">Edit
+            data-edit="<%= the.customName !== null ? the.customName : the.city %>" data-id="<%= the._id %> ">Edit
             Name</button>
-          <form action="/admin/delete" method="POST">
-            <button type="submit" class="btn btn-secondary">Delete</button>
-            <input type="hidden" name="id" value="<%= saved.id %>">
-          </form>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal"
+            data-delete="<%= the.customName !== null ? the.customName : the.city %>" data-id="<%= the._id %>">
+            Delete
+          </button>
         </div>
-      </li>
-      <!-- Modal -->
-      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Name</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="edit-name"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="/admin/edit-name" method="POST">
+                  <div>
+                    <input type="text" class="form-control" aria-label="Edit Name" aria-describedby="Edit-name"
+                      id="edit-name" name="editNameInput">
+                    <input type="hidden" aria-describedby="Edit-name" aria-label="Edit Name" id="edit-id-input" name="editIdInput">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div class="modal-body">
-              <form action="/admin/edit-name" method="POST">
-                <input type="text" class="form-control" aria-label="Edit Name"
-                  aria-describedby="Edit-name" id="edit-name">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-            </form>
           </div>
-        </div>
-      </div>
+      </li>
       <% } %>
       <% } else { %>
     </ul>
     <h2>Nothing to Edit!</h2>
     <% } %>
+
+    <!----------- Delete Modal --------------------------->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/admin/delete" method="POST">
+              <h5 class="modal-title" id="delete-city"></h5>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <input type="hidden" id="del-id-input" name="idInput">
+                <input type="hidden" id="del-name-input" name="nameInput">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <%- include('../includes/back-btn.ejs') %>
