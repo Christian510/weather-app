@@ -90,12 +90,15 @@ module.exports = class WeatherData {
 
     static editName(id, name) {
         console.log(id, name);
-        
         //  Update One Document by ID
         const db = getDb();
-        db.collection("saved_searches").updateOne({ _id: new mongodb.ObjectID(id)})
+        let findById = { _id: new mongodb.ObjectID(id)}
+        let updateDoc = {
+            $set: { customName: name}
+        }
+        return db.collection("saved_searches").updateOne(findById, updateDoc)
         .then(result => {
-            console.log(result);
+            console.log(`Documents modified: ${result.modifiedCount}`);
         })
         .catch(err => {
             console.log(err);
