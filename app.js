@@ -5,9 +5,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-// const compileSass = require('express-compile-sass');
-// const mongoConnect = require('./util/database').mongoConnect;
-
 
 const app = express();
 
@@ -27,7 +24,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
@@ -49,7 +45,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;

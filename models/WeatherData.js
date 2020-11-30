@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
@@ -6,7 +5,6 @@ const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
 const getCityData = (c, s, cb) => {
-    console.log(s);
     let state = s.toUpperCase();
     let city = c.charAt(0).toUpperCase() + c.slice(1);
 
@@ -40,6 +38,7 @@ const getSavedData = cb => {
 }
 
 const getCurrentWeather = (id, cb) => {
+    // console.log(process.env);
     const key = process.env.TOKEN;
     let cityID = id;
     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
@@ -47,7 +46,11 @@ const getCurrentWeather = (id, cb) => {
             cb(response);
         })
         .catch(function (error) {
-            console.log(error)
+            console.log("API Error message: ");
+            // console.log(error);
+            console.log("url: ", error.config.url);
+            console.log("error code", error.response.data.cod);
+            console.log("error message", error.response.data.message);
         });
 }
 
@@ -62,7 +65,6 @@ module.exports = class WeatherData {
     }
 
     save() {
-        // Need to add an Update //
         this.visibility = false;
         const db = getDb();
         return db.collection('saved_searches')
@@ -89,14 +91,13 @@ module.exports = class WeatherData {
     }
 
     static editName(id, name) {
-        console.log(id, name);
         //  Update One Document by ID
         const db = getDb();
-        let findById = { _id: new mongodb.ObjectID(id)}
+        let mongoId = { _id: new mongodb.ObjectID(id)}
         let updateDoc = {
             $set: { customName: name}
         }
-        return db.collection("saved_searches").updateOne(findById, updateDoc)
+        return db.collection("saved_searches").updateOne(mongoId, updateDoc)
         .then(result => {
             console.log(`Documents modified: ${result.modifiedCount}`);
         })
@@ -112,8 +113,9 @@ module.exports = class WeatherData {
             getCurrentWeather(id, cb);
         });
     }
-
+    // Gets weather using an id
     static getWeatherById(cityId, cb) {
+        // converts id string to number
         let id = Number(cityId);
         getCurrentWeather(id, cb);
     }
