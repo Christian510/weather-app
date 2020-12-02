@@ -4,18 +4,18 @@ const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
-const getCityData = (c, s, cb) => {
-    let state = s.toUpperCase();
-    let city = c.charAt(0).toUpperCase() + c.slice(1);
-
+const getCityData = (city, state, cb) => {
     const db = getDb();
     db
         .collection('city_list')
         .find({ "name": city, "state": state }) // need both city and state values
         .toArray()
         .then(weather => {
-            cb(weather);
-            // console.log("weather: ", weather);
+            if (Object.keys(weather).length === 0) {
+                console.log("Can't find an Id for this location.");
+            } else {
+                cb(weather);
+            }
         })
         .catch(err => {
             console.log("err message: ", err);
@@ -38,7 +38,6 @@ const getSavedData = cb => {
 }
 
 const getCurrentWeather = (id, cb) => {
-    // console.log(process.env);
     const key = process.env.TOKEN;
     let cityID = id;
     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
@@ -93,21 +92,20 @@ module.exports = class WeatherData {
     static editName(id, name) {
         //  Update One Document by ID
         const db = getDb();
-        let mongoId = { _id: new mongodb.ObjectID(id)}
+        let mongoId = { _id: new mongodb.ObjectID(id) }
         let updateDoc = {
-            $set: { customName: name}
+            $set: { customName: name }
         }
         return db.collection("saved_searches").updateOne(mongoId, updateDoc)
-        .then(result => {
-            console.log(`Documents modified: ${result.modifiedCount}`);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(result => {
+                console.log(`Documents modified: ${result.modifiedCount}`);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {
-        console.log(l);
         getCityData(l.city, l.state, cityInfo => {
             let id = cityInfo[0].id;
             getCurrentWeather(id, cb);

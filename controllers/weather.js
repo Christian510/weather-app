@@ -6,13 +6,14 @@ const location = {
   state: '',
 };
 
-function cleanUpData(str) {
-  let parsedReq = str.split(", ");
-  // console.log("parsedReq: ",parsedReq);
-  let cleanReq = parsedReq.filter(value => value !== '');
-  location.city = cleanReq[0];
-  location.state = cleanReq[1];
+function cleanUpStr(str) {
+  let cleanStr = str.split(", ").filter(value => value !== '');
+  location.state = cleanStr[1].toUpperCase();
+  location.city = cleanStr[0].split(' ').map(elm => {
+    return elm.charAt(0).toUpperCase() + elm.slice(1);
+  }).join(' ');
 }
+
 function checkPrecip(rain, snow) {
   let precipitation;
   if (rain !== undefined) {
@@ -39,9 +40,8 @@ exports.getIndex = (req, res, next) => {
 // DISPLAY WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
   // sanitize data.
-  let str = req.body.city_state.toLowerCase();
-  cleanUpData(str);
-
+  let str = req.body.city_state;
+  cleanUpStr(str);
   WeatherData.getWeatherByName(location, apiResp => {
     // console.log("response: ", apiResp);
     const weather = apiResp.data;
