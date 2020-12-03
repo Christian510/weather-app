@@ -4,11 +4,11 @@ const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
-const getCityData = (city, state, cb) => {
+const getCityData = (city, state, country, cb) => {
     const db = getDb();
     db
         .collection('city_list')
-        .find({ "name": city, "state": state }) // need both city and state values
+        .find({ "name": city, "state": state, "country": country}) // need both city and state values
         .toArray()
         .then(weather => {
             if (Object.keys(weather).length === 0) {
@@ -106,7 +106,7 @@ module.exports = class WeatherData {
     }
     // Fetches current weather
     static getWeatherByName(l, cb) {
-        getCityData(l.city, l.state, cityInfo => {
+        getCityData(l.city, l.state, l.country, cityInfo => {
             let id = cityInfo[0].id;
             getCurrentWeather(id, cb);
         });

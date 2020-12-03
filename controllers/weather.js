@@ -1,18 +1,6 @@
 const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
-
-const location = {
-  city: '',
-  state: '',
-};
-
-function cleanUpStr(str) {
-  let cleanStr = str.split(", ").filter(value => value !== '');
-  location.state = cleanStr[1].toUpperCase();
-  location.city = cleanStr[0].split(' ').map(elm => {
-    return elm.charAt(0).toUpperCase() + elm.slice(1);
-  }).join(' ');
-}
+const validateAdr = require('../public/javascripts/validateAddr').validateAdr;
 
 function checkPrecip(rain, snow) {
   let precipitation;
@@ -26,7 +14,6 @@ function checkPrecip(rain, snow) {
   }
 }
 
-
 exports.getIndex = (req, res, next) => {
   WeatherData.getSavedLocations(locations => {
     // console.log(locations);
@@ -39,15 +26,14 @@ exports.getIndex = (req, res, next) => {
 
 // DISPLAY WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
-  // sanitize data.
-  let str = req.body.city_state;
-  cleanUpStr(str);
+  // Organize string into a name string, state, country
+  let location = validateAdr(req.body.city_state);
+  console.log(location);
   WeatherData.getWeatherByName(location, apiResp => {
     // console.log("response: ", apiResp);
     const weather = apiResp.data;
     let dt = weather.dt;
     let id = weather.id;
-
     let sunr = weather.sys.sunrise;
     let suns = weather.sys.sunset;
     const getDate = WeatherDate.convertUTC(dt, sunr, suns);
@@ -55,7 +41,7 @@ exports.postWeatherByName = (req, res, next) => {
     let r = weather.rain;
     let s = weather.snow;
     let c = weather.clouds;
-    let precipitation = checkPrecip(r, s);
+    let precipitation = checkPrecip(weather.rain, weather.snow);
 
     WeatherData.validateById(validate => {
       let validated = validate.find(l => l.id == id);
