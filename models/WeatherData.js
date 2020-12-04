@@ -4,12 +4,20 @@ const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
-const getCityData = (city, state, country, cb) => {
+const getCityData = (l, cb) => {
+    console.log("l: ", l);
     const db = getDb();
     db
         .collection('city_list')
-        .find({ "name": city, "state": state, "country": country}) // need both city and state values
-        .toArray()
+        .findOne({
+            $or: [ {
+                $and: [{"name": l.city}, { $or: [ {"state": l.abbr}, {"country": l.abbr} ]}]
+            },
+            {
+                $and: [{"name": l.city}, {"state": l.state}, {"country": l.country}]
+            }
+            ]
+        }) // need both city and state values
         .then(weather => {
             if (Object.keys(weather).length === 0) {
                 console.log("Can't find an Id for this location.");
@@ -105,10 +113,11 @@ module.exports = class WeatherData {
             })
     }
     // Fetches current weather
-    static getWeatherByName(l, cb) {
-        getCityData(l.city, l.state, l.country, cityInfo => {
-            let id = cityInfo[0].id;
-            getCurrentWeather(id, cb);
+    static getWeather(l, cb) {
+        console.log("l: ", l);
+        getCityData(l, city => {
+            // console.log("data: ", city.id);
+            getCurrentWeather(city.id, cb);
         });
     }
     // Gets weather using an id
