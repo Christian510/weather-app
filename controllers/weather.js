@@ -26,9 +26,8 @@ exports.getIndex = (req, res, next) => {
 
 // DISPLAY WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
-  // Organize string into a name string, state, country
+  // Parse string into a useable object
   let location = validateAdr(req.body.city_state);
-  // console.log(location);
 
   WeatherData.getWeather(location, apiResp => {
     // console.log("response: ", apiResp);

@@ -8,7 +8,7 @@ const getCityData = (l, cb) => {
     console.log("l: ", l);
     const db = getDb();
     db
-        .collection('city_list')
+        .collection('city_list') 
         .findOne({
             $or: [ {
                 $and: [{"name": l.city}, { $or: [ {"state": l.abbr}, {"country": l.abbr} ]}]
@@ -17,7 +17,7 @@ const getCityData = (l, cb) => {
                 $and: [{"name": l.city}, {"state": l.state}, {"country": l.country}]
             }
             ]
-        }) // need both city and state values
+        })
         .then(weather => {
             if (Object.keys(weather).length === 0) {
                 console.log("Can't find an Id for this location.");
@@ -114,7 +114,6 @@ module.exports = class WeatherData {
     }
     // Fetches current weather
     static getWeather(l, cb) {
-        console.log("l: ", l);
         getCityData(l, city => {
             // console.log("data: ", city.id);
             getCurrentWeather(city.id, cb);
