@@ -114,7 +114,7 @@ exports.getSavedWeatherById = (req, res, next) => {
   });
 };
 
-// Save city weather search
+// SAVE CITY WEATHER SEARCH
 exports.saveWeather = (req, res, next) => {
   // console.log("SaveWeather: req.body", req.body);
   let { city, state, id } = req.body;
@@ -129,4 +129,25 @@ exports.saveWeather = (req, res, next) => {
     .catch(err => {
       console.log("saved search err: ", err);
     });
+}
+
+// 5 DAY WEATHER FORCAST
+exports.getFiveDayWeather = (req, res, next) => {
+  res.render('weather/5-day-forecast', {
+    title: '5 Day Forecast',
+  });
+}
+
+// HOURLY WEATHER
+exports.getHourlyWeather = (req, res, next) => {
+  res.render('weather/hourly', {
+    title: 'Hourly Forecast',
+  });
+}
+
+// MAP SEARCH
+exports.getMap = (req, res, next) => {
+  res.render('weather/map', {
+    title: 'Map Search',
+  });
 }

@@ -12,18 +12,16 @@ router.post('/weather', weatherController.postWeatherByName);
 // DISPLAY WEATHER BY CITY ID
 router.get('/weather', weatherController.getSavedWeatherById);
 
-router.get('/5-day-forecast', (req, res, next) => {
-    res.write('<body>');
-    res.write('<h1>5 Day Forecast</h1>')
-    res.write('<ul>');
-    res.write('<li>5-day forecast card</li>');
-    res.write('<li>forecast details</li>');
-    res.write('<li></li>');
-    res.write('</ul>');
-    res.write('</body>');
-    res.end();
-});
+// DISPLAY 5 DAY WEATHER FORECAST
+router.get('/weather/5-day-forecast', weatherController.getFiveDayWeather);
 
+// DISPLAY HOURLY WEATHER FORECAST
+router.get('/weather/hourly', weatherController.getHourlyWeather);
+
+// SEARCH FOR WEATHER BY MAP
+router.get('/weather/map', weatherController.getMap);
+
+// SAVE TO YOUR FAVORITES
 router.post("/save-weather", weatherController.saveWeather);
 
 module.exports = router;
