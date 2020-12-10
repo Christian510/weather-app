@@ -38,9 +38,7 @@ exports.postWeatherByName = (req, res, next) => {
     let suns = weather.sys.sunset;
     const getDate = WeatherDate.convertUTC(dt, sunr, suns);
 
-    let r = weather.rain;
-    let s = weather.snow;
-    let c = weather.clouds;
+    // let c = weather.clouds;
     let precipitation = checkPrecip(weather.rain, weather.snow);
 
     WeatherData.validateById(validate => {
@@ -85,9 +83,7 @@ exports.getSavedWeatherById = (req, res, next) => {
     let suns = weather.sys.sunset;
     const getDate = WeatherDate.convertUTC(dt, sunr, suns);
 
-    let r = weather.rain;
-    let s = weather.snow;
-    let precipitation = checkPrecip(r, s);
+    let precipitation = checkPrecip(weather.rain, weather.snow);
 
     res.render('weather/current-weather', {
       visibile: false, // for display of save btn
