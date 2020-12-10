@@ -1,6 +1,7 @@
 <form class="<%= visibile === true ? "visible" : "invisible" %>" action="/save-weather" method="POST">
     <button type="submit" class="btn btn-success save-button">Save Weather</button>
     <input type="hidden" name="city" value="<%= city %>">
-    <input type="hidden" name="id" value="<%= cityID %>">
     <input type="hidden" name="state" value="<%= state %>">
+    <input type="hidden" name="lat" value="<%= lat %>">
+    <input type="hidden" name="lon" value="<%= lon %>">
 </form>

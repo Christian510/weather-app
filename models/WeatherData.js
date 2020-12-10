@@ -5,16 +5,16 @@ const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
 const getCityData = (l, cb) => {
-    console.log("l: ", l);
+    // console.log("l: ", l);
     const db = getDb();
     db
-        .collection('city_list') 
+        .collection('city_list')
         .findOne({
-            $or: [ {
-                $and: [{"name": l.city}, { $or: [ {"state": l.abbr}, {"country": l.abbr} ]}]
+            $or: [{
+                $and: [{ "name": l.city }, { $or: [{ "state": l.abbr }, { "country": l.abbr }] }]
             },
             {
-                $and: [{"name": l.city}, {"state": l.state}, {"country": l.country}]
+                $and: [{ "name": l.city }, { "state": l.state }, { "country": l.country }]
             }
             ]
         })
@@ -44,12 +44,29 @@ const getSavedData = cb => {
             console.log(err);
         });
 }
+// const getCurrentWeather = (id, cb) => {
+//     const key = process.env.TOKEN;
+//     let cityID = id;
+//     let units = ['imperial', 'metric', 'stadard'];
+//     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
+//         .then(function (response) {
+//             cb(response);
+//         })
+//         .catch(function (error) {
+//             console.log("API Error message: ");
+//             // console.log(error);
+//             console.log("url: ", error.config.url);
+//             console.log("error code", error.response.data.cod);
+//             console.log("error message", error.response.data.message);
+//         });
+// }
 
-const getCurrentWeather = (id, cb) => {
+const getWeatherForecast = (coord, cb) => {
     const key = process.env.TOKEN;
-    let cityID = id;
     let units = ['imperial', 'metric', 'stadard'];
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
+    let lat = coord.lat;
+    let lon = coord.lon;
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
         .then(function (response) {
             cb(response);
         })
@@ -59,43 +76,25 @@ const getCurrentWeather = (id, cb) => {
             console.log("url: ", error.config.url);
             console.log("error code", error.response.data.cod);
             console.log("error message", error.response.data.message);
-        });
-}
-
-const getWeatherForecast = (coord, cb) => {
-    const key = process.env.TOKEN;
-    let units = ['imperial', 'metric', 'stadard'];
-    let lat = coord.lat;
-    let lon = coord.lon;
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
-    .then(function(response) {
-        cb(response);
-    })
-    .catch(function(error) {
-        console.log("API Error message: ");
-        // console.log(error);
-        console.log("url: ", error.config.url);
-        console.log("error code", error.response.data.cod);
-        console.log("error message", error.response.data.message);
-        // cb(error);
-    })
+            // cb(error);
+        })
 }
 
 module.exports = class WeatherData {
-    constructor(city, id, state, lat, lon) {
+    constructor(city, state, lat, lon) {
+        this._id = '';
         this.city = city;
         this.state = state.toUpperCase();
-        this.id = id;
         this.visibility = true;
         this.customName = null;
-        this._id = new mongodb.ObjectID(id);
         this.lat = lat;
         this.lon = lon;
     }
 
     save() {
-        this.visibility = false;
         const db = getDb();
+        this.visibility = false;
+        this._id = new mongodb.ObjectID();
         return db.collection('saved_searches')
             .insertOne(this)
             .then(result => {
@@ -136,21 +135,15 @@ module.exports = class WeatherData {
     }
 
     // Fetches hourly, 7 day Weather Forecast
-
     static getForecast(l, cb) {
+        // this will return lat and lon then...
         getCityData(l, data => {
-            // this will return lat and lon then...
-            console.log(data.coord);
+            // console.log(data);
+            // returns weather data from api
             getWeatherForecast(data.coord, cb);
-        })
-    }
-    // Fetches current weather
-    static getWeather(l, cb) {
-        getCityData(l, city => {
-            // console.log("data: ", city.id);
-            getCurrentWeather(city.id, cb);
         });
     }
+
     // Gets weather using an id
     static getWeatherById(cityId, cb) {
         // converts id string to number
@@ -165,4 +158,8 @@ module.exports = class WeatherData {
     static getSavedLocations(cb) {
         getSavedData(cb);
     };
+
+    static findCity(l, cb) {
+       getCityData(l, cb);
+    }
 }
