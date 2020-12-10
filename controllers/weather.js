@@ -1,18 +1,7 @@
 const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
 const validateAdr = require('../public/javascripts/validateAddr').validateAdr;
-
-function checkPrecip(rain, snow) {
-  let precipitation;
-  if (rain !== undefined) {
-    return precipitation = rain['1h'];
-  }
-  if (snow !== undefined) {
-    return precipitation = snow['1h'];
-  } else {
-    return precipitation = '0';
-  }
-}
+const checkPrecip = require('../public/javascripts/main').checkPrecip;
 
 exports.getIndex = (req, res, next) => {
   WeatherData.getSavedLocations(locations => {

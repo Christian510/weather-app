@@ -1,29 +1,14 @@
 
-const fs = require('fs');
-const path = require('path');
-const cityDir = require(process.mainModule.filename);
-
-const p = path.join(
-    path.dirname(cityDir),
-    'data',
-    'sample_list.json');
-
-
-
-    const getCities = () => {
-        fs.readFile(p, (err, fielContent) => {
-            if (err) {
-                console.log(err);
-                return [];
-            } else {
-                return JSON.parse(fielContent);
-            }
-        });
+function checkPrecip(rain, snow) {
+    let precipitation;
+    if (rain !== undefined) {
+      return precipitation = rain['1h'];
     }
-
-
-    function returnCityData() {
-        getCities( cities => {
-            console.log(cities);
-        })
+    if (snow !== undefined) {
+      return precipitation = snow['1h'];
+    } else {
+      return precipitation = '0';
     }
+  }
+
+  exports.checkPrecip = checkPrecip;
