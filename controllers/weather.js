@@ -17,7 +17,10 @@ exports.getIndex = (req, res, next) => {
 exports.postWeatherByName = (req, res, next) => {
   // Parse string into a useable object
   let location = validateAdr(req.body.city_state);
-
+  WeatherData.getForecast(location, forecast => {
+    console.log(forecast.data);
+    // console.log(forecast.data.hourly);
+  });
   WeatherData.getWeather(location, apiResp => {
     // console.log("response: ", apiResp);
     const weather = apiResp.data;
