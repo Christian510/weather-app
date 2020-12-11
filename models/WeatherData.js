@@ -4,25 +4,25 @@ const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
 const { listenerCount } = require('process');
 
-const getCityData = (l, cb) => {
-    // console.log("l: ", l);
+const getCityData = (sq, cb) => {
+    console.log("sq: ", sq);
     const db = getDb();
     db
         .collection('city_list')
         .findOne({
             $or: [{
-                $and: [{ "name": l.city }, { $or: [{ "state": l.abbr }, { "country": l.abbr }] }]
+                $and: [{ "name": sq.city }, { $or: [{ "state": sq.abbr }, { "country": sq.abbr }] }]
             },
             {
-                $and: [{ "name": l.city }, { "state": l.state }, { "country": l.country }]
+                $and: [{ "name": sq.city }, { "state": sq.state }, { "country": sq.country }]
             }
             ]
         })
-        .then(weather => {
-            if (Object.keys(weather).length === 0) {
-                console.log("Can't find an Id for this location.");
+        .then(city => {
+            if (Object.keys(city).length === 0) {
+                console.log("Can't find a city based on query.");
             } else {
-                cb(weather);
+                cb(city);
             }
         })
         .catch(err => {
@@ -31,35 +31,22 @@ const getCityData = (l, cb) => {
 }
 
 const getSavedData = (id, cb) => {
+    id = "5fd2a15c22f71c20ff4a5594"
     const db = getDb();
     db
         .collection('saved_searches')
         .findOne({_id: ObjectID(id)})
         .then(city => {
-            cb(city);
+            return city
+            // cb(city);
         })
         .catch(err => {
             console.log(err);
         });
 }
-// const getCurrentWeather = (id, cb) => {
-//     const key = process.env.TOKEN;
-//     let cityID = id;
-//     let units = ['imperial', 'metric', 'stadard'];
-//     axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${key}&units=imperial`)
-//         .then(function (response) {
-//             cb(response);
-//         })
-//         .catch(function (error) {
-//             console.log("API Error message: ");
-//             // console.log(error);
-//             console.log("url: ", error.config.url);
-//             console.log("error code", error.response.data.cod);
-//             console.log("error message", error.response.data.message);
-//         });
-// }
 
 const getWeatherForecast = (coord, cb) => {
+    console.log(coord);
     const key = process.env.TOKEN;
     let units = ['imperial', 'metric', 'stadard'];
     let lat = coord.lat;
@@ -132,14 +119,12 @@ module.exports = class WeatherData {
             })
     }
 
-    // Fetches hourly, 7 day Weather Forecast
-    static getForecast(coord, cb) {
-        // this will return lat and lon then...
-        // getCityData(l, data => {
-            // console.log(data);
-            // returns weather data from api
-            getWeatherForecast(coord, cb);
-        // });
+    // Fetches current Weather Forecast for Name search
+    static getForecast(sq, cb) {
+        console.log("sq: ",sq);
+        getCityData(sq, city => {
+            getWeatherForecast(city.coord, cb);
+        });
     }
 
     // Gets weather using an id
@@ -148,16 +133,20 @@ module.exports = class WeatherData {
         let id = Number(cityId);
         getCurrentWeather(id, cb);
     }
-
-    static getCityById(id, cb) {
-        getSavedData(id, cb);
+    // returns a city if it exists ELSE null
+    static getCityById(sq, cb) {
+        console.log(sq);
+        // getCityData(sq, city => {
+        //     getSavedData(city._id, cb);
+        // });
     }
-
+    // returns a list of saved cities else null
     static getSavedLocations(cb) {
         getSavedData(cb);
     };
 
-    static findCity(l, cb) {
-       getCityData(l, cb);
+    static findCity(l) {
+        // console.log(l);
+       getCityData(l);
     }
 }
