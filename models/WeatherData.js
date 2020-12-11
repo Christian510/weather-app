@@ -30,15 +30,13 @@ const getCityData = (l, cb) => {
         });
 }
 
-const getSavedData = cb => {
+const getSavedData = (id, cb) => {
     const db = getDb();
     db
         .collection('saved_searches')
-        .find()
-        .toArray()
-        .then(locations => {
-            // console.log("locations: ", locations);
-            cb(locations);
+        .findOne({_id: ObjectID(id)})
+        .then(city => {
+            cb(city);
         })
         .catch(err => {
             console.log(err);
@@ -135,13 +133,13 @@ module.exports = class WeatherData {
     }
 
     // Fetches hourly, 7 day Weather Forecast
-    static getForecast(l, cb) {
+    static getForecast(coord, cb) {
         // this will return lat and lon then...
-        getCityData(l, data => {
+        // getCityData(l, data => {
             // console.log(data);
             // returns weather data from api
-            getWeatherForecast(data.coord, cb);
-        });
+            getWeatherForecast(coord, cb);
+        // });
     }
 
     // Gets weather using an id
@@ -151,8 +149,8 @@ module.exports = class WeatherData {
         getCurrentWeather(id, cb);
     }
 
-    static validateById(cb) {
-        getSavedData(cb);
+    static getCityById(id, cb) {
+        getSavedData(id, cb);
     }
 
     static getSavedLocations(cb) {

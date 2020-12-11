@@ -9,10 +9,10 @@
                 <div class="col pr-0">
                     <div>
                         <h3>
-                            <% if([null, undefined, ' ', ''].includes(name)) { %>
+                            <% if([null, undefined, ' ', ''].includes(customName)) { %>
                             <%= city %> <%= state.toUpperCase() %>
                             <% } else { %>
-                            <%= name %>
+                            <%= customName %>
                             <% } %>
                         </h3>
                         <p><%= observation %> </p>
