@@ -5,11 +5,12 @@ const checkPrecip = require('../public/javascripts/main').checkPrecip;
 const { ObjectID } = require('mongodb');
 
 exports.getIndex = (req, res, next) => {
-  WeatherData.getSavedLocations(locations => {
-    // console.log(locations);
+  // console.log(req.sessionID);
+  WeatherData.getSavedWeatherList(list => {
+    // console.log("list: ",list);
     res.render('weather/index', {
       title: 'Basic Weather',
-      searches: locations,
+      weather: list,
     });
   });
 }
@@ -18,9 +19,9 @@ exports.getIndex = (req, res, next) => {
 exports.postWeatherByName = (req, res, next) => {
   // Parse search query (sq) into a useable object
   let sq = parseStr(req.body.city_state);
-  // console.log("search input: ",sq);
+  console.log("search input: ",sq);
   WeatherData.getForecast(sq, apiResp => {
-    // console.log("response: ", apiResp.data);
+    console.log(" weather.js-getForecast: ",tapiResp.data.lat, apiResp.data.lat);
     const cw = apiResp.data.current;
     // console.log("cw", cw);
 
@@ -29,8 +30,8 @@ exports.postWeatherByName = (req, res, next) => {
     let precipitation = checkPrecip(cw.rain, cw.snow);
     // When the save button is clicked getCityById checks to see if its in the db if not then save
     WeatherData.getCityById(sq, savedCity => {
-      console.log("savedCity: ", savedCity);
-      let isVisable = savedCity === null ? false : true;
+      // console.log("savedCity: ", savedCity);
+      let isVisable = savedCity === null ? true : false;
       res.render('weather/current-weather', {
         title: "Weather Basics",
         visibile: isVisable,
@@ -38,10 +39,10 @@ exports.postWeatherByName = (req, res, next) => {
         observation: cw.weather[0].main,
         typeOfPrecip: "rain",
         precip: precipitation,
-        city: location.city,
-        state: location.abbr.toUpperCase(),
-        customName: location.custom_name,
-        cityID: savedCity._id,
+        city: sq.city,
+        state: sq.abbr.toUpperCase(),
+        customName: sq.custom_name,
+        // cityID: savedCity._id,
         temp: Math.round(cw.temp),
         humidity: cw.humidity,
         pressure: cw.pressure,
@@ -53,8 +54,8 @@ exports.postWeatherByName = (req, res, next) => {
         clouds: cw.clouds,
         icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
         main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
-        lat: cw.lat,
-        lon: cw.lon
+        lat: apiResp.data.lat,
+        lon: apiResp.data.lon
       });
     });
   });
@@ -62,10 +63,14 @@ exports.postWeatherByName = (req, res, next) => {
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
-  const id = req.query.id;
-  console.log(req.query);
+  // console.log(req.query);
+  // const id = req.query.id;
+  const lat = req.query.lat;
+  const lon = req.query.lon;
+  console.log("req.query.lat: ", req.query.lat)
+  console.log("req.query.lon: ", req.query.lon)
 
-  WeatherData.getWeatherById(id, apiResp => {
+  WeatherData.getSavedWeather(lat, lon, apiResp => {
     const cw = apiResp.data;
     let dt = cw.dt;
     let sunr = cw.sunrise;
@@ -103,6 +108,7 @@ exports.getSavedWeatherById = (req, res, next) => {
 exports.saveWeather = (req, res, next) => {
   console.log("SaveWeather: req.body", req.body);
   let { city, state, lat, lon } = req.body;
+  console.log("saveWeather: ", lat, lon);
   let saveSearch = new WeatherData(city, state, lat, lon);
   saveSearch.save()
     .then(result => {
@@ -113,6 +119,7 @@ exports.saveWeather = (req, res, next) => {
     .catch(err => {
       console.log("saved search err: ", err);
     });
+    // saveSearch.saveNew();
 }
 
 // 5 DAY WEATHER FORCAST

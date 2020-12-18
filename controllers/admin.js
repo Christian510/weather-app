@@ -4,7 +4,7 @@ const WeatherData = require('../models/WeatherData');
 // Displays all saved Locations on edit page.
 exports.editList = (req, res, next) => {
 
-    WeatherData.getSavedLocations(data => {
+    WeatherData.getSavedWeatherList(data => {
         // console.log(SavedSearches);
         res.render('admin/edit-list', {
             title: 'Basic Weather',
