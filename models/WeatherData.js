@@ -19,11 +19,11 @@ const getCityData = (sq, cb) => {
                 $and: [{ "name": sq.city }, { "state": sq.state }, { "country": sq.country }]
             }]
         })
-        .then(city => {
-            if (Object.keys(city).length === 0) {
+        .then(result => {
+            if (Object.keys(result).length === 0) {
                 console.log("Can't find a city based on query.");
             } else {
-                cb(city);
+                cb(result);
             }
         })
         .catch(err => {
@@ -37,8 +37,8 @@ const getSavedDataByID = (id, cb) => {
     db
         .collection('saved_searches')
         .findOne({ _id: ObjectID(id) })
-        .then(city => {
-            cb(city);
+        .then(result => {
+            cb(result);
         })
         .catch(err => {
             console.log(err);
@@ -61,19 +61,20 @@ const getSavedData = cb => {
 // GET THE CURRENT WEATHER FORECAST FROM API
 const getWeatherForecast = (lat, lon, cb) => {
     console.log("line 63 WeatherData: ", lat,lon);
-    const key = process.env.TOKEN;
+    // const key = process.env.TOKEN1;
+    const key = process.env.TOKEN2;
     let units = ['imperial', 'metric', 'stadard'];
-    console.log(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
+    console.log(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`);
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
         .then(function (response) {
             cb(response);
         })
         .catch(function (error) {
             console.log("API Error message: ");
-            // console.log(error);
-            console.log("url: ", error.config.url);
-            console.log("error code", error.response.data.cod);
-            console.log("error message", error.response.data.message);
+            console.log(error);
+            // console.log("url: ", error.config.url);
+            // console.log("error code", error.response.data.cod);
+            // console.log("error message", error.response.data.message);
             // cb(error);
         });
 }
@@ -159,27 +160,25 @@ module.exports = class WeatherData {
     }
 
     // FETCHES CURRENT WEATHER FORECAST FOR NAME SEARCH
-    static getForecast(sq, cb) {
+    static validateCity(sq, cb) {
         // console.log("sq: ", sq);
-        getCityData(sq, city => {
-            let lat = city.coord.lat;
-            let lon = city.coord.lon;
-            console.log("getForecast-line 165: ",lat, lon);
-            getWeatherForecast(lat, lon, cb);
-        });
+        getCityData(sq, cb);
     }
 
+    static getWeather(lat, lon, cb) {
+        getWeatherForecast(lat, lon, cb);
+    }
+    
     // GETS WEATHER USING LATITUDE and LONGITUDE
     // Invoked at weather.js line 72
     static getSavedWeather(lat, lon, cb) {
-        console.log("line 177: ",lat, lon)
+        // console.log("line 177: ",lat, lon)
         getWeatherForecast(lat, lon, cb);
     }
     // RETURNS A CITY IF IT EXISTS ELSE NULL
     static getCityById(sq, cb) {
         // console.log(sq);
         getCityData(sq, city => {
-            // console.log(city._id);
             getSavedDataByID(city._id, cb);
         });
     }

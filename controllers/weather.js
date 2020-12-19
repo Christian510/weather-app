@@ -19,22 +19,19 @@ exports.getIndex = (req, res, next) => {
 exports.postWeatherByName = (req, res, next) => {
   // Parse search query (sq) into a useable object
   let sq = parseStr(req.body.city_state);
-  console.log("search input: ",sq);
-  WeatherData.getForecast(sq, apiResp => {
-    console.log(" weather.js-getForecast: ",tapiResp.data.lat, apiResp.data.lat);
-    const cw = apiResp.data.current;
-    // console.log("cw", cw);
-
-    const getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
-    // let c = cw.weather.clouds;
-    let precipitation = checkPrecip(cw.rain, cw.snow);
-    // When the save button is clicked getCityById checks to see if its in the db if not then save
-    WeatherData.getCityById(sq, savedCity => {
-      // console.log("savedCity: ", savedCity);
-      let isVisable = savedCity === null ? true : false;
+  console.log(sq);
+  WeatherData.validateCity(sq, city => {
+    console.log(city);
+    WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
+      let cw = w.data.current;
+      let c = cw.clouds;
+      let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+      console.log(city.isVisable);
+      let precipitation = checkPrecip(cw.rain, cw.snow);
+      let isVisable = city.isVisable === undefined ? true : false;
       res.render('weather/current-weather', {
         title: "Weather Basics",
-        visibile: isVisable,
+        visible: isVisable,
         time: getDate.date,
         observation: cw.weather[0].main,
         typeOfPrecip: "rain",
@@ -54,8 +51,8 @@ exports.postWeatherByName = (req, res, next) => {
         clouds: cw.clouds,
         icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
         main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
-        lat: apiResp.data.lat,
-        lon: apiResp.data.lon
+        lat: city.coord.lat,
+        lon: city.coord.lon
       });
     });
   });
@@ -64,42 +61,36 @@ exports.postWeatherByName = (req, res, next) => {
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
   // console.log(req.query);
-  // const id = req.query.id;
-  const lat = req.query.lat;
-  const lon = req.query.lon;
-  console.log("req.query.lat: ", req.query.lat)
-  console.log("req.query.lon: ", req.query.lon)
-
-  WeatherData.getSavedWeather(lat, lon, apiResp => {
-    const cw = apiResp.data;
-    let dt = cw.dt;
-    let sunr = cw.sunrise;
-    let suns = cw.sunset;
-    const getDate = WeatherDate.convertUTC(dt, sunr, suns);
+  WeatherData.getSavedWeather(req.query.lat, req.query.lon, apiResp => {
+    const cw = apiResp.data.current;
+    // console.log(cw);
+    const getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
 
     let precipitation = checkPrecip(cw.rain, cw.snow);
-
+    //  I have to get the correct coords from the saved
     res.render('weather/current-weather', {
-      visibile: false, // for display of save btn
+      visible: false, // for display of save btn
       title: "Weather Basics",
       time: getDate.date,
-      observation: weather.weather[0].main,
-      city: location.city,
-      cityID: weather.id,
+      observation: cw.weather[0].main,
+      city: req.query.city,
+      cityID: cw.id,
       state: req.query.state,
-      name: req.query.custom_name,
-      temp: Math.round(weather.main.temp),
-      humidity: weather.main.humidity,
-      pressure: weather.main.pressure,
-      windSpeed: Math.round(weather.wind.speed),
-      windDir: weather.wind.deg,
+      customName: req.query.custom_name,
+      temp: Math.round(cw.temp),
+      humidity: cw.humidity,
+      pressure: cw.pressure,
+      windSpeed: Math.round(cw.wind_speed),
+      windDir: cw.wind_deg,
       sunrise: getDate.sunrise,
       sunset: getDate.sunset,
-      clouds: weather.clouds.all,
-      visibility: Math.round(weather.visibility / 1000),
-      icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
-      main: weather.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
+      clouds: cw.clouds.all,
+      visibility: Math.round(cw.visibility / 1000),
+      icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+      main: cw.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
       precip: precipitation,
+      lat: req.query.lat,
+      lon: req.query.lon,
     });
   });
 };
@@ -119,7 +110,7 @@ exports.saveWeather = (req, res, next) => {
     .catch(err => {
       console.log("saved search err: ", err);
     });
-    // saveSearch.saveNew();
+  // saveSearch.saveNew();
 }
 
 // 5 DAY WEATHER FORCAST
