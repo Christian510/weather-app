@@ -60,11 +60,9 @@ const getSavedData = cb => {
 }
 // GET THE CURRENT WEATHER FORECAST FROM API
 const getWeatherForecast = (lat, lon, cb) => {
-    console.log("line 63 WeatherData: ", lat,lon);
     // const key = process.env.TOKEN1;
     const key = process.env.TOKEN2;
     let units = ['imperial', 'metric', 'stadard'];
-    console.log(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`);
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
         .then(function (response) {
             cb(response);
@@ -162,6 +160,7 @@ module.exports = class WeatherData {
     // FETCHES CURRENT WEATHER FORECAST FOR NAME SEARCH
     static validateCity(sq, cb) {
         // console.log("sq: ", sq);
+
         getCityData(sq, cb);
     }
 
