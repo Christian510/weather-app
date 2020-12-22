@@ -1,4 +1,25 @@
-// RETURNS AN ADDRESS OBJECT USED RETRIEVE WEATHER DATA
+const precip = {
+  precipitation: '',
+  type: '',
+}
+const checkPrecip = (rain, snow) => {
+    // let precipitation;
+    if (rain !== undefined) {
+      precip.precipitation = rain['1h'];
+      precip.type = "rain";
+    }
+    if (snow !== undefined) {
+      precip.precipitation = snow['1h'];
+      precip.type = "snow";
+    } else {
+      precip.precipitation = '0';
+      // precip.type = 'none';
+    }
+    return precip;
+  }
+
+
+  // RETURNS AN ADDRESS OBJECT USED RETRIEVE WEATHER DATA
 const addr = {
   city: '',
   state: '',
@@ -29,4 +50,5 @@ const validateAdr = str => {
 }
 
 
+exports.checkPrecip = checkPrecip;
 exports.validateAdr = validateAdr;

@@ -20,8 +20,8 @@ const getCityData = (sq, cb) => {
             }]
         })
         .then(result => {
-            if (Object.keys(result).length === 0) {
-                console.log("Can't find a city based on query.");
+            if (result === null) {
+                cb(null);
             } else {
                 cb(result);
             }
@@ -77,19 +77,19 @@ const getWeatherForecast = (lat, lon, cb) => {
         });
 }
 
-// const findSessionID = (id, cb) => {
-//     const db = getDb();
-//     db
-//         .collection('sessions')
-//         .findOne(id)
-//         .then(sessionUser => {
-//             console.log(sessionUser);
-//             cb(sessionUser);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// }
+const findSessionID = (id, cb) => {
+    const db = getDb();
+    db
+        .collection('sessions')
+        .findOne(id)
+        .then(sessionUser => {
+            console.log(sessionUser);
+            cb(sessionUser);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 module.exports = class WeatherData {
     constructor(city, state, lat, lon) {
@@ -118,14 +118,14 @@ module.exports = class WeatherData {
     }
     // Save Session User and Collection
     // saveNew(id) {
-        // const db = getDb();
-        // this.ivsibility = false;
-        // this._id = new mongodb.ObjectID();
-        // discover is sessionID exists. If so save search to db associated with sessionID
-        // findSessionID((id, user => {
-        //     console.log(user);
-        // }))
-        // if db save search. if no db exists for sessionID create one.
+    // const db = getDb();
+    // this.ivsibility = false;
+    // this._id = new mongodb.ObjectID();
+    // discover is sessionID exists. If so save search to db associated with sessionID
+    // findSessionID((id, user => {
+    //     console.log(user);
+    // }))
+    // if db save search. if no db exists for sessionID create one.
     // }
     // DELETES ONE SAVED WEATHER STATION IF EXISTS
     static delete(id) {
@@ -160,14 +160,13 @@ module.exports = class WeatherData {
     // FETCHES CURRENT WEATHER FORECAST FOR NAME SEARCH
     static validateCity(sq, cb) {
         // console.log("sq: ", sq);
-
         getCityData(sq, cb);
     }
 
     static getWeather(lat, lon, cb) {
         getWeatherForecast(lat, lon, cb);
     }
-    
+
     // GETS WEATHER USING LATITUDE and LONGITUDE
     // Invoked at weather.js line 72
     static getSavedWeather(lat, lon, cb) {

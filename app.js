@@ -36,15 +36,15 @@ const sessionStore = new MongoStore({
   },
 });
 
-app.use(session({
-  secret: 'secret-key',
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
-  },
-  store: sessionStore,
-  resave: false,
-  saveUninitialized: true,
-}));
+// app.use(session({
+//   secret: 'secret-key',
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
+//   },
+//   store: sessionStore,
+//   resave: false,
+//   saveUninitialized: true,
+// }));
 
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
