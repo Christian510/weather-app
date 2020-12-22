@@ -17,11 +17,6 @@ exports.getIndex = (req, res, next) => {
 
 // /WEATHER - DISPLAY WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
-  console.log("input: ", req.body.city_state);
-  if (req.body.city_state === '') {
-    console.log("Nothing entered");
-    console.log(res);
-  } else {
     // Parse search query (sq) into a useable object
     let sq = parseStr(req.body.city_state);
     if (sq === null) {
@@ -72,7 +67,6 @@ exports.postWeatherByName = (req, res, next) => {
         }
       });
     }
-  }
 };
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
