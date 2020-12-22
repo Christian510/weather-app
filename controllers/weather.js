@@ -109,7 +109,7 @@ exports.getSavedWeatherById = (req, res, next) => {
 exports.saveWeather = (req, res, next) => {
   console.log("SaveWeather: req.body", req.body);
   let { city, state, lat, lon } = req.body;
-  console.log("saveWeather: ", lat, lon);
+  // console.log("saveWeather: ", lat, lon);
   let saveSearch = new WeatherData(city, state, lat, lon);
   saveSearch.save()
     .then(result => {

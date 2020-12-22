@@ -7,10 +7,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const mongoSessionClient = require('./util/sessiondb').mongoSessionClient;
-
 const app = express();
-
 // Routers
 const adminRouter = require('./routes/admin');
 const usersRouter = require('./routes/users');
@@ -21,9 +18,7 @@ const indexRouter = require('./routes/index');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(path.join(__dirname, 'public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,22 +26,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 const sessionStore = new MongoStore({
-  url: 'mongodb+srv://Christian:ewv7KxfQ@weatherappdb.cq3qr.mongodb.net/WeatherAppDB?retryWrites=true&w=majority',
+  url: process.env.URL,
   mongoOptions: {
     useNewUrlParser: true,
     useUnifiedTopology: true
   },
 });
 
-// app.use(session({
-//   secret: 'secret-key',
-//   cookie: {
-//     maxAge: 1000 * 60 * 60 * 24 // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
-//   },
-//   store: sessionStore,
-//   resave: false,
-//   saveUninitialized: true,
-// }));
+app.use(session({
+  secret: process.env.SECRET,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
+  },
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);

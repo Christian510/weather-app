@@ -109,8 +109,7 @@ module.exports = class WeatherData {
         return db.collection('saved_searches')
             .insertOne(this)
             .then(result => {
-                // console.log("save result: ", result);
-                console.log("save result: ", result.ops[0]);
+                // console.log("save result: ", result.ops[0]);
             })
             .catch(err => {
                 console.log("error msg: ", err);
