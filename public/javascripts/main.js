@@ -22,3 +22,7 @@ function savedMsg(e) {
     }
     
 }
+
+// Write a function that deletes an item and updates the list
+// pull in WeatherData and use it to make the changes to the db
+// Then update the list

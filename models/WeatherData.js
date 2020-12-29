@@ -92,40 +92,52 @@ const findSessionID = (id, cb) => {
 }
 
 module.exports = class WeatherData {
-    constructor(city, state, lat, lon) {
-        this._id = '';
+    constructor(id, city, state, lat, lon) {
+        this._id = id;
         this.city = city;
         this.state = state.toUpperCase();
-        this.visibility = true;
+        this.visibile = true;
         this.customName = null;
         this.lat = lat;
         this.lon = lon;
     }
     // SAVES A NEW SEARCH TO DB
-    save() {
-        const db = getDb();
-        this.visibility = false;
-        this._id = new mongodb.ObjectID();
-        return db.collection('saved_searches')
-            .insertOne(this)
-            .then(result => {
-                // console.log("save result: ", result.ops[0]);
-            })
-            .catch(err => {
-                console.log("error msg: ", err);
-            });
-    }
-    // Save Session User and Collection
-    // saveNew(id) {
-    // const db = getDb();
-    // this.ivsibility = false;
-    // this._id = new mongodb.ObjectID();
-    // discover is sessionID exists. If so save search to db associated with sessionID
-    // findSessionID((id, user => {
-    //     console.log(user);
-    // }))
-    // if db save search. if no db exists for sessionID create one.
+    // save() {
+    //     const db = getDb();
+    //     this.visibility = false;
+    //     this._id = new mongodb.ObjectID();
+    //     return db.collection('saved_searches')
+    //         .insertOne(this)
+    //         .then(result => {
+    //             // console.log("save result: ", result.ops[0]);
+    //         })
+    //         .catch(err => {
+    //             console.log("error msg: ", err);
+    //         });
     // }
+    // Save Session User and Collection
+    save() {
+    const db = getDb();
+    this.visibile = false;
+    let weatherID = new mongodb.ObjectID();
+        return db.collection("sessions").updateOne(
+            {"_id": this._id},
+            {$set: {
+                "savedWeather.id": weatherID,
+                "savedWeather.city": this.city,
+                "savedWeather.state": this.state,
+                "savedWeather.lat": this.lat,
+                "savedWeather.lon": this.lon,
+                "savedWeather.visible": this.visibile
+              }
+          })
+          .then(result => {
+              console.log(result);
+          })
+          .catch(err => {
+              console.log(err);
+          });
+    }
     // DELETES ONE SAVED WEATHER STATION IF EXISTS
     static delete(id) {
         const db = getDb();

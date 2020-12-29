@@ -23,5 +23,6 @@ router.get('/weather/map', weatherController.getMap);
 
 // SAVE TO YOUR FAVORITES
 router.post("/save-weather", weatherController.saveWeather);
+// router.put("/save-weather", weatherController.saveWeather);
 
 module.exports = router;

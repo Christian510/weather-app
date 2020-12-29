@@ -3,9 +3,9 @@ const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
 const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
 // Yep, it's not the most elegent code.  But it's 99% all my work!
-// The learning will continue whether you likeit or not.  So, like it -- A LOT.
+// The learning will continue whether you like it or not.  So, like it -- A LOT.
 exports.getIndex = (req, res, next) => {
-  // console.log(req.sessionID);
+  console.log(req.sessionID);
   WeatherData.getSavedWeatherList(list => {
     // console.log("list: ",list);
     res.render('weather/index', {
@@ -106,21 +106,38 @@ exports.getSavedWeatherById = (req, res, next) => {
 };
 
 // SAVE CITY WEATHER SEARCH
+// exports.saveWeather = (req, res, next) => {
+//   // console.log("SaveWeather: req.body", req.body);
+//   let { city, state, lat, lon } = req.body;
+//   // console.log("saveWeather: ", lat, lon);
+//   let saveSearch = new WeatherData(city, state, lat, lon);
+//   saveSearch.save()
+//     .then(result => {
+//       console.log(result);
+//       console.log("Search Saved");
+//       // res.redirect('/');
+//     })
+//     .catch(err => {
+//       console.log("saved search err: ", err);
+//     });
+//   // saveSearch.saveNew();
+// }
+
 exports.saveWeather = (req, res, next) => {
-  console.log("SaveWeather: req.body", req.body);
+  // console.log(req);
+  // console.log("SaveWeather: req.body", req.body);
+  // console.log("session: ", req.sessionID);
   let { city, state, lat, lon } = req.body;
-  // console.log("saveWeather: ", lat, lon);
-  let saveSearch = new WeatherData(city, state, lat, lon);
+  let saveSearch = new WeatherData(req.sessionID, city, state, lat, lon);
   saveSearch.save()
     .then(result => {
-      // console.log(result);
+      console.log(result);
       console.log("Search Saved");
-      res.redirect('/');
+      res.render('/');
     })
     .catch(err => {
       console.log("saved search err: ", err);
     });
-  // saveSearch.saveNew();
 }
 
 // 5 DAY WEATHER FORCAST

@@ -15,10 +15,11 @@ exports.editList = (req, res, next) => {
 
 // Delete Item from Saved Locations
 exports.deleteItem = (req, res, next) => {
-    console.log("req body: ", req.body);
+    // console.log("req body: ", req.body);
     let id = req.body.idInput;
     WeatherData.delete(id)
-        .then(() => {
+        .then(result => {
+            console.log(result);
             res.redirect('/');
         })
         .catch(err => {
