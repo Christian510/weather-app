@@ -7,9 +7,9 @@
     <%- include('../includes/search-bar.ejs') %>
   </div>
   <section class="container contain-all">
-    <% if (weather.length > 0) { %>
+    <% if (cities.length > 0) { console.log("index.ejs: ", cities) %>
     <ul class="list-group" role="list">
-      <% for (let location of weather) { %>
+      <% cities.forEach(location => { %>
       <li class="list-group-item">
         <form action="/weather" method="GET">
           <button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start">
@@ -38,7 +38,7 @@
             <input type="hidden" name="lon" value="<%= location.lon %>"  >
           </form>
       </li>
-      <% } %>
+      <% }); %>
       <% } else { %>
       <h2>Your saved searches desplay here!</h2>
       <% } %>

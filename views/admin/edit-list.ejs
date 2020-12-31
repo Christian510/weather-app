@@ -7,28 +7,28 @@
     <%- include('../includes/search-bar.ejs') %>
   </div>
   <section class="container">
-    <% if (content.length > 0) { %>
+    <% if (cities.length > 0) { console.log(cities) %>
     <ul class=" list-group row">
-      <% for(let the of content){ %>
+      <% cities.forEach(location => { %>
       <li class="list-group-item d-flex flex-column">
-        <% if(the.customName !== null) { %>
-        <label for="Edit-Search"><%= the.customName %></label>
+        <% if(location.customName) { %>
+        <label for="Edit-Search"><%= location.customName %></label>
         <% } else { %>
-        <label for="Edit-Search"><%= the.city %> <%= the.state.toUpperCase(); %></label>
+        <label for="Edit-Search"><%= location.city %> <%= location.state.toUpperCase(); %></label>
         <% } %>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
-            data-edit="<%= the.customName !== null ? the.customName : the.city %>" data-id="<%= the._id %> ">Edit
+            data-edit="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location._id %> ">Edit
             Name</button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal"
-            data-delete="<%= the.customName !== null ? the.customName : the.city %>" data-id="<%= the._id %>">
+            data-delete="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location._id %>">
             Delete
           </button>
         </div>
         <!-- Edit Modal -->
         <%- include('../includes/edit-name-modal.ejs') %>
       </li>
-      <% } %>
+      <% }); %>
       <% } else { %>
     </ul>
     <h2>Nothing to Edit!</h2>

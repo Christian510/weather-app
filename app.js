@@ -31,12 +31,14 @@ const sessionStore = new MongoStore({
     useNewUrlParser: true,
     useUnifiedTopology: true
   },
+  clear_interval: 1000 * 60 * 60 * 24,
 });
 
 app.use(session({
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
+    // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
+    maxAge: 1000 * 60 * 60 * 24
   },
   store: sessionStore,
   resave: false,

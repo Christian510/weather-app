@@ -48,7 +48,7 @@ const getSavedDataByID = (id, cb) => {
 const getSavedData = cb => {
     const db = getDb();
     db
-        .collection('saved_searches')
+        .collection('sessions')
         .find()
         .toArray()
         .then(cities => {
@@ -77,19 +77,19 @@ const getWeatherForecast = (lat, lon, cb) => {
         });
 }
 
-const findSessionID = (id, cb) => {
-    const db = getDb();
-    db
-        .collection('sessions')
-        .findOne(id)
-        .then(sessionUser => {
-            console.log(sessionUser);
-            cb(sessionUser);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
+// const findSessionID = (id, cb) => {
+//     const db = getDb();
+//     db
+//         .collection('sessions')
+//         .findOne(id)
+//         .then(sessionUser => {
+//             console.log(sessionUser);
+//             cb(sessionUser);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
+// }
 
 module.exports = class WeatherData {
     constructor(id, city, state, lat, lon) {
@@ -101,55 +101,47 @@ module.exports = class WeatherData {
         this.lat = lat;
         this.lon = lon;
     }
-    // SAVES A NEW SEARCH TO DB
-    // save() {
-    //     const db = getDb();
-    //     this.visibility = false;
-    //     this._id = new mongodb.ObjectID();
-    //     return db.collection('saved_searches')
-    //         .insertOne(this)
-    //         .then(result => {
-    //             // console.log("save result: ", result.ops[0]);
-    //         })
-    //         .catch(err => {
-    //             console.log("error msg: ", err);
-    //         });
-    // }
-    // Save Session User and Collection
+
+    // SAVES WEATHER SEARCHES TO SESSION USER
     save() {
-    const db = getDb();
-    this.visibile = false;
-    let weatherID = new mongodb.ObjectID();
-        return db.collection("sessions").updateOne(
-            {"_id": this._id},
-            {$set: {
-                "savedWeather.id": weatherID,
-                "savedWeather.city": this.city,
-                "savedWeather.state": this.state,
-                "savedWeather.lat": this.lat,
-                "savedWeather.lon": this.lon,
-                "savedWeather.visible": this.visibile
-              }
-          })
-          .then(result => {
-              console.log(result);
-          })
-          .catch(err => {
-              console.log(err);
-          });
-    }
-    // DELETES ONE SAVED WEATHER STATION IF EXISTS
-    static delete(id) {
         const db = getDb();
-        return db.collection("saved_searches").deleteOne({ _id: new mongodb.ObjectID(id) })
-            .then(result => {
-                if (result.deletedCount === 1) {
-                    console.log("Delete Successful!")
+        this.visibile = false;
+        let weatherID = new mongodb.ObjectID();
+        return db.collection("sessions").update(
+            { "_id": this._id },
+            {
+                $push: {
+                    "savedSearches": {
+                        "id": weatherID,
+                        "state": this.state,
+                        "city": this.city,
+                        "lat": this.lat,
+                        "lon": this.lon,
+                        "customName": this.customName,
+                        "visible": this.visibile
+                    }
                 }
+            })
+            .then(result => {
+                // console.log(result);
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
+    }
+    // DELETES ONE SAVED WEATHER STATION IF EXISTS
+    static delete(id) {
+        console.log(id);
+        // const db = getDb();
+        // return db.collection("sessions").deleteOne({ _id: new mongodb.ObjectID(id) })
+        //     .then(result => {
+        //         if (result.deletedCount === 1) {
+        //             console.log("Delete Successful!")
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
     }
     // EDITS THE NAME OF ONE SAVED WEATHER STATION
     static editName(id, name) {
@@ -174,16 +166,11 @@ module.exports = class WeatherData {
         getCityData(sq, cb);
     }
 
+    // GETS WEATHER USING LATITUDE and LONGITUDE
     static getWeather(lat, lon, cb) {
         getWeatherForecast(lat, lon, cb);
     }
 
-    // GETS WEATHER USING LATITUDE and LONGITUDE
-    // Invoked at weather.js line 72
-    static getSavedWeather(lat, lon, cb) {
-        // console.log("line 177: ",lat, lon)
-        getWeatherForecast(lat, lon, cb);
-    }
     // RETURNS A CITY IF IT EXISTS ELSE NULL
     static getCityById(sq, cb) {
         // console.log(sq);
@@ -191,9 +178,20 @@ module.exports = class WeatherData {
             getSavedDataByID(city._id, cb);
         });
     }
-    // RETURNS A LIST OF SAVED CITIES ELSE NULL
-    static getSavedWeatherList(cb) {
-        getSavedData(cb);
+    // RETURNS A LIST OF SAVED CITIES BY SESSION ID
+    static getSavedSearchList(id, cb) {
+        getSavedData(sessions => {
+            let session = [];
+            for (let i = 0; i < sessions.length; i++) {
+                if (sessions[i]._id === id && sessions[i].savedSearches) {
+                    sessions[i].savedSearches.forEach(element => {
+                        session.push(element);
+                    });
+                } else {
+                    i++
+                }
+            }
+            cb(session);
+        });
     };
-
 }

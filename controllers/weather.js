@@ -5,12 +5,17 @@ const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
 // Yep, it's not the most elegent code.  But it's 99% all my work!
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
 exports.getIndex = (req, res, next) => {
-  console.log(req.sessionID);
-  WeatherData.getSavedWeatherList(list => {
-    // console.log("list: ",list);
+  let id = req.sessionID;
+  WeatherData.getSavedSearchList(id, cities => {
+    console.log("cities: ", cities);
+    if (req.session.viewCount) {
+      req.session.viewCount++
+    } else {
+      req.session.viewCount = 1;
+    }
     res.render('weather/index', {
       title: 'Quoteable Weather',
-      weather: list,
+      cities: cities,
     });
   });
 }
@@ -48,7 +53,6 @@ exports.postWeatherByName = (req, res, next) => {
               city: sq.city,
               state: sq.abbr.toUpperCase(),
               customName: sq.custom_name,
-              // cityID: savedCity._id,
               temp: Math.round(cw.temp),
               humidity: cw.humidity,
               pressure: cw.pressure,
@@ -71,7 +75,7 @@ exports.postWeatherByName = (req, res, next) => {
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
-  WeatherData.getSavedWeather(req.query.lat, req.query.lon, w => {
+  WeatherData.getWeather(req.query.lat, req.query.lon, w => {
     const cw = w.data.current;
     const getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
     let precip = checkPrecip(cw.rain, cw.snow);
@@ -106,34 +110,17 @@ exports.getSavedWeatherById = (req, res, next) => {
 };
 
 // SAVE CITY WEATHER SEARCH
-// exports.saveWeather = (req, res, next) => {
-//   // console.log("SaveWeather: req.body", req.body);
-//   let { city, state, lat, lon } = req.body;
-//   // console.log("saveWeather: ", lat, lon);
-//   let saveSearch = new WeatherData(city, state, lat, lon);
-//   saveSearch.save()
-//     .then(result => {
-//       console.log(result);
-//       console.log("Search Saved");
-//       // res.redirect('/');
-//     })
-//     .catch(err => {
-//       console.log("saved search err: ", err);
-//     });
-//   // saveSearch.saveNew();
-// }
-
 exports.saveWeather = (req, res, next) => {
-  // console.log(req);
   // console.log("SaveWeather: req.body", req.body);
-  // console.log("session: ", req.sessionID);
+  let id = req.sessionID;
   let { city, state, lat, lon } = req.body;
-  let saveSearch = new WeatherData(req.sessionID, city, state, lat, lon);
+  // console.log("saveWeather: ", lat, lon);
+  let saveSearch = new WeatherData(id, city, state, lat, lon);
   saveSearch.save()
     .then(result => {
       console.log(result);
       console.log("Search Saved");
-      res.render('/');
+      res.redirect('/');
     })
     .catch(err => {
       console.log("saved search err: ", err);
