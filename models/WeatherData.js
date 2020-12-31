@@ -77,20 +77,6 @@ const getWeatherForecast = (lat, lon, cb) => {
         });
 }
 
-// const findSessionID = (id, cb) => {
-//     const db = getDb();
-//     db
-//         .collection('sessions')
-//         .findOne(id)
-//         .then(sessionUser => {
-//             console.log(sessionUser);
-//             cb(sessionUser);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// }
-
 module.exports = class WeatherData {
     constructor(id, city, state, lat, lon) {
         this._id = id;
@@ -123,35 +109,36 @@ module.exports = class WeatherData {
                 }
             })
             .then(result => {
-                // console.log(result);
+                console.log(result);
             })
             .catch(err => {
                 console.log(err);
             });
     }
     // DELETES ONE SAVED WEATHER STATION IF EXISTS
-    static delete(id) {
-        console.log(id);
-        // const db = getDb();
-        // return db.collection("sessions").deleteOne({ _id: new mongodb.ObjectID(id) })
-        //     .then(result => {
-        //         if (result.deletedCount === 1) {
-        //             console.log("Delete Successful!")
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
-    }
-    // EDITS THE NAME OF ONE SAVED WEATHER STATION
-    static editName(id, name) {
-        //  Update One Document by ID
+    static delete(cityId, sessionId) {
+        // console.log(id);
         const db = getDb();
-        let mongoId = { _id: new mongodb.ObjectID(id) }
-        let updateDoc = {
-            $set: { customName: name }
-        }
-        return db.collection("saved_searches").updateOne(mongoId, updateDoc)
+        const query = { '_id': sessionId }
+        const updateDoc = { $pull: { "savedSearches": { "id": ObjectID(cityId) } } };
+
+        db.collection("sessions").updateOne(query, updateDoc)
+            .then(result => {
+                if (result.deletedCount === 1) {
+                    console.log("Delete Successful!")
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    // EDITS THE NAME OF ONE SAVED WEATHER STATION
+    static editName(cityId, sessionId, newName) {
+        const db = getDb();
+        const query = { _id: sessionId, "savedSearches.id": ObjectID(cityId) };
+        const updateDoc = { $set: { "savedSearches.$.customName": newName } };
+        return db.collection("sessions").updateOne(query, updateDoc)
             .then(result => {
                 console.log(`Documents modified: ${result.modifiedCount}`);
             })
@@ -183,11 +170,11 @@ module.exports = class WeatherData {
         getSavedData(sessions => {
             let session = [];
             for (let i = 0; i < sessions.length; i++) {
-                if (sessions[i]._id === id && sessions[i].savedSearches) {
+                if (sessions[i]._id === id && typeof sessions[i].savedSearches != undefined) {
                     sessions[i].savedSearches.forEach(element => {
                         session.push(element);
                     });
-                } else {
+                } else if (typeof sessions[i].savedSearches == undefined) {
                     i++
                 }
             }

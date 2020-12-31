@@ -14,31 +14,21 @@ exports.editList = (req, res, next) => {
 
 // DELETE ITEM FROM SAVED LOCATIONS
 exports.deleteItem = (req, res, next) => {
-    console.log(req.session);
-    let id = req.sessionID;
-    WeatherData.delete(id)
-        .then(result => {
-            console.log(result);
-            res.redirect('/');
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    console.log(req.body.idInput);
+    let cityId = req.body.idInput;
+    let sessionId = req.sessionID;
+    WeatherData.delete(cityId, sessionId);
+    res.redirect('/');
 }
 
 exports.editName = (req, res, next) => {
+    console.log(req.body);
     let str = req.body.editIdInput;
-    // for some reason I am getting an empty space at the end of my id string throwing an error.
     let index0 = str.split(' ');
-    let id = index0[0];
-    // console.log(id.length);
-    let name = req.body.editNameInput;
+    let cityId = index0[0];
+    let sessionId = req.sessionID;
+    let newName = req.body.editNameInput;
 
-    WeatherData.editName(id, name)
-        .then( () => {
-            res.redirect('/');
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    WeatherData.editName(cityId, sessionId, newName)
+    res.redirect('/');
 }

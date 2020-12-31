@@ -6,6 +6,7 @@ const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
+  console.log(id);
   WeatherData.getSavedSearchList(id, cities => {
     console.log("cities: ", cities);
     if (req.session.viewCount) {
@@ -114,12 +115,11 @@ exports.saveWeather = (req, res, next) => {
   // console.log("SaveWeather: req.body", req.body);
   let id = req.sessionID;
   let { city, state, lat, lon } = req.body;
-  // console.log("saveWeather: ", lat, lon);
   let saveSearch = new WeatherData(id, city, state, lat, lon);
   saveSearch.save()
     .then(result => {
       console.log(result);
-      console.log("Search Saved");
+      // console.log("Search Saved");
       res.redirect('/');
     })
     .catch(err => {

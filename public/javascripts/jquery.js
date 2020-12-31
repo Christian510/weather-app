@@ -2,10 +2,9 @@
 $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('edit') // Extract info from data-* attributes
-  console.log(recipient);
+  console.log("recipient: ", recipient);
   var id = button.data('id');
-  console.log(id);
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  console.log("id: ", id);
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this);
   // modal.find('.modal-title').text('New message to ' + recipient)
@@ -20,7 +19,6 @@ $('#editModal').on('show.bs.modal', function (event) {
     var id = button.data('id')
     console.log(id)
 
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     // modal.find('.modal-title').text('New message to ' + recipient)

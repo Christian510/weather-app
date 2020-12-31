@@ -7,21 +7,21 @@
     <%- include('../includes/search-bar.ejs') %>
   </div>
   <section class="container">
-    <% if (cities.length > 0) { console.log(cities) %>
+    <% if (cities.length > 0) { %>
     <ul class=" list-group row">
-      <% cities.forEach(location => { %>
+      <% cities.forEach(location => { console.log(location.id); %>
       <li class="list-group-item d-flex flex-column">
-        <% if(location.customName) { %>
+        <% if(location.customName !== null) { %>
         <label for="Edit-Search"><%= location.customName %></label>
         <% } else { %>
         <label for="Edit-Search"><%= location.city %> <%= location.state.toUpperCase(); %></label>
         <% } %>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
-            data-edit="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location._id %> ">Edit
+            data-edit="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location.id %>">Edit
             Name</button>
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal"
-            data-delete="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location._id %>">
+            data-delete="<%= location.customName !== null ? location.customName : location.city %>" data-id="<%= location.id %>">
             Delete
           </button>
         </div>
