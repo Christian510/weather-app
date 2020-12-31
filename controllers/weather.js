@@ -119,7 +119,6 @@ exports.saveWeather = (req, res, next) => {
   saveSearch.save()
     .then(result => {
       console.log(result);
-      // console.log("Search Saved");
       res.redirect('/');
     })
     .catch(err => {

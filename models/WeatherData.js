@@ -7,7 +7,6 @@ const { listenerCount } = require('process');
 
 // GETS DATA FOR ONE CITY
 const getCityData = (sq, cb) => {
-    // console.log("sq: ", sq);
     const db = getDb();
     db
         .collection('city_list')
@@ -70,10 +69,6 @@ const getWeatherForecast = (lat, lon, cb) => {
         .catch(function (error) {
             console.log("API Error message: ");
             console.log(error);
-            // console.log("url: ", error.config.url);
-            // console.log("error code", error.response.data.cod);
-            // console.log("error message", error.response.data.message);
-            // cb(error);
         });
 }
 
