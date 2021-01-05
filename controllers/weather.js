@@ -18,8 +18,10 @@ exports.getIndex = (req, res, next) => {
     });
   })
   .catch(err => {
-    console.log("There is an error!");
-    console.log(err);
+    console.log("we have an error!")
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
   });
 }
 
@@ -136,7 +138,10 @@ exports.saveWeather = (req, res, next) => {
       res.redirect('/');
     })
     .catch(err => {
-      console.log("saved search err: ", err);
+      console.log("we have an error!")
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 }
 

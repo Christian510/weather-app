@@ -60,8 +60,12 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
+// ERROR HANDLING
+app.get('/500', errorController.get500);
 app.use(errorController.get404);
+app.use((error, req, res, next) => {
+  res.redirect('/500');
+});
 
 // error handler
 app.use(function (err, req, res, next) {

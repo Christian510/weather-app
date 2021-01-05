@@ -175,7 +175,7 @@ module.exports = class WeatherData {
                 return cities;
             })
             .catch(err => {
-                console.log(err);
+                return err;
             });
     };
 }
