@@ -30,19 +30,66 @@ exports.postWeatherByName = (req, res, next) => {
   // Parse search query (sq) into a useable object
   let sq = parseStr(req.body.city_state);
   if (sq === null) {
+    // Instead create an error message above the search box.
     res.write("<h1>Please provide a city, state/province, and/or country abbr<h1>");
     res.write("<h2>I'll have a better response in the future ;-)<h2>");
     res.end();
   } else {
-    // let id = req.sessionID;
-    // WeatherData.getSavedSearchList(id)
-    //     .then(sessions => {
-    //       let cities = findCitiesBySessionUser(sessions);
-    //       return cities;
-    //     })
-    //     .then( cities => {
-    //       console.log(cities);
-    //     })
+    WeatherData.validateCity(sq, city => {
+      if (city === null) {
+        // Create a error message with a path then redirect
+        // path: /500 status: 500;
+        res.write("<h1>The city you are looking for may not be in our database!<h1>");
+        res.write("<h2>It's just a test database unfortunately<h2>");
+        res.write("<h2>Hit the back button and try again!<h2>");
+        res.end();
+      } else {
+        WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
+          // console.log("isSaved: ", isSaved);
+          let cw = w.data.current;
+          let c = cw.clouds;
+          let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+          let precip = checkPrecip(cw.rain, cw.snow);
+          let isVisable = city.isVisable === undefined ? true : false;
+          res.render('weather/current-weather', {
+            title: "Quoteable Weather",
+            visible: isVisable,
+            time: getDate.date,
+            observation: cw.weather[0].main,
+            typeOfPrecip: precip.type,
+            precip: precip.precipitation,
+            pop: w.data.daily[0].pop,
+            city: sq.city,
+            state: sq.abbr.toUpperCase(),
+            customName: sq.custom_name,
+            temp: Math.round(cw.temp),
+            humidity: cw.humidity,
+            pressure: cw.pressure,
+            visibility: Math.round(cw.visibility / 1000),
+            windSpeed: Math.round(cw.wind_speed),
+            windDir: cw.wind_deg,
+            sunrise: getDate.sunrise,
+            sunset: getDate.sunset,
+            clouds: cw.clouds,
+            icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+            main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
+            lat: city.coord.lat,
+            lon: city.coord.lon
+          });
+        });
+      }
+    });
+  }
+};
+
+exports.postWeatherByName = (req, res, next) => {
+  // Parse search query (sq) into a useable object
+  let sq = parseStr(req.body.city_state);
+  if (sq === null) {
+    res.write("<h1>Please provide a city, state/province, and/or country abbr<h1>");
+    res.write("<h2>I'll have a better response in the future ;-)<h2>");
+    res.end();
+  } else {
     WeatherData.validateCity(sq, city => {
       if (city === null) {
         // Create a error message with a path then redirect
@@ -144,6 +191,8 @@ exports.saveWeather = (req, res, next) => {
       return next(error);
     });
 }
+
+// 5 DAY HISTORICAL WEATHER DATA
 
 // 5 DAY WEATHER FORCAST
 exports.getFiveDayWeather = (req, res, next) => {

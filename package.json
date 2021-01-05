@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "start-server": "./bin/www"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -16,6 +17,7 @@
     "express": "~4.16.1",
     "express-compile-sass": "^4.0.0",
     "express-session": "^1.17.1",
+    "helmet": "^4.3.1",
     "http-errors": "~1.6.3",
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1",

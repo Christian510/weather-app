@@ -15,9 +15,11 @@
     --green-2: #27AE60;
     --green-3: #6FCF97;
     --blue-1: #2F80ED;
-    --blue-2: #2D9CDB;
-    --blue-3: #56CCF2;
-    --sky-blue: #b7cefb;
+    --blue-2: #3395ce;
+    /* --blue-3: #56CCF2; */
+    --blue-3: #79b1f1;
+    /* --sky-blue: #b7cefb; */
+    --sky-blue: #a1b5dd;
 
 }
 .font-14 {

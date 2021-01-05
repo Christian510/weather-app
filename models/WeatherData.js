@@ -2,7 +2,7 @@ const axios = require('axios');
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 const { ObjectID } = require('mongodb');
-const { listenerCount } = require('process');
+// const { listenerCount } = require('process');
 
 // GETS DATA FOR ONE CITY
 const getCityData = (sq, cb) => {
@@ -30,7 +30,6 @@ const getCityData = (sq, cb) => {
 }
 // LOOKS FOR A CITY BY ID IF EXISTS ELSE NULL
 const getSavedDataByID = (id, cb) => {
-    // console.log(id);
     const db = getDb();
     db
         .collection('saved_searches')
@@ -42,25 +41,12 @@ const getSavedDataByID = (id, cb) => {
             console.log(err);
         });
 }
-// RETURNS ALL SAVED SEARCHES FROM DB
-// const getSavedData = cb => {
-//     const db = getDb();
-//     db
-//         .collection('sessions')
-//         .find()
-//         .toArray()
-//         .then(cities => {
-//             cb(cities);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// }
+
 // GET THE CURRENT WEATHER FORECAST FROM API
 const getWeatherForecast = (lat, lon, cb) => {
     // const key = process.env.TOKEN1;
     const key = process.env.TOKEN2;
-    let units = ['imperial', 'metric', 'stadard'];
+    // let units = ['imperial', 'metric', 'stadard'];
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
         .then(function (response) {
             cb(response);
@@ -113,7 +99,6 @@ module.exports = class WeatherData {
     }
     // DELETES ONE SAVED WEATHER STATION IF EXISTS
     static delete(cityId, sessionId) {
-        // console.log(id);
         const db = getDb();
         const query = { '_id': sessionId }
         const updateDoc = { $pull: { "savedSearches": { "id": ObjectID(cityId) } } };
@@ -148,7 +133,6 @@ module.exports = class WeatherData {
 
     // CHECKS TO MAKE SURE THE CITY EXISTS IN DB
     static validateCity(sq, cb) {
-        // console.log("sq: ", sq);
         getCityData(sq, cb);
     }
 
@@ -159,7 +143,6 @@ module.exports = class WeatherData {
 
     // RETURNS A CITY IF IT EXISTS ELSE NULL
     static getCityById(sq, cb) {
-        // console.log(sq);
         getCityData(sq, city => {
             getSavedDataByID(city._id, cb);
         });

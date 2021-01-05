@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+// const helmet = require("helmet");
 const MongoStore = require('connect-mongo')(session);
 const app = express();
 // Routers
@@ -36,12 +37,18 @@ const sessionStore = new MongoStore({
   },
   clear_interval: 1000 * 60 * 60 * 24,
 });
-
+// app.use(helmet.contentSecurityPolicy({
+//   directives:{
+//     defaultSrc:["'self'"],
+//     scriptSrc:["'self'",'code.jquery.com','maxcdn.bootstrapcdn.com','cdn.jsdelivr.net'],
+//     styleSrc:["'self'",'maxcdn.bootstrapcdn.com'],
+//     fontSrc:["'self'",'kit.fontawesome.com']}}));
+    
 app.use(session({
   secret: process.env.SECRET,
   cookie: {
     // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
-    maxAge: 1000 * 60 * 60 * 24
+    maxAge: 1000 * 60 * 60 * 24 * 90
   },
   store: sessionStore,
   resave: false,
