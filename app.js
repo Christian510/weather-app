@@ -12,10 +12,12 @@ const app = express();
 const adminRouter = require('./routes/admin');
 const usersRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
-const errorsRouter = require('./routes/errors');
+
+const errorController = require('./controllers/errors');
 const WeatherData = require('./models/WeatherData');
 
 // view engine setup
+console.log(path.join(__dirname, 'views'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -58,11 +60,8 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
-
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+app.use(errorController.get404);
 
 // error handler
 app.use(function (err, req, res, next) {
