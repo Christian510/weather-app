@@ -2,76 +2,90 @@ const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
 const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
+const findCitiesBySessionUser = require('../public/javascripts/util_functions').findCitiesBySessionUser;
 // Yep, it's not the most elegent code.  But it's 99% all my work!
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
+
 exports.getIndex = (req, res, next) => {
+  console.log("req.body: ", req.body);
   let id = req.sessionID;
-  console.log(id);
-  WeatherData.getSavedSearchList(id, cities => {
-    console.log("cities: ", cities);
-    if (req.session.viewCount) {
-      req.session.viewCount++
-    } else {
-      req.session.viewCount = 1;
-    }
+  WeatherData.getSavedSearchList(id)
+  .then(sessions => {
+    let cities = findCitiesBySessionUser(sessions);
     res.render('weather/index', {
       title: 'Quoteable Weather',
       cities: cities,
     });
+  })
+  .catch(err => {
+    console.log("There is an error!");
+    console.log(err);
   });
 }
 
-// /WEATHER - DISPLAY WEATHER BY CITY NAME AND STATE
+// /WEATHER - GETS WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
-    // Parse search query (sq) into a useable object
-    let sq = parseStr(req.body.city_state);
-    if (sq === null) {
-      res.write("<h1>Please provide a city, state/province, and/or country abbr<h1>");
-      res.write("<h2>I'll have a better response in the future ;-)<h2>");
-      res.end();
-    } else {
-      WeatherData.validateCity(sq, city => {
-        if (city === null) {
-          res.write("<h1>The city you are looking for may not be in our database!<h1>");
-          res.write("<h2>It's just a test database unfortunately<h2>");
-          res.write("<h2>Hit the back button and try again!<h2>");
-          res.end();
-        } else {
-          WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
-            let cw = w.data.current;
-            let c = cw.clouds;
-            let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
-            let precip = checkPrecip(cw.rain, cw.snow);
-            let isVisable = city.isVisable === undefined ? true : false;
-            res.render('weather/current-weather', {
-              title: "Quoteable Weather",
-              visible: isVisable,
-              time: getDate.date,
-              observation: cw.weather[0].main,
-              typeOfPrecip: precip.type,
-              precip: precip.precipitation,
-              pop: w.data.daily[0].pop,
-              city: sq.city,
-              state: sq.abbr.toUpperCase(),
-              customName: sq.custom_name,
-              temp: Math.round(cw.temp),
-              humidity: cw.humidity,
-              pressure: cw.pressure,
-              visibility: Math.round(cw.visibility / 1000),
-              windSpeed: Math.round(cw.wind_speed),
-              windDir: cw.wind_deg,
-              sunrise: getDate.sunrise,
-              sunset: getDate.sunset,
-              clouds: cw.clouds,
-              icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
-              main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
-              lat: city.coord.lat,
-              lon: city.coord.lon
-            });
+  // Parse search query (sq) into a useable object
+  let sq = parseStr(req.body.city_state);
+  if (sq === null) {
+    res.write("<h1>Please provide a city, state/province, and/or country abbr<h1>");
+    res.write("<h2>I'll have a better response in the future ;-)<h2>");
+    res.end();
+  } else {
+    // let id = req.sessionID;
+    // WeatherData.getSavedSearchList(id)
+    //     .then(sessions => {
+    //       let cities = findCitiesBySessionUser(sessions);
+    //       return cities;
+    //     })
+    //     .then( cities => {
+    //       console.log(cities);
+    //     })
+    WeatherData.validateCity(sq, city => {
+      if (city === null) {
+        // Create a error message with a path then redirect
+        // path: /500 status: 500;
+        res.write("<h1>The city you are looking for may not be in our database!<h1>");
+        res.write("<h2>It's just a test database unfortunately<h2>");
+        res.write("<h2>Hit the back button and try again!<h2>");
+        res.end();
+      } else {
+        WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
+          // console.log("isSaved: ", isSaved);
+          let cw = w.data.current;
+          let c = cw.clouds;
+          let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+          let precip = checkPrecip(cw.rain, cw.snow);
+          let isVisable = city.isVisable === undefined ? true : false;
+          res.render('weather/current-weather', {
+            title: "Quoteable Weather",
+            visible: isVisable,
+            time: getDate.date,
+            observation: cw.weather[0].main,
+            typeOfPrecip: precip.type,
+            precip: precip.precipitation,
+            pop: w.data.daily[0].pop,
+            city: sq.city,
+            state: sq.abbr.toUpperCase(),
+            customName: sq.custom_name,
+            temp: Math.round(cw.temp),
+            humidity: cw.humidity,
+            pressure: cw.pressure,
+            visibility: Math.round(cw.visibility / 1000),
+            windSpeed: Math.round(cw.wind_speed),
+            windDir: cw.wind_deg,
+            sunrise: getDate.sunrise,
+            sunset: getDate.sunset,
+            clouds: cw.clouds,
+            icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+            main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
+            lat: city.coord.lat,
+            lon: city.coord.lon
           });
-        }
-      });
-    }
+        });
+      }
+    });
+  }
 };
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS

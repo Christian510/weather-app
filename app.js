@@ -12,7 +12,8 @@ const app = express();
 const adminRouter = require('./routes/admin');
 const usersRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
-// Sass Compiler
+const errorsRouter = require('./routes/errors');
+const WeatherData = require('./models/WeatherData');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,9 +46,18 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use((req, res, next) => {
+  if (req.session.viewCount) {
+    req.session.viewCount++
+  } else {
+    req.session.viewCount = 1;
+  }
+  next();
+})
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

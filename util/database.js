@@ -17,7 +17,7 @@ const mongoConnect = cb => {
     .then(client => {
         console.log('Connected!');
         _db = client.db(); // To Connected locally insert dbName into db().
-        cb(_db);
+        cb();
     }).catch(err => {
         console.log("Mongo err msg: ",err);
         throw err;
