@@ -21,7 +21,6 @@ exports.editList = (req, res, next) => {
 
 // DELETE ITEM FROM SAVED LOCATIONS
 exports.deleteItem = (req, res, next) => {
-    console.log(req.body.idInput);
     let cityId = req.body.idInput;
     let sessionId = req.sessionID;
     WeatherData.delete(cityId, sessionId)
@@ -35,7 +34,6 @@ exports.deleteItem = (req, res, next) => {
 }
 
 exports.editName = (req, res, next) => {
-    console.log(req.body);
     let str = req.body.editIdInput;
     let index0 = str.split(' ');
     let cityId = index0[0];

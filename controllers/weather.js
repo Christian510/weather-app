@@ -7,7 +7,6 @@ const findCitiesBySessionUser = require('../public/javascripts/util_functions').
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
 
 exports.getIndex = (req, res, next) => {
-  console.log("req.body: ", req.body);
   let id = req.sessionID;
   WeatherData.getSavedSearchList(id)
   .then(sessions => {
@@ -45,7 +44,6 @@ exports.postWeatherByName = (req, res, next) => {
         res.end();
       } else {
         WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
-          // console.log("isSaved: ", isSaved);
           let cw = w.data.current;
           let c = cw.clouds;
           let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
@@ -100,7 +98,6 @@ exports.postWeatherByName = (req, res, next) => {
         res.end();
       } else {
         WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
-          // console.log("isSaved: ", isSaved);
           let cw = w.data.current;
           let c = cw.clouds;
           let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
@@ -175,13 +172,12 @@ exports.getSavedWeatherById = (req, res, next) => {
 
 // SAVE CITY WEATHER SEARCH
 exports.saveWeather = (req, res, next) => {
-  // console.log("SaveWeather: req.body", req.body);
   let id = req.sessionID;
   let { city, state, lat, lon } = req.body;
   let saveSearch = new WeatherData(id, city, state, lat, lon);
   saveSearch.save()
-    .then(result => {
-      console.log(result);
+    .then(() => {
+      // console.log(result);
       res.redirect('/');
     })
     .catch(err => {
