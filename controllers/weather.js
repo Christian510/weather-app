@@ -8,6 +8,9 @@ const findCitiesBySessionUser = require('../public/javascripts/util_functions').
 
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
+  // console.log(req.sessionStore);
+  // console.log(session);
+  console.log(id);
   WeatherData.getSavedSearchList(id)
   .then(sessions => {
     let cities = findCitiesBySessionUser(sessions);

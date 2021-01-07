@@ -107,7 +107,7 @@ module.exports = class WeatherData {
             .then(result => {
                 if (result.deletedCount === 1) {
                     console.log("Delete Successful!");
-                    return result.deletedCount;
+                    console.log(result.deletedCount);
                 }
             })
             .catch(err => {
