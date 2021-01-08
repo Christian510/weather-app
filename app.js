@@ -28,14 +28,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const sessionStore = new MongoStore({
-  url: process.env.URL,
-  mongoOptions: {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  },
-  clear_interval: 1000 * 60 * 60 * 24,
-});
+// const sessionStore = new MongoStore({
+//   url: process.env.URL,
+//   mongoOptions: {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   },
+//   clear_interval: 1000 * 60 * 60 * 24,
+// });
 // app.use(helmet.contentSecurityPolicy({
 //   directives:{
 //     defaultSrc:["'self'"],
