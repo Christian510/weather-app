@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('weather-app:server');
 var http = require('http');
-const mongoConnect = require('../util/database').mongoConnect;
 
 /**
  * Get port from environment and store in Express.
@@ -25,12 +24,9 @@ var server = http.createServer(app);
 /** 
  * Listen on provided port, on all network interfaces.
  */
-
-mongoConnect( () => {
-  server.listen(port);
-  server.on('error', onError);
-  server.on('listening', onListening);  
-});
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);  
 
 /**
  * Normalize a port into a number, string, or false.

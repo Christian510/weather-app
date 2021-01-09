@@ -3,28 +3,30 @@ const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
 const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
 const findCitiesBySessionUser = require('../public/javascripts/util_functions').findCitiesBySessionUser;
+
 // Yep, it's not the most elegent code.  But it's 99% all my work!
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
 
 exports.getIndex = (req, res, next) => {
-  let id = req.sessionID;
+  // let id = req.sessionID;
   // console.log(req.sessionStore);
   // console.log(session);
-  console.log(id);
-  WeatherData.getSavedSearchList(id)
-  .then(sessions => {
-    let cities = findCitiesBySessionUser(sessions);
+  // console.log(id);
+  // WeatherData.getSavedSearchList(id)
+  // .then(sessions => {
+  //   let cities = findCitiesBySessionUser(sessions);
     res.render('weather/index', {
       title: 'Quoteable Weather',
-      cities: cities,
+      // cities: cities,
+      cities: [],
     });
-  })
-  .catch(err => {
-    console.log("we have an error!")
-    const error = new Error(err);
-    error.httpStatusCode = 500;
-    return next(error);
-  });
+  // })
+  // .catch(err => {
+  //   console.log("we have an error!")
+  //   const error = new Error(err);
+  //   error.httpStatusCode = 500;
+  //   return next(error);
+  // });
 }
 
 // /WEATHER - GETS WEATHER BY CITY NAME AND STATE
