@@ -2,10 +2,12 @@ require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+// const port = require('./bin/www').port;
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 // const helmet = require("helmet");
 const db = require('./util/database');
 const app = express();
@@ -26,42 +28,49 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// const sessionStore = new MongoStore({
-//   url: process.env.URL,
-//   mongoOptions: {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   },
-//   clear_interval: 1000 * 60 * 60 * 24,
-// });
+const options = {
+  // host: 'localhost',
+  // port: 3000,
+  // user: 'root',
+  // password: 'C2546$6689t',
+  // database: 'weather-app',
+  clearExpired: true,
+  checkExpirationInterval: 1000 * 60 * 60 * 24,
+  // checkExpirationInterval: 1000 * 60 * 60 * 24 * 90,
+  createDatabaseTable: true,
+};
+// var connection = mysql.createConnection(options);
+const sessionStore = new MySQLStore(options, db);
+
+app.use(session({
+  key: 'session_cookie_name',
+  secret: 'Conradicus_maximus',
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: false
+}));
 // app.use(helmet.contentSecurityPolicy({
 //   directives:{
 //     defaultSrc:["'self'"],
 //     scriptSrc:["'self'",'code.jquery.com','maxcdn.bootstrapcdn.com','cdn.jsdelivr.net'],
 //     styleSrc:["'self'",'maxcdn.bootstrapcdn.com'],
 //     fontSrc:["'self'",'kit.fontawesome.com']}}));
-    
-// app.use(session({
-//   secret: process.env.SECRET,
-//   cookie: {
-//     // EQUALS 1 DAY ( 1 DAY * 24 HR/1 DAY * 60 MIN/1 HR)
-//     maxAge: 1000 * 60 * 60 * 24 * 90
-//   },
-//   store: sessionStore,
-//   resave: false,
-//   saveUninitialized: true,
-// }));
 
-// app.use((req, res, next) => {
-//   if (req.session.viewCount) {
-//     req.session.viewCount++
-//   } else {
-//     req.session.viewCount = 1;
-//   }
-//   next();
-// })
+app.use((req, res, next) => {
+  console.log(req.session);
+  // if (req.session.viewCount) {
+  //   req.session.viewCount++
+  // } else {
+  //   req.session.viewCount = 1;
+  // }
+  next();
+})
 
-db.execute('SELECT * FROM Cities')
+db.execute('SELECT * FROM Cities;')
+  .then(result => {console.log(result)})
+  .catch(err => {console.log("error msg: ",err)});
+
+db.execute('SELECT * FROM `weather-app`.sessions;')
   .then(result => {console.log(result)})
   .catch(err => {console.log(err)});
 

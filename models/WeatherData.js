@@ -1,5 +1,4 @@
 const axios = require('axios');
-const mongodb = require('mongodb');
 const getDb = require('../util/database');
 
 // GETS DATA FOR ONE CITY
