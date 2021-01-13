@@ -46,8 +46,8 @@ const getSavedDataByID = (id, cb) => {
 const getWeatherForecast = (lat, lon, cb) => {
     // const key = process.env.TOKEN1;
     const key = process.env.TOKEN2;
-    // let units = ['imperial', 'metric', 'stadard'];
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=imperial`)
+    let units = ['imperial', 'metric', 'standard'];
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${key}&units=${units[0]}`)
         .then(function (response) {
             cb(response);
         })

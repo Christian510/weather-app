@@ -3,12 +3,10 @@ const MongoClient = mongodb.MongoClient;
 
 let _db;
 
-const remote = 'mongodb+srv://Christian:ewv7KxfQ@weatherappdb.cq3qr.mongodb.net/WeatherAppDB?retryWrites=true&w=majority';
-const localHost = "mongodb://127.0.0.1:27017";
-const dbName = "WeatherApp";
+const db = process.env.DB;
 
 const mongoConnect = cb => {
-    MongoClient.connect(remote,
+    MongoClient.connect(db,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

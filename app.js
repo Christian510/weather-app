@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 const sessionStore = new MongoStore({
-  url: process.env.URL,
+  url: process.env.DB,
   mongoOptions: {
     useNewUrlParser: true,
     useUnifiedTopology: true
