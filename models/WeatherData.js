@@ -73,7 +73,7 @@ module.exports = class WeatherData {
         const db = getDb();
         this.visibile = false;
         let weatherID = new mongodb.ObjectID();
-        return db.collection("sessions").update(
+        return db.collection("sessions").updateOne(
             { "_id": this._id },
             {
                 $push: {
