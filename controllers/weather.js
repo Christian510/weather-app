@@ -13,7 +13,6 @@ exports.getIndex = (req, res, next) => {
   // console.log(id);
   WeatherData.getSessionById(id)
   .then(session => {
-    console.log(session);
     let cities = findCitiesBySessionUser(session);
     console.log("cities: ", cities);
     res.render('weather/index', {
