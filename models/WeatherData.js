@@ -33,7 +33,7 @@ const getSavedDataByID = (id, cb) => {
     const db = getDb();
     db
         .collection('saved_searches')
-        .findOne({ _id: ObjectID(id) })
+        .findOne({ "_id": ObjectID(id) })
         .then(result => {
             cb(result);
         })
@@ -148,17 +148,17 @@ module.exports = class WeatherData {
         });
     }
     // RETURNS A LIST OF SAVED CITIES BY SESSION ID
-    static getSavedSearchList(id) {
+    static getSessionById(id) {
         const db = getDb();
         return db
             .collection('sessions')
-            .find()
-            .toArray()
-            .then(cities => {
-                return cities;
+            .findOne({ "_id": id })
+            .then(result => {
+                return result;
             })
             .catch(err => {
-                return err;
+                // return err;
+                console.log(err);
             });
     };
 }

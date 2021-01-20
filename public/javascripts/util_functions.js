@@ -50,18 +50,12 @@ const validateAdr = str => {
   return addr;
 }
 
-const findCitiesBySessionUser = (sessions) => {
-  let citylist = [];
-  for (let i = 0; i < sessions.length; i++) {
-    if (typeof sessions[i].savedSearches !== 'undefined') {
-      sessions[i].savedSearches.forEach(element => {
-        citylist.push(element);
-      });
-    } else {
-      i++
+const findCitiesBySessionUser = (session) => {
+  let cities = [];
+    if (typeof session.savedSearches !== 'undefined') {
+      cities = session.savedSearches;
     }
-  }
-  return citylist;
+  return cities;
 }
 
 exports.findCitiesBySessionUser = findCitiesBySessionUser;

@@ -5,9 +5,9 @@ const findCitiesBySessionUser = require('../public/javascripts/util_functions').
 // DISPLAYS ALL SAVED LOCATIONS ON EDIT PAGE.
 exports.editList = (req, res, next) => {
     let id = req.sessionID;
-    WeatherData.getSavedSearchList(id)
-        .then(sessions => {
-            let cities = findCitiesBySessionUser(sessions);
+    WeatherData.getSessionById(id)
+        .then(session => {
+            let cities = findCitiesBySessionUser(session);
             res.render('admin/edit-list', {
                 title: 'Basic Weather',
                 cities: cities,

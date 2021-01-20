@@ -10,10 +10,12 @@ exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
   // console.log(req.sessionStore);
   // console.log(session);
-  console.log(id);
-  WeatherData.getSavedSearchList(id)
-  .then(sessions => {
-    let cities = findCitiesBySessionUser(sessions);
+  // console.log(id);
+  WeatherData.getSessionById(id)
+  .then(session => {
+    console.log(session);
+    let cities = findCitiesBySessionUser(session);
+    console.log("cities: ", cities);
     res.render('weather/index', {
       title: 'Quoteable Weather',
       cities: cities,

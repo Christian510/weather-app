@@ -35,6 +35,7 @@ const sessionStore = new MongoStore({
     useUnifiedTopology: true
   },
   clear_interval: 1000 * 60 * 60 * 24,
+  touchAfter: 24 * 3600, // time period in seconds
 });
 // app.use(helmet.contentSecurityPolicy({
 //   directives:{
@@ -55,6 +56,8 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+  console.log(req.sessionID);
+  // console.log(req);
   if (req.session.viewCount) {
     req.session.viewCount++
   } else {
