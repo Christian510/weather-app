@@ -147,3 +147,9 @@ exports.getMap = (req, res, next) => {
     title: 'Map Search',
   });
 }
+
+exports.getAboutPage = (req, res, next) => {
+  res.render('weather/about', {
+    title: 'About Page',
+  })
+}

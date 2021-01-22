@@ -1,3 +1,4 @@
+// const WeatherData = require('../models/WeatherData');
 
 function isEmpty() {
     let input;
@@ -21,6 +22,14 @@ function savedMsg(e) {
     }
     
 }
+
+// function saveCity(id, city, state, lat, lon) {
+//     console.log("city info: ", id, " " , city, " ", state);
+//    let city = new WeatherData.save(id, city, state, lat, lon);
+//    city.save();
+//    preventDefault();
+// }
+
 
 // 1. Write a function that deletes an item and updates the list pull in WeatherData and use it to make the changes to the db Then update the list //
 
