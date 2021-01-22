@@ -9,7 +9,7 @@
   <section class="container">
     <% if (cities.length > 0) { %>
     <ul class=" list-group row">
-      <% cities.forEach(location => { console.log(location.id); %>
+      <% cities.forEach(location => { %>
       <li class="list-group-item d-flex flex-column">
         <% if(location.customName !== null) { %>
         <label for="Edit-Search"><%= location.customName %></label>

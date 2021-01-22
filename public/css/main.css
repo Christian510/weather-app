@@ -55,12 +55,7 @@
 
 /* NAVBAR BOTTOM COMPONENT */
 .nav-bottom {
-    /* position: sticky; */
-    /* position: -webkit-sticky; */
-    /* left: 0; */
-    /* bottom: 7px; */
     color: var(--gray-2);
-    /* background-color: var(--gray-6); */
     height: 72px;
     width: 375px;
     padding-right: 1rem;
@@ -114,10 +109,6 @@
     padding-left: 7.85rem;
     padding-right: 7.85rem;
 }
-/* .save-weather {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-} */
 
 .button-title {
     width: 150px;
@@ -155,6 +146,7 @@
 .contain-all {
     margin-bottom: 65px;
 }
+
 
 /* MEDIA QUERIES */
 
