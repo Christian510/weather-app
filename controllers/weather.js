@@ -8,67 +8,76 @@ const findCitiesBySessionUser = require('../public/javascripts/util_functions').
 
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
-  WeatherData.getSessionById(id)
-  .then(session => {
-    let cities = findCitiesBySessionUser(session);
+  cities = [];
+  if ([null, undefined].includes(req.session)) {
     res.render('weather/index', {
       title: 'Quoteable Weather',
       cities: cities,
     });
-  })
-  .catch(err => {
-    console.log("we have an error!")
-    // const error = new Error(err);
-    // error.httpStatusCode = 500;
-    // return next(error);
-  });
+  } else {
+    WeatherData.getSessionById(id)
+      .then(session => {
+        cities = findCitiesBySessionUser(session);
+        res.render('weather/index', {
+          title: 'Quoteable Weather',
+          cities: cities,
+        });
+      })
+      .catch(err => {
+        console.log("we have an error!")
+        console.log(err);
+        // const error = new Error(err);
+        // error.httpStatusCode = 500;
+        // return next(error);
+      });
+  }
 }
 
 // /WEATHER - GETS WEATHER BY CITY NAME AND STATE
 exports.postWeatherByName = (req, res, next) => {
   // Parse search query (sq) into a useable object
   let sq = parseStr(req.body.city_state);
-    WeatherData.validateCity(sq, city => {
-      if (city === null) {
-        res.render('error/noCityFound', {
-          title: 'City Not Found'
+  WeatherData.validateCity(sq, city => {
+    if (city === null) {
+      res.render('error/noCityFound', {
+        title: 'City Not Found'
+      });
+    } else {
+      WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
+        let cw = w.data.current;
+        let c = cw.clouds;
+        let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+        // console.log(getDate);
+        let precip = checkPrecip(cw.rain, cw.snow);
+        let isVisable = city.isVisable === undefined ? true : false;
+        res.render('weather/current-weather', {
+          title: "Quoteable Weather",
+          visible: isVisable,
+          time: getDate.date,
+          observation: cw.weather[0].main,
+          typeOfPrecip: precip.type,
+          precip: precip.precipitation,
+          pop: w.data.daily[0].pop,
+          city: sq.city,
+          state: sq.abbr.toUpperCase(),
+          customName: sq.custom_name,
+          temp: Math.round(cw.temp),
+          humidity: cw.humidity,
+          pressure: cw.pressure,
+          visibility: Math.round(cw.visibility / 1000),
+          windSpeed: Math.round(cw.wind_speed),
+          windDir: cw.wind_deg,
+          sunrise: getDate.sunrise,
+          sunset: getDate.sunset,
+          clouds: cw.clouds,
+          icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+          main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
+          lat: city.coord.lat,
+          lon: city.coord.lon
         });
-      } else {
-        WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
-          let cw = w.data.current;
-          let c = cw.clouds;
-          let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
-          // console.log(getDate);
-          let precip = checkPrecip(cw.rain, cw.snow);
-          let isVisable = city.isVisable === undefined ? true : false;
-          res.render('weather/current-weather', {
-            title: "Quoteable Weather",
-            visible: isVisable,
-            time: getDate.date,
-            observation: cw.weather[0].main,
-            typeOfPrecip: precip.type,
-            precip: precip.precipitation,
-            pop: w.data.daily[0].pop,
-            city: sq.city,
-            state: sq.abbr.toUpperCase(),
-            customName: sq.custom_name,
-            temp: Math.round(cw.temp),
-            humidity: cw.humidity,
-            pressure: cw.pressure,
-            visibility: Math.round(cw.visibility / 1000),
-            windSpeed: Math.round(cw.wind_speed),
-            windDir: cw.wind_deg,
-            sunrise: getDate.sunrise,
-            sunset: getDate.sunset,
-            clouds: cw.clouds,
-            icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
-            main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
-            lat: city.coord.lat,
-            lon: city.coord.lon
-          });
-        });
-      }
-    });
+      });
+    }
+  });
 };
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
