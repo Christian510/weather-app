@@ -49,15 +49,5 @@ const validateAdr = str => {
   }
   return addr;
 }
-
-const findCitiesBySessionUser = (session) => {
-  let cities = [];
-    if (typeof session.savedSearches !== 'undefined') {
-      cities = session.savedSearches;
-    }
-  return cities;
-}
-
-exports.findCitiesBySessionUser = findCitiesBySessionUser;
 exports.checkPrecip = checkPrecip;
 exports.validateAdr = validateAdr;

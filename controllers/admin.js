@@ -7,7 +7,7 @@ exports.editList = (req, res, next) => {
     let id = req.sessionID;
     WeatherData.getSessionById(id)
         .then(session => {
-            let cities = findCitiesBySessionUser(session);
+            let cities = session.savedSearches;
             res.render('admin/edit-list', {
                 title: 'Basic Weather',
                 cities: cities,

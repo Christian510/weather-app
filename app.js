@@ -56,7 +56,7 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-  console.log(req.sessionID);
+  // console.log(req.sessionID);
   // console.log(req);
   if (req.session.viewCount) {
     req.session.viewCount++

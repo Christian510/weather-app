@@ -2,35 +2,35 @@ const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
 const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
-const findCitiesBySessionUser = require('../public/javascripts/util_functions').findCitiesBySessionUser;
 // Yep, it's not the most elegent code.  But it's 99% all my work!
 // The learning will continue whether you like it or not.  So, like it -- A LOT.
 
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
-  cities = [];
-  if ([null, undefined].includes(req.session)) {
-    res.render('weather/index', {
-      title: 'Quoteable Weather',
-      cities: cities,
-    });
-  } else {
-    WeatherData.getSessionById(id)
-      .then(session => {
-        cities = findCitiesBySessionUser(session);
-        res.render('weather/index', {
-          title: 'Quoteable Weather',
-          cities: cities,
-        });
+  let values = {
+    title: 'Weather App',
+    cities: [],
+  }
+  WeatherData.getSessionById(id)
+  .then(session => {
+        if (!session) {
+          res.render('weather/index', values );
+        } else if (!session.hasOwnProperty('savedSearches')) {
+          res.render('weather/index', values);
+        } else {
+          res.render('weather/index', {
+            title: 'Weather App',
+            cities: session.savedSearches,
+          });
+        }
       })
       .catch(err => {
         console.log("we have an error!")
         console.log(err);
-        // const error = new Error(err);
-        // error.httpStatusCode = 500;
-        // return next(error);
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
-  }
 }
 
 // /WEATHER - GETS WEATHER BY CITY NAME AND STATE
