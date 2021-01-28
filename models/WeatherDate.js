@@ -6,7 +6,8 @@ const date_time = {
 }
 
 module.exports = class WeatherDate {
-  static convertUTC(dt, sunr, suns) {
+  static convertUTC(dt, sunr, suns, offset) {
+    console.log(dt);
     const displayDate = new Date(dt * 1000);
     let dtOptions = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'};
     date_time.date = displayDate.toLocaleTimeString("en-US", dtOptions);

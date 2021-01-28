@@ -1,3 +1,4 @@
+'use strict';
 const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
@@ -46,7 +47,9 @@ exports.postWeatherByName = (req, res, next) => {
       WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
         let cw = w.data.current;
         let c = cw.clouds;
-        let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+        let offset = w.data.timezone_offset;
+        console.log(offset);
+        let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset);
         // console.log(getDate);
         let precip = checkPrecip(cw.rain, cw.snow);
         let isVisable = city.isVisable === undefined ? true : false;
@@ -83,8 +86,8 @@ exports.postWeatherByName = (req, res, next) => {
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
   WeatherData.getWeather(req.query.lat, req.query.lon, w => {
-    const cw = w.data.current;
-    const getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+    let cw = w.data.current;
+    let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
     let precip = checkPrecip(cw.rain, cw.snow);
     //  I have to get the correct coords from the saved
     res.render('weather/current-weather', {
