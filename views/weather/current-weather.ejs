@@ -15,7 +15,7 @@
                             <%= customName %>
                             <% } %>
                         </h3>
-                        <p><%= observation %> </p>
+                        <p><%= observation %></p>
                     </div>
                     <div>
                         <p class="font-14"> <%= time %> </p>
@@ -53,7 +53,7 @@
                         <h5 class="mb-0"><%= sunrise %> </h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">CHANCE OF PRECIPITATION</p>
+                        <p class="mb-0 font-weight-light font-12">CHANCE OF <%= observation.toUpperCase() %></p>
                         <h5 class="mb-0"><%= pop %> % </h5>
                     </div>
                     <div class="white-ln-btm">
