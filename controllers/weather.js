@@ -48,7 +48,7 @@ exports.postWeatherByName = (req, res, next) => {
         let cw = w.data.current;
         let c = cw.clouds;
         let offset = w.data.timezone_offset;
-        console.log(offset);
+        console.log(cw.wind_deg);
         let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset);
         // console.log(getDate);
         let precip = checkPrecip(cw.rain, cw.snow);
@@ -76,7 +76,8 @@ exports.postWeatherByName = (req, res, next) => {
           icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
           main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
           lat: city.coord.lat,
-          lon: city.coord.lon
+          lon: city.coord.lon,
+          deg: `${cw.wind_deg}deg`,
         });
       });
     }
@@ -89,6 +90,7 @@ exports.getSavedWeatherById = (req, res, next) => {
     let cw = w.data.current;
     let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
     let precip = checkPrecip(cw.rain, cw.snow);
+    console.log(cw.wind_deg);
     //  I have to get the correct coords from the saved
     res.render('weather/current-weather', {
       visible: false, // for display of save btn
@@ -115,6 +117,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       typeOfPrecip: precip.type,
       lat: req.query.lat,
       lon: req.query.lon,
+      deg: cw.wind_deg,
     });
   });
 };
