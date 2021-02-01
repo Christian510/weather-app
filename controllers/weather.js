@@ -48,9 +48,8 @@ exports.postWeatherByName = (req, res, next) => {
         let cw = w.data.current;
         let c = cw.clouds;
         let offset = w.data.timezone_offset;
-        console.log(cw.wind_deg);
-        let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset);
-        // console.log(getDate);
+        let timezone = w.data.timezone;
+        let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset, timezone);
         let precip = checkPrecip(cw.rain, cw.snow);
         let isVisable = city.isVisable === undefined ? true : false;
         res.render('weather/current-weather', {
@@ -88,9 +87,10 @@ exports.postWeatherByName = (req, res, next) => {
 exports.getSavedWeatherById = (req, res, next) => {
   WeatherData.getWeather(req.query.lat, req.query.lon, w => {
     let cw = w.data.current;
-    let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset);
+    let offset = w.data.timezone_offset;
+    let timezone = w.data.timezone;
+    let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset, timezone);
     let precip = checkPrecip(cw.rain, cw.snow);
-    console.log(cw.wind_deg);
     //  I have to get the correct coords from the saved
     res.render('weather/current-weather', {
       visible: false, // for display of save btn
@@ -117,7 +117,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       typeOfPrecip: precip.type,
       lat: req.query.lat,
       lon: req.query.lon,
-      deg: cw.wind_deg,
+      deg: `${cw.wind_deg}deg`,
     });
   });
 };
