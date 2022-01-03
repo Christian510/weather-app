@@ -59,6 +59,7 @@ exports.postWeatherByName = (req, res, next) => {
           observation: cw.weather[0].main,
           typeOfPrecip: precip.type,
           precip: precip.precipitation,
+          precipType: precip.type,
           pop: w.data.daily[0].pop,
           city: sq.city,
           state: sq.abbr.toUpperCase(),
@@ -113,6 +114,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
       main: cw.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
       precip: precip.precipitation,
+      precipType: precip.type,
       pop: w.data.daily[0].pop,
       typeOfPrecip: precip.type,
       lat: req.query.lat,
