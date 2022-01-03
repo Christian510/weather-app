@@ -45,12 +45,13 @@ exports.postWeatherByName = (req, res, next) => {
       });
     } else {
       WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
-        let cw = w.data.current.weather;
+        let cw = w.data.current;
 				console.log(cw);
         let offset = w.data.timezone_offset;
         let timezone = w.data.timezone;
         let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset, timezone);
-        let precip = checkPrecip(cw.rain, cw.snow);
+        let precip = checkPrecip(cw.weather[0].main.rain, cw.weather[0].main.snow);
+        console.log(precip)
         let isVisable = city.isVisable === undefined ? true : false;
         res.render('weather/current-weather', {
           title: "Quoteable Weather",
@@ -60,7 +61,7 @@ exports.postWeatherByName = (req, res, next) => {
           typeOfPrecip: precip.type,
           precip: precip.precipitation,
           precipType: precip.type,
-          pop: w.data.daily[0].pop,
+          feelsLikeTemp: cw.feels_like,
           city: sq.city,
           state: sq.abbr.toUpperCase(),
           customName: sq.custom_name,

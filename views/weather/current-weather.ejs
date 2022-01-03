@@ -18,7 +18,7 @@
                         <p><%= observation %></p>
                     </div>
                     <div>
-                        <p class="font-14"> <%= time %> </p>
+                        <p class="font-14">Last Updated: <%= time %> </p>
                     </div>
                 </div>
                 <div class="col-xs d-flex align-items-center px-0">
@@ -53,15 +53,15 @@
                         <h5 class="mb-0"><%= sunrise %> </h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">IT'S CURRENTLY <%= precipType.toUpperCase() %></p>
-                        <h5 class="mb-0"><%= pop %> % </h5>
+                        <p class="mb-0 font-weight-light font-12">FEELS LIKE</p>
+                        <h5 class="mb-0"><%= feelsLikeTemp %> &deg F</h5>
                     </div>
                     <div class="white-ln-btm">
                         <p class="mb-0 font-weight-light font-12">PRECIPITATION <% typeOfPrecip %></p>
                         <h5 class="mb-0"><%= precip %> in</h5>
                     </div>
                     <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">PRESSURE</p>
+                        <p class="mb-0 font-weight-light font-12">BOROMETER</p>
                         <h5 class="mb-0"><%= pressure %> mmHg</h5>
                     </div>
                 </div>
