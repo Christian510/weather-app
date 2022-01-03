@@ -46,6 +46,7 @@ exports.postWeatherByName = (req, res, next) => {
     } else {
       WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
         let cw = w.data.current;
+				console.log(cw);
         let c = cw.clouds;
         let offset = w.data.timezone_offset;
         let timezone = w.data.timezone;
