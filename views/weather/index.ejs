@@ -12,7 +12,13 @@
       <% cities.forEach(location => { %>
       <li class="list-group-item">
         <form action="/weather" method="GET">
-          <button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start">
+          <button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start"
+						data-city = <%= location.city %>
+						data-state = <%= location.state %>
+						data-custom_name = <%= location.customName %>
+						data-latitude = <%= location.lat %> 
+						data-longitude = <%= location.lon %>
+					>
             <% if (location.customName !== null) { %>
               <p class="button-title mb-0">
                 <%= location.customName %>
@@ -22,7 +28,7 @@
                   <%= location.city %> <%= location.state.toUpperCase() %>
                 </p>
                 <% } %> 
-                <div class="margin-lft">
+                <div class="margin-lft" >
                   <svg width="22" height="22" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

@@ -9,7 +9,7 @@ router.get('/', weatherController.getIndex);
 // DISPLAY WEATHER BY CITY NAME
 router.post('/weather', weatherController.postWeatherByName);
 
-// DISPLAY WEATHER BY CITY ID
+// GET SAVED WEATHER BY CITY ID
 router.get('/weather', weatherController.getSavedWeatherById);
 
 // DISPLAY 5 DAY WEATHER FORECAST
