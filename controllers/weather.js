@@ -85,6 +85,7 @@ exports.postWeatherByName = (req, res, next) => {
 
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
+	console.log(res.httpStatusCode);
   WeatherData.getWeather(req.query.lat, req.query.lon, w => {
     console.log("req: ", req.query)
     let cw = w.data.current;
