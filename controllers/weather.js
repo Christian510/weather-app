@@ -112,7 +112,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       sunset: getDate.sunset,
       clouds: cw.clouds.all,
       visibility: Math.round(cw.visibility / 1000),
-      icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+      icon: cw.weather[0].icon,
       main: cw.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
       precip: precip.precipitation,
       precipType: precip.type,
