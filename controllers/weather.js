@@ -96,6 +96,7 @@ exports.getSavedWeatherById = (req, res, next) => {
     let precip = checkPrecip(cw.rain, cw.snow);
     //  I have to get the correct coords from the saved
     res.render('weather/current-weather', {
+			forecast: w.data,
       visible: false, // for display of save btn
       title: "Quoteable Weather",
       time: getDate.date,
