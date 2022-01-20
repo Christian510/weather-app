@@ -3,8 +3,6 @@ const WeatherData = require('../models/WeatherData');
 const WeatherDate = require('../models/WeatherDate');
 const parseStr = require('../public/javascripts/util_functions').validateAdr;
 const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
-// Yep, it's not the most elegent code.  But it's 99% all my work!
-// The learning will continue whether you like it or not.  So, like it -- A LOT.
 
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
@@ -46,16 +44,16 @@ exports.postWeatherByName = (req, res, next) => {
     } else {
       WeatherData.getWeather(city.coord.lat, city.coord.lon, w => {
         let cw = w.data.current;
-				console.log(cw);
+				// console.log(w.data);
         let offset = w.data.timezone_offset;
         let timezone = w.data.timezone;
         let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset, timezone);
         let precip = checkPrecip(cw.weather[0].main.rain, cw.weather[0].main.snow);
-        console.log(precip)
-        let isVisable = city.isVisable === undefined ? true : false;
+
         res.render('weather/current-weather', {
+          forecast: w.data,
           title: "Quoteable Weather",
-          visible: isVisable,
+          visible: city.isVisable === undefined ? true : false,
           time: getDate.date,
           observation: cw.weather[0].main,
           typeOfPrecip: precip.type,
@@ -74,7 +72,7 @@ exports.postWeatherByName = (req, res, next) => {
           sunrise: getDate.sunrise,
           sunset: getDate.sunset,
           clouds: cw.clouds,
-          icon: `http://openweathermap.org/img/wn/${cw.weather[0].icon}@2x.png`,
+          icon: cw.weather[0].icon,
           main: cw.weather[0].main, // Basic description: "rain", "snow", etc.
           lat: city.coord.lat,
           lon: city.coord.lon,
@@ -88,7 +86,9 @@ exports.postWeatherByName = (req, res, next) => {
 // DISPLAYS CURRENT WEATHER FOR SAVED WEATHER STATIONS
 exports.getSavedWeatherById = (req, res, next) => {
   WeatherData.getWeather(req.query.lat, req.query.lon, w => {
+    console.log("req: ", req.query)
     let cw = w.data.current;
+    // console.log(cw.id)
     let offset = w.data.timezone_offset;
     let timezone = w.data.timezone;
     let getDate = WeatherDate.convertUTC(cw.dt, cw.sunrise, cw.sunset, offset, timezone);
@@ -100,7 +100,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       time: getDate.date,
       observation: cw.weather[0].main,
       city: req.query.city,
-      cityID: cw.id,
+      // cityID: cw.id,
       state: req.query.state,
       customName: req.query.custom_name,
       temp: Math.round(cw.temp),
@@ -116,7 +116,7 @@ exports.getSavedWeatherById = (req, res, next) => {
       main: cw.weather[0].main, // Basic description of weather, i.e.; rain, snow, clouds, etc.
       precip: precip.precipitation,
       precipType: precip.type,
-      pop: w.data.daily[0].pop,
+      feelsLikeTemp: cw.feels_like,
       typeOfPrecip: precip.type,
       lat: req.query.lat,
       lon: req.query.lon,

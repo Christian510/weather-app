@@ -37,12 +37,6 @@ const sessionStore = new MongoStore({
   clear_interval: 1000 * 60 * 60 * 24,
   touchAfter: 24 * 3600, // time period in seconds
 });
-// app.use(helmet.contentSecurityPolicy({
-//   directives:{
-//     defaultSrc:["'self'"],
-//     scriptSrc:["'self'",'code.jquery.com','maxcdn.bootstrapcdn.com','cdn.jsdelivr.net'],
-//     styleSrc:["'self'",'maxcdn.bootstrapcdn.com'],
-//     fontSrc:["'self'",'kit.fontawesome.com']}}));
     
 app.use(session({
   secret: process.env.SECRET,

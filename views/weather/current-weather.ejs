@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-xs d-flex align-items-center px-0">
                     <div>
-                        <img src="<%= icon %>" alt="weather icon"></img>
+                        <img src="http://openweathermap.org/img/wn/<%= icon %>@2x.png" alt="weather icon"></img>
                     </div>
                 </div>
                 <div class="col pl-0 d-flex flex-column justify-content-between">
@@ -41,10 +41,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="weather-description white-ln-top white-ln-btm">
-            <p>Today: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-        </div> -->
         <div class="container weather-data">
             <div class="row">
                 <div class="col-xm col-lft">
@@ -80,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            <weather-card data-weather="<%= JSON.stringify(forecast) %>"></weather-card>
             <div class="save-weather">
                 <%- include('../includes/save-button.ejs') %>
             </div>

@@ -1,5 +1,6 @@
-
+'use strict'
 const WeatherData = require('../models/WeatherData');
+
 const findCitiesBySessionUser = require('../public/javascripts/util_functions').findCitiesBySessionUser;
 
 // DISPLAYS ALL SAVED LOCATIONS ON EDIT PAGE.

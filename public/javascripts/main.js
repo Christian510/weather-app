@@ -1,4 +1,4 @@
-// const WeatherData = require('../models/WeatherData');
+// import { WeatherDate } from '../../models/WeatherDate.js';
 
 function isEmpty() {
     let input;
@@ -19,16 +19,23 @@ function savedMsg(e) {
         visibility.className = "invisible";
         console.log(e);
         e.preventDefault();
-    }
-    
+    }   
 }
 
-// function saveCity(id, city, state, lat, lon) {
-//     console.log("city info: ", id, " " , city, " ", state);
-//    let city = new WeatherData.save(id, city, state, lat, lon);
-//    city.save();
-//    preventDefault();
-// }
+// function convertUTC(dt, sunr, suns, offset, timezone) {
+//     const displayDate = new Date(dt * 1000);
+//     let dtOptions = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: timezone};
+//     date_time.date = displayDate.toLocaleString("en-US", dtOptions);
+
+//     const sunrise = new Date(sunr * 1000);
+//     let sunrOptions = { hour: 'numeric', minute: 'numeric', timeZone: timezone }
+//     date_time.sunrise = sunrise.toLocaleString("en-US", sunrOptions);
+
+//     const sunset = new Date(suns * 1000);
+//     let sunsOptions = { hour: 'numeric', minute: 'numeric', timeZone: timezone }
+//     date_time.sunset = sunset.toLocaleString("en-US", sunsOptions);
+//     return date_time;
+//   }
 
 
 // 1. Write a function that deletes an item and updates the list pull in WeatherData and use it to make the changes to the db Then update the list //

@@ -31,6 +31,7 @@ const getCityData = (sq, cb) => {
 // LOOKS FOR A CITY BY ID IF EXISTS ELSE NULL
 const getSavedDataByID = (id, cb) => {
     const db = getDb();
+    // Use async/await and return result and db.
     db
         .collection('saved_searches')
         .findOne({ "_id": ObjectID(id) })
