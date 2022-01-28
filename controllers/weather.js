@@ -7,7 +7,7 @@ const checkPrecip = require('../public/javascripts/util_functions').checkPrecip;
 exports.getIndex = (req, res, next) => {
   let id = req.sessionID;
   let values = {
-    title: 'Weather App',
+    title: 'Elements Weather',
     cities: [],
   }
   WeatherData.getSessionById(id)
@@ -18,7 +18,7 @@ exports.getIndex = (req, res, next) => {
           res.render('weather/index', values);
         } else {
           res.render('weather/index', {
-            title: 'Weather App',
+            title: 'Elements Weather',
             cities: session.savedSearches,
           });
         }
@@ -52,7 +52,7 @@ exports.postWeatherByName = (req, res, next) => {
 
         res.render('weather/current-weather', {
           forecast: w.data,
-          title: "Quoteable Weather",
+          title: "Elements Weather",
           visible: city.isVisable === undefined ? true : false,
           time: getDate.date,
           observation: cw.weather[0].main,
@@ -98,7 +98,7 @@ exports.getSavedWeatherById = (req, res, next) => {
     res.render('weather/current-weather', {
 			forecast: w.data,
       visible: false, // for display of save btn
-      title: "Quoteable Weather",
+      title: "Elements Weather",
       time: getDate.date,
       observation: cw.weather[0].main,
       city: req.query.city,

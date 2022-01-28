@@ -1,34 +1,5 @@
-/* Typography */
-:root {
-    --white: #ffffff;
-    --black: #000000;
-    --gray-1: #333333;
-    --gray-2: #4F4F4F;
-    --gray-3: #828282;
-    --gray-4: #BDBDBD;
-    --gray-5: #E0E0E0;
-    --gray-6: #F2F2F2;
-    --red: #EB5757;
-    --orange: #F2994A;
-    --yellow: #F2C94C;
-    --green-1: #219653;
-    --green-2: #27AE60;
-    --green-3: #6FCF97;
-    --blue-1: #2F80ED;
-    --blue-2: #3395ce;
-    /* --blue-3: #56CCF2; */
-    --blue-3: #79b1f1;
-    /* --sky-blue: #b7cefb; */
-    --sky-blue: #a1b5dd;
-
-}
-.font-14 {
-    font-size: 14px;
-}
-.font-12 {
-    font-size: 12px;
-}
-/* End Typography */
+@import "color-palate.css";
+@import "typography.css";
 
 .home-bg-color {
     background-color: var(--sky-blue);

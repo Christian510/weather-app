@@ -3,83 +3,92 @@
 </head>
 
 <body class="current-weather">
-    <section class="container mt-3">
-        <div>
-            <div class="row">
-                <div class="col pr-0">
-                    <div>
-                        <h3>
-                            <% if([null, undefined, ' ', ''].includes(customName)) { %>
-                            <%= city %> <%= state %>
-                            <% } else { %>
-                            <%= customName %>
-                            <% } %>
-                        </h3>
-                        <p><%= observation %></p>
-                    </div>
-                    <div>
-                        <p class="font-14">Last Updated: <%= time %> </p>
-                    </div>
-                </div>
-                <div class="col-xs d-flex align-items-center px-0">
-                    <div>
-                        <img src="http://openweathermap.org/img/wn/<%= icon %>@2x.png" alt="weather icon"></img>
-                    </div>
-                </div>
-                <div class="col pl-0 d-flex flex-column justify-content-between">
-                    <div class="d-flex justify-content-center">
-                        <h2> <%= temp %>&deg F</h2>
-                    </div>
-                    <div class="mb-2 d-flex justify-content-center">
-                        <svg style="transform: rotate(<%= deg %>);" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
-                          </svg>
-                    </div>
-                    <div class="text-center">
-                        <p class="font-14">Wind <%= windSpeed %> mph NNE</p>
-                    </div>
-                </div>
+  <section class="container mt-3">
+  <%- include('../includes/search-bar.ejs') %>
+  <!-- Begin Current Weather Header -->
+      <div class="">
+        <!-- row for location and temp -->
+        <div class="row"> 
+          <div class="col-5">
+            <h3>
+                <% if([null, undefined, ' ', ''].includes(customName)) { %>
+                <%= city %>, <%= state %>
+                <% } else { %>
+                <%= customName %>
+                <% } %>
+            </h3>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5 d-flex justify-content-center">
+              <h2> <%= temp %>&deg F</h2>
+          </div>
+        </div>
+        <!-- End row for location and temp -->
+        <!-- row for Observation, weather icon, wind icon -->
+        <div class="row">
+          <div class="col">
+            <p><%= observation %></p>
+          </div>
+          <div class="col d-flex align-items-center px-0">
+            <img src="http://openweathermap.org/img/wn/<%= icon %>@2x.png" alt="weather icon"></img>
+          </div>
+          <div class="col mb-2 d-flex justify-content-center align-items-end">
+            <svg style="transform: rotate(<%= deg %>);" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+            </svg>
+          </div>
+        </div>
+        <!-- End row for Observation, weather icon, wind icon -->
+        <!-- Row for time and wind direction -->
+        <div class="row">
+          <div class="col-5">
+              <p class="font-14" style="margin-bottom: 0px">Last Updated:</p>
+              <p style="margin-top: 0px"><%= time %></p>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5 text-center">
+            <p class="font-14">Wind <%= windSpeed %> mph NNE</p>
+          </div>
+        </div>
+        <!-- Row for time and wind direction -->
+      </div>
+    <!-- End Current Weather Header -->
+    <div class="container weather-data">
+      <div class="row">
+        <div class="col-xm col-lft">
+            <div class="white-ln-btm">
+                <p class="mb-0 font-weight-light font-12">SUNRISE</p>
+                <h5 class="mb-0"><%= sunrise %> </h5>
+            </div>
+            <div class="white-ln-btm">
+                <p class="mb-0 font-weight-light font-12">FEELS LIKE</p>
+                <h5 class="mb-0"><%= feelsLikeTemp %> &deg F</h5>
+            </div>
+            <div class="white-ln-btm">
+                <p class="mb-0 font-weight-light font-12">BOROMETER</p>
+                <h5 class="mb-0"><%= pressure %> mmHg</h5>
             </div>
         </div>
-        <div class="container weather-data">
-            <div class="row">
-                <div class="col-xm col-lft">
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">SUNRISE</p>
-                        <h5 class="mb-0"><%= sunrise %> </h5>
-                    </div>
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">FEELS LIKE</p>
-                        <h5 class="mb-0"><%= feelsLikeTemp %> &deg F</h5>
-                    </div>
-                    <!-- <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">PRECIPITATION <% typeOfPrecip %></p>
-                        <h5 class="mb-0"><%= precip %> in</h5>
-                    </div> -->
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">BOROMETER</p>
-                        <h5 class="mb-0"><%= pressure %> mmHg</h5>
-                    </div>
-                </div>
-                <div class="col-xm col-rt">
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">SUNSET</p>
-                        <h5 class="mb-0"><%= sunset %> </h5>
-                    </div>
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">HUMIDITY</p>
-                        <h5 class="mb-0"> <%= humidity %> %</h5>
-                    </div>
-                    <div class="white-ln-btm">
-                        <p class="mb-0 font-weight-light font-12">VISIBILITY</p>
-                        <h5 class="mb-0"> <%= visibility %> miles</h5>
-                    </div>
-                </div>
-            </div>
-            <weather-card data-weather="<%= JSON.stringify(forecast) %>"></weather-card>
-            <div class="save-weather">
-                <%- include('../includes/save-button.ejs') %>
-            </div>
+          <div class="col-xm col-rt">
+              <div class="white-ln-btm">
+                  <p class="mb-0 font-weight-light font-12">SUNSET</p>
+                  <h5 class="mb-0"><%= sunset %> </h5>
+              </div>
+              <div class="white-ln-btm">
+                  <p class="mb-0 font-weight-light font-12">HUMIDITY</p>
+                  <h5 class="mb-0"> <%= humidity %> %</h5>
+              </div>
+              <div class="white-ln-btm">
+                  <p class="mb-0 font-weight-light font-12">VISIBILITY</p>
+                  <h5 class="mb-0"> <%= visibility %> miles</h5>
+              </div>
+          </div>
         </div>
+      </div>
+      <weather-card data-weather="<%= JSON.stringify(forecast) %>">
+      </weather-card>
+      <div class="save-weather">
+          <%- include('../includes/save-button.ejs') %>
+      </div>
     </section>
     <%- include('../includes/end.ejs') %>
