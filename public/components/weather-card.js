@@ -141,4 +141,4 @@ class WeatherCard extends HTMLElement {
 
 customElements.define('weather-card', WeatherCard);
 
-// export default WeatherCard;
+export default WeatherCard;
