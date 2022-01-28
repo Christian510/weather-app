@@ -49,7 +49,7 @@ template.innerHTML = `
 	</div>
 `;
 
-class WeatherCard extends HTMLElement {
+module.exports = class WeatherCard extends HTMLElement {
   constructor() {
     super();
 
@@ -141,4 +141,4 @@ class WeatherCard extends HTMLElement {
 
 customElements.define('weather-card', WeatherCard);
 
-export default WeatherCard;
+// export default WeatherCard;
