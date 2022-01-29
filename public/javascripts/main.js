@@ -1,5 +1,4 @@
 // import { WeatherDate } from '../../models/WeatherDate.js';
-import '../components/weather-card';
 
 function isEmpty() {
     let input;
