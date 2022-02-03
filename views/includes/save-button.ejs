@@ -1,16 +1,8 @@
 <form class="<%= visible === true ? "visible" : "invisible" %>" action="/save-weather" method="POST">
-    <button type="submit" id="save-btn" class="btn btn-success btn-sm save-button">Save City</button>
+    <button type="submit" id="save-btn" class="btn btn-success btn-md save-button">Save City</button>
     <input type="hidden" name="city" value="<%= city %>">
     <input type="hidden" name="state" value="<%= state %>">
     <input type="hidden" name="lat" value="<%= lat %>">
     <input type="hidden" name="lon" value="<%= lon %>">
 </form>
-
-<!-- Needs some work.  I am not sure how to pass values to saveCity -->
-<!-- <form class="<%= visible === true ? "visible" : "invisible" %>">
-    <button type="submit" id="save-btn" class="btn btn-success btn-sm save-button" onclick="saveCity(city, state, lat, lon);">Save City</button>
-    <input type="hidden" name="city" value="<%= city %>">
-    <input type="hidden" name="state" value="<%= state %>">
-    <input type="hidden" name="lat" value="<%= lat %>">
-    <input type="hidden" name="lon" value="<%= lon %>">
-</form> -->
+<a href=""></a>

@@ -22,21 +22,18 @@ function savedMsg(e) {
     }   
 }
 
-// function convertUTC(dt, sunr, suns, offset, timezone) {
-//     const displayDate = new Date(dt * 1000);
-//     let dtOptions = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: timezone};
-//     date_time.date = displayDate.toLocaleString("en-US", dtOptions);
+// function preventTouchMoveBehavior(e) {
+//   e.preventDefault();
+// } 
 
-//     const sunrise = new Date(sunr * 1000);
-//     let sunrOptions = { hour: 'numeric', minute: 'numeric', timeZone: timezone }
-//     date_time.sunrise = sunrise.toLocaleString("en-US", sunrOptions);
+//   const elm = document.querySelector('html');
+//   elm.addEventListener('touchmove', preventTouchMoveBehavior, {passive: false});
 
-//     const sunset = new Date(suns * 1000);
-//     let sunsOptions = { hour: 'numeric', minute: 'numeric', timeZone: timezone }
-//     date_time.sunset = sunset.toLocaleString("en-US", sunsOptions);
-//     return date_time;
-//   }
-
+//   const scroll = document.querySelector('#scroll');
+//   scroll.addEventListener('scroll', function(e) {
+//     console.log(window.scrollY);
+//   });
+  // https://stackoverflow.com/questions/41594997/ios-10-safari-prevent-scrolling-behind-a-fixed-overlay-and-maintain-scroll-posi
 
 // 1. Write a function that deletes an item and updates the list pull in WeatherData and use it to make the changes to the db Then update the list //
 

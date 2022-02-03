@@ -1,16 +1,147 @@
-.main-header-nav {
-    background-color: #ead2ac;
-    width: 100%;
-    height: 3rem;
-    padding-left: 1rem;
+
+@import "color-palate.css";
+@import "typography.css";
+@import "index.css";
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.home-bg-color {
+    background-color: var(--sky-blue);
+}
+
+.form-control {
+    width: 250px;
+    margin-right: 10px;
+}
+
+/* Save Search List Content */
+.list-group-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: transparent;
+    border: none;
+}
+
+.header {
+    margin-bottom: 5px;
+}
+
+/* END Save Search List Content */
+
+/* NAVBAR BOTTOM COMPONENT */
+.nav-bottom {
+    color: var(--gray-2);
+    height: 72px;
+    width: 375px;
     padding-right: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .logo {
-    float: left;
-  }
-  
-  .title {
-    float: right;
-  }
+    padding-left: 1rem;
+    margin-bottom: .5rem;
+    border-radius: 3px;
+}
+.nav-bottom div a svg {
+    fill: var(--gray-2);
+}
+/* END NAVBAR BOTTOM COMPONENT */
+
+
+/* Footer component bw = basic weather */
+.footer-wrapper {
+    background-color: var(--gray-2);
+}
+.footer-icons {
+    width: 220px;
+    height: 60px;
+}
+
+.footer-icons div a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.footer-icons div a svg {
+    fill: var(--white);
+}
+
+.margin-lft {
+    margin-left: 8.6rem;
+}
+
+/* BUTTON STYLES  */
+.btn {
+    text-align: left;
+}
+
+.button-edit {
+    color: var(--gray-3);
+    background-color: var(--gray-5);
+}
+
+.button-edit div {
+    margin-left: 8.6rem;
+}
+
+.save-button {
+    padding-left: 7.85rem;
+    padding-right: 7.85rem;
+}
+
+.button-title {
+    width: 150px;
+}
+
+.back-btn {
+    margin: 1.1rem 1.1rem;
+}
+.back-btn .btn {
+    padding-right: 5rem;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+}
+
+.back-btn-layout {
+    width: 6.5rem;
+}
+/* END BUTTON STYLES */
+
+/* HEADER STYLES */
+.stick-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.bw-header {
+    background-color: var(--sky-blue);
+}
+/* END HEADER STYLES */
+
+.contain-all {
+    margin-bottom: 65px;
+}
+
+
+/* MEDIA QUERIES */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+ }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

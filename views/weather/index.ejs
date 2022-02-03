@@ -2,11 +2,11 @@
 </head>
 
 <body class="home-bg-color">
-  <div class="sticky-top header">
+  <section class="prevent-touch-drag sticky-top header">
     <%- include('../includes/header.ejs') %>
     <%- include('../includes/search-bar.ejs') %>
-  </div>
-  <section class="container contain-all d-flex justify-content-center">
+  </section>
+  <section id="scroll" class="container contain-all d-flex justify-content-center">
     <% if (cities.length > 0) { %>
     <ul class="list-group" role="list">
       <% cities.forEach(location => { %>
