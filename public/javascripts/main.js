@@ -22,17 +22,21 @@ function savedMsg(e) {
     }   
 }
 
-// function preventTouchMoveBehavior(e) {
-//   e.preventDefault();
-// } 
+function scrollListItems(e) {
+  console.log(e.touches);
+} 
 
-//   const elm = document.querySelector('html');
-//   elm.addEventListener('touchmove', preventTouchMoveBehavior, {passive: false});
+window.addEventListener('DOMContentLoaded', function() {
+  const elm = document.querySelector('.list-items');
+  elm.addEventListener('touchstart', scrollListItems)
 
-//   const scroll = document.querySelector('#scroll');
-//   scroll.addEventListener('scroll', function(e) {
-//     console.log(window.scrollY);
-//   });
+  
+})
+
+  // const scroll = document.querySelector('#scroll');
+  // scroll.addEventListener('scroll', function(e) {
+  //   console.log(window.scrollY);
+  // });
   // https://stackoverflow.com/questions/41594997/ios-10-safari-prevent-scrolling-behind-a-fixed-overlay-and-maintain-scroll-posi
 
 // 1. Write a function that deletes an item and updates the list pull in WeatherData and use it to make the changes to the db Then update the list //

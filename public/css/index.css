@@ -25,6 +25,11 @@ html, body {
     border: none;
 }
 
+/* .scrollable-list {
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+} */
+
 .header {
     margin-bottom: 5px;
 }
