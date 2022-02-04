@@ -22,13 +22,19 @@ function savedMsg(e) {
     }   
 }
 
-function scrollListItems(e) {
-  console.log(e.touches);
-} 
 
 window.addEventListener('DOMContentLoaded', function() {
-  const elm = document.querySelector('.list-items');
-  elm.addEventListener('touchstart', scrollListItems)
+  const elm = document.querySelector('body');
+  elm.addEventListener('touchmove', function(e) {
+		e.preventDefault();
+		console.dir(`Outside scrollable area: ${e.touches}`);
+	}, {passive: false});
+
+	const scroll = document.querySelector('.scrollable-list');
+	scroll.addEventListener('touchstart', function(e) {
+		console.dir(`Inside scrollable area: ${e}`);
+		// if(e.target)
+	})
 
   
 })
