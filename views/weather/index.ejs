@@ -2,11 +2,11 @@
 </head>
 
 <body class="home-bg-color">
-  <section class="prevent-touch-drag sticky-top header">
+  <div class="prevent-touch-drag sticky-top header">
     <%- include('../includes/header.ejs') %>
     <%- include('../includes/search-bar.ejs') %>
-  </section>
-  <section class="container contain-all d-flex justify-content-center">
+	</div>
+  <div class="container contain-all d-flex justify-content-center">
     <% if (cities.length > 0) { %>
     <ul class="list-group scrollable-list" role="list">
       <% cities.forEach(location => { %>
@@ -44,10 +44,10 @@
       </li>
       <% } else { %>
         <section class="intro">
-          <p>Thank you for checking out my weather app!</p>
+          <h3>Thank you for checking out my weather app!</h3>
           <p>Your saved searches will live her for 90 days.</p>
         </section>
       <% } %>
     </ul>
-  </section>
+  </div>
   <%- include('../includes/end.ejs') %>
