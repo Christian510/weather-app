@@ -1,5 +1,7 @@
 // import { WeatherDate } from '../../models/WeatherDate.js';
 
+const e = require("express");
+
 function isEmpty() {
     let input;
     input = document.getElementById("city_state").value;
@@ -22,7 +24,11 @@ function savedMsg(e) {
     }   
 }
 
-
+function scrollList(e) {
+	if (e.targetTouch === 1) {
+		console.log('scolling started')
+	}
+}
 window.addEventListener('DOMContentLoaded', function() {
   const elm = document.querySelector('body');
   elm.addEventListener('touchmove', function(e) {
@@ -31,10 +37,17 @@ window.addEventListener('DOMContentLoaded', function() {
 	}, {passive: false});
 
 	const scroll = document.querySelector('.scrollable-list');
+	e.preventDefault();
 	scroll.addEventListener('touchstart', function(e) {
 		console.dir(`Inside scrollable area: ${e}`);
 		// if(e.target)
 	})
+	scroll.addEventListener('touchmove', function(e) {
+		e.preventDefault();
+	}, false);
+	scroll.addEventListener('touchend', function(e) {
+		e.preventDefault();
+	}, false);
 
   
 })

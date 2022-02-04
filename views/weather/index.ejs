@@ -1,53 +1,55 @@
 <%- include('../includes/head.ejs') -%>
-</head>
+	</head>
 
-<body class="home-bg-color">
-  <div class="prevent-touch-drag sticky-top header">
-    <%- include('../includes/header.ejs') %>
-    <%- include('../includes/search-bar.ejs') %>
-	</div>
-  <div class="container contain-all d-flex justify-content-center">
-    <% if (cities.length > 0) { %>
-    <ul class="list-group scrollable-list" role="list">
-      <% cities.forEach(location => { %>
-      <li class="list-group-item">
-        <form action="/weather" method="GET">
-          <button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start">
-            <% if (location.customName !== null) { %>
-              <p class="button-title mb-0">
-                <%= location.customName %>
-              </p>
-              <%  } else {%> 
-                <p class="button-title mb-0">
-                  <%= location.city %> <%= location.state.toUpperCase() %>
-                </p>
-                <% } %> 
-                <div class="margin-lft" >
-                  <svg width="22" height="22" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path fill-rule="evenodd"
-                  d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-                </svg>
-              </div>
-            </button>
-            <input type="hidden" name="city" value="<%= location.city %>">
-            <input type="hidden" name="state" value="<%= location.state %>">
-            <input type="hidden" name="custom_name" value="<%= location.customName %>">
-            <input type="hidden" name="lat" value="<%= location.lat %>">
-            <input type="hidden" name="lon" value="<%= location.lon %>">
-          </form>
-      </li>
-      <% }); %>
-      <li class="list-group-item">
-        <%- include('../includes/edit-button.ejs') %>
-      </li>
-      <% } else { %>
-        <section class="intro">
-          <h3>Thank you for checking out my weather app!</h3>
-          <p>Your saved searches will live her for 90 days.</p>
-        </section>
-      <% } %>
-    </ul>
-  </div>
-  <%- include('../includes/end.ejs') %>
+	<body class="home-bg-color">
+		<div class="prevent-touch-drag sticky-top header">
+			<%- include('../includes/header.ejs') %>
+				<%- include('../includes/search-bar.ejs') %>
+		</div>
+		<div class="container contain-all d-flex justify-content-center">
+			<% if (cities.length> 0) { %>
+				<ul class="list-group scrollable-list" role="list">
+					<% cities.forEach(location => { %>
+						<li class="list-group-item">
+							<form action="/weather" method="GET">
+								<button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start">
+									<% if (location.customName !== null) { %>
+										<p class="button-title mb-0">
+											<%= location.customName %>
+										</p>
+										<% } else {%>
+											<p class="button-title mb-0">
+												<%= location.city %>
+													<%= location.state.toUpperCase() %>
+											</p>
+											<% } %>
+												<div class="margin-lft">
+													<svg width="22" height="22" viewBox="0 0 16 16" class="bi bi-arrow-right-circle"
+														fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd"
+															d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+														<path fill-rule="evenodd"
+															d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
+													</svg>
+												</div>
+								</button>
+								<input type="hidden" name="city" value="<%= location.city %>">
+								<input type="hidden" name="state" value="<%= location.state %>">
+								<input type="hidden" name="custom_name" value="<%= location.customName %>">
+								<input type="hidden" name="lat" value="<%= location.lat %>">
+								<input type="hidden" name="lon" value="<%= location.lon %>">
+							</form>
+						</li>
+						<% }); %>
+							<li class="list-group-item">
+								<%- include('../includes/edit-button.ejs') %>
+							</li>
+							<% } else { %>
+								<section class="intro">
+									<h3>Thank you for checking out my weather app!</h3>
+									<p>Your saved searches will live her for 90 days.</p>
+								</section>
+					<% } %>
+				</ul>
+		</div>
+		<%- include('../includes/end.ejs') %>
