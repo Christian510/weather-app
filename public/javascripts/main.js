@@ -30,7 +30,9 @@ window.addEventListener('DOMContentLoaded', function() {
 	}, {passive: false});
 
 	function preventTouchMoveOnBody() {
-		window.addEventListener('touchmove', preventDefault, {passive: false});
+		window.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, {passive: false});
 	}
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
