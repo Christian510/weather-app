@@ -34,9 +34,9 @@ window.addEventListener('DOMContentLoaded', function() {
 	window.removeEventListener('touchmove', preventDefault);
 
 	let body = document.querySelector('body');
-	let scrollableArea = document.querySelector('.scrolling');
+	let scrollableArea = document.querySelector('.scrollable-area');
 	console.log("body: ", body.scrollTop);
-	console.log(`scrollHeight: ${scrollableArea}`);
+	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 
 
   
