@@ -45,10 +45,11 @@ window.addEventListener('DOMContentLoaded', function() {
 	})
   
 })
-console.log(window.location);
-// if (window.location != '')
-// window.removeEventListener('gesturechange', preventDefault);
-// window.removeEventListener('touchmove', preventDefault);
+
+if (window.location.pathname !== '/') {
+	window.removeEventListener('gesturechange', preventDefault);
+	window.removeEventListener('touchmove', preventDefault);
+}
 
 	
 	/* Dev Notes:
