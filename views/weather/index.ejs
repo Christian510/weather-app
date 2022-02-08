@@ -6,9 +6,9 @@
 			<%- include('../includes/header.ejs') %>
 				<%- include('../includes/search-bar.ejs') %>
 		</div>
-		<div class="scrollable-area container contain-all d-flex justify-content-center">
+		<div class="container contain-all d-flex justify-content-center">
 			<% if (cities.length> 0) { %>
-				<ul class="list-group" role="list">
+				<ul class="scrollable-area list-group" role="list">
 					<% cities.forEach(location => { %>
 						<li class="list-group-item">
 							<form action="/weather" method="GET">
