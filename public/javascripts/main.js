@@ -28,10 +28,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		e.preventDefault();
 		console.log('touch gestures prevented.')
 	}, {passive: false});
-	window.removeEventListener('gesturechange', preventDefault);
+	// window.removeEventListener('gesturechange', preventDefault);
 	
 	window.addEventListener('touchmove', preventDefault, {passive: false});
-	window.removeEventListener('touchmove', preventDefault);
+	// window.removeEventListener('touchmove', preventDefault);
 
 	let scrollableArea = document.querySelector('.scrollable-area');
 	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
