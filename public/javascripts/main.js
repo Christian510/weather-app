@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	let body = document.querySelector('body');
 	let scrollableArea = document.querySelector('.scrolling');
 	console.log("body: ", body.scrollTop);
-	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight}`);
+	console.log(`scrollHeight: ${scrollableArea.scrollHeight}`);
 
 
   
