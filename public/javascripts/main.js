@@ -38,8 +38,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
 	scrollableArea.addEventListener('touchstart', function(e) {
-		if (e.targetTouches.length === 1 && this.scrollTop < 0) {
-			preventTouchMove();
+		if (e.targetTouches.length === 1) {
+			console.log("scrolltop: ", this.scrollTop);
 		}
 	})
 
