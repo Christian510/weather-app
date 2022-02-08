@@ -23,7 +23,7 @@ function savedMsg(e) {
 
 window.addEventListener('DOMContentLoaded', function() {
 	let body = document.querySelector('body');
-	let scolling = document.querySelector('.scrolling');
+	let scrolling = document.querySelector('.scrolling');
 	let yValue = null,
 	scollStart = false;
 	
