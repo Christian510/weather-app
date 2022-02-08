@@ -24,7 +24,10 @@ function savedMsg(e) {
 window.addEventListener('DOMContentLoaded', function() {
 	
 	let header = document.querySelector('header');
-	const preventDefault = e => { e.preventDefault() }
+	const preventDefault = e => { 
+		e.preventDefault() 
+		console.log('touch move prevented');
+	}
 
 	window.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
