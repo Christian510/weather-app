@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
 	let header = document.querySelector('header');
-	header.addEventListener('touchstart', preventTouchMoveOnBody)
+	header.addEventListener('touchmove', preventTouchMoveOnBody)
   
 })
 
