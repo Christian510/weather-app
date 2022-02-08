@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	let list = document.querySelector('.scrollable-area')
 
 	header.addEventListener('touchmove', preventTouchMoveOnBody);
-	list.addEventListener('touchmove', preventTouchMoveOnBody);
+	// list.addEventListener('touchmove', preventTouchMoveOnBody);
   
 })
 
