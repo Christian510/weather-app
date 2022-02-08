@@ -22,19 +22,21 @@ function savedMsg(e) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-	
-	let header = document.querySelector('header');
-	const preventDefault = e => { 
-		e.preventDefault() 
-		console.log('touch move prevented');
-	}
+	const preventDefault = e => { e.preventDefault() }
 
 	window.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
 		console.log('touch gestures prevented.')
 	}, {passive: false});
+	window.removeEventListener('gesturechange', preventDefault);
 	
-	header.addEventListener('touchmove', preventDefault, {passive: false});
+	window.addEventListener('touchmove', preventDefault, {passive: false});
+	window.removeEventListener('touchmove', preventDefault);
+
+	let body = document.querySelector('body');
+	let scrolling = document.querySelector('.scrolling');
+	console.log("body: ", body.scrollTop);
+	console.log(".scrolling: ", scrolling.scrollTop, scrolling.scrollHeight);
 
 
   
