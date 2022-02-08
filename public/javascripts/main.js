@@ -34,8 +34,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		// window.addEventListener('touchmove', preventDefault, {passive: false});
 	}
 
-	function consoleTouches(e, elm) {
-		console.log(`target touches${e.targetTouches} | ${elm.scrollTop}`);
+	function consoleTouches(e) {
+		console.log(`target touches${e.targetTouches}`);
 	}
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	
 	scrollableArea.addEventListener('touchmove', function(e) {
 		if (e.targetTouches.length === 1) {
-			consoleTouches(e, this);
+			consoleTouches(e);
 		}
 	})
 
