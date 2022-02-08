@@ -29,10 +29,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 
-	window.addEventListener('touchmove', function(e) {
-		e.preventDefault();
-		console.log('toucmove prevent')
-	}, {passive: false});
+	// window.addEventListener('touchmove', function(e) {
+	// 	e.preventDefault();
+	// 	console.log('toucmove prevent')
+	// }, {passive: false});
 
 
   
