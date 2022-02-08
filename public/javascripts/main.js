@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
 	scrollableArea.addEventListener('touchstart', function(e) {
-		if (e.targetTouches.length === 1 && this.scrollTop <= 0) {
+		if (e.targetTouches.length === 1 && this.scrollTop < 0) {
 			preventTouchMove();
 		}
 	})
