@@ -23,6 +23,7 @@ function savedMsg(e) {
 
 window.addEventListener('DOMContentLoaded', function() {
 	let header = document.querySelector('header');
+	console.log(header)
 	// Obviously this will disable touchmove on all pages;
 	window.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
