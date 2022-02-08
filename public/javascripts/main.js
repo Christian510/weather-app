@@ -38,16 +38,16 @@ window.addEventListener('DOMContentLoaded', function() {
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
 	scrollableArea.addEventListener('touchstart', function(e) {
-		if (e.targetTouches.length === 1 && this.scrollTop >= 0) {
+		if (e.targetTouches.length === 1 && this.scrollTop <= 0) {
 			preventTouchMove();
 		}
 	})
 
-	scrollableArea.addEventListener('touchmove', function(e) {
-		if (e.targetTouches.length === 1) {
-			console.log("move: ", e.targetTouches);
-		}
-	})
+	// scrollableArea.addEventListener('touchmove', function(e) {
+	// 	if (e.targetTouches.length === 1) {
+	// 		console.log("move: ", e.targetTouches);
+	// 	}
+	// })
   
 })
 
