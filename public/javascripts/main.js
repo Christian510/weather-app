@@ -1,6 +1,3 @@
-// import { WeatherDate } from '../../models/WeatherDate.js';
-
-const e = require("express");
 
 function isEmpty() {
     let input;
@@ -24,30 +21,62 @@ function savedMsg(e) {
     }   
 }
 
-function scrollList(e) {
-	if (e.targetTouch === 1) {
-		console.log('scolling started')
-	}
-}
 window.addEventListener('DOMContentLoaded', function() {
-  const elm = document.querySelector('body');
-  elm.addEventListener('touchmove', function(e) {
+	let body = document.querySelector('body');
+	let scolling = document.querySelector('#scroll');
+	let yValue = null,
+	scollStart = false;
+	
+	body.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
-		console.dir(`Outside scrollable area: ${e.touches}`);
 	}, {passive: false});
 
-	const scroll = document.querySelector('.scrollable-list');
-	e.preventDefault();
-	scroll.addEventListener('touchstart', function(e) {
-		console.dir(`Inside scrollable area: ${e}`);
-		// if(e.target)
-	})
+	body.addEventListener('touchmove', function(e) {
+		e.preventDefault();
+	}, {passive: false})
+
+  scroll.addEventListener('touchstart', function(e) {
+		// e.preventDefault();
+		if (e.targetTouches.length === 1) {
+			yValue = e.targetTouches[0].clientY;
+			// console.log(`Y value: ${e.targetTouches.length}`);
+			console.log(`Y value: ${yValue}`);
+			console.log(`scrollTop: ${body.scrollTop}`);
+		}
+		// console.dir(`Outside scrollable area: ${e.targetTouches[0]}`);
+	}, {passive: false});
+
 	scroll.addEventListener('touchmove', function(e) {
-		e.preventDefault();
-	}, false);
-	scroll.addEventListener('touchend', function(e) {
-		e.preventDefault();
-	}, false);
+		// console.log(`is 1? ${e.targetTouches.length}`)
+		if(e.targetTouches.length === 1) {
+			console.log(`touchmove started: ${e.targetTouches}`)
+		}
+	}, {passive: false});
+
+		scroll.addEventListener('touchend', function(){
+			console.log(`touch ended: ${e.targetTouches}`)
+		}, {passive: false});
+
+
+
+	// function disableRubberBand(e) {
+	// 	let stop = e.targetTouches[0].clientY - yValue;
+	// 	console.log(`stop: ${stop}`);
+	// 	if (scroll.scrollTop === 0 && stop > 0) {
+	// 		e.preventDefault();
+	// 	}
+	// }
+
+// 	const scroll = document.querySelector('.scrollable-list');
+// 	scroll.addEventListener('touchstart', function(e) {
+// 		console.dir(`Inside scrollable area: ${e}`);
+// 	})
+// 	scroll.addEventListener('touchmove', function(e) {
+// 		e.preventDefault();
+// 	}, false);
+// 	scroll.addEventListener('touchend', function(e) {
+// 		e.preventDefault();
+// 	}, false);
 
   
 })

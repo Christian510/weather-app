@@ -2,13 +2,13 @@
 	</head>
 
 	<body class="home-bg-color">
-		<div class="prevent-touch-drag sticky-top header">
+		<div class="ios-fixed-top sticky-top header">
 			<%- include('../includes/header.ejs') %>
 				<%- include('../includes/search-bar.ejs') %>
 		</div>
 		<div class="container contain-all d-flex justify-content-center">
 			<% if (cities.length> 0) { %>
-				<ul class="list-group scrollable-list" role="list">
+				<ul id="scroll" class="list-group" role="list">
 					<% cities.forEach(location => { %>
 						<li class="list-group-item">
 							<form action="/weather" method="GET">
