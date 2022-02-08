@@ -33,12 +33,18 @@ window.addEventListener('DOMContentLoaded', function() {
 	window.addEventListener('touchmove', preventDefault, {passive: false});
 	window.removeEventListener('touchmove', preventDefault);
 
-	let body = document.querySelector('body');
 	let scrollableArea = document.querySelector('.scrollable-area');
-	console.log("body: ", body.scrollTop);
 	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 
-
+	scrollableArea.addEventListener('touchstart', function() {
+		if (this.scrollTop <= 0) {
+			this.scrollTo(0, 1);
+			return
+		}
+		if (this.scrollTop + this.offsetHeight >= this.scrollHeight) {
+			this.scrollTo(0, this.scrollHeight - this.offsetHeight - 1);
+		}
+	})
   
 })
 
