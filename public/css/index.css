@@ -20,7 +20,7 @@ html, body {
 /* Save Search List Content */
 
 .scrolling {
-	touch-action: none;
+	
 }
 .list-group-item {
     padding-top: 5px;
