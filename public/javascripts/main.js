@@ -33,13 +33,17 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log("function triggered");
 		// window.addEventListener('touchmove', preventDefault, {passive: false});
 	}
+
+	function consolefunc(elm) {
+		console.log(elm);
+	}
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
 	scrollableArea.addEventListener('touchmove', function(e) {
 		if (e.targetTouches.length === 1) {
-			console.log(` scrolltop: ${this}`);
+			consolefunc(this);
 		}
 	})
 
