@@ -24,6 +24,7 @@ function savedMsg(e) {
 window.addEventListener('DOMContentLoaded', function() {
 	let body = document.querySelector('body');
 	let scrolling = document.querySelector('.scrolling');
+	console.log(scrolling);
 	let yValue = null,
 	scollStart = false;
 	
@@ -42,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			yValue = e.targetTouches[0].clientY;
 			// console.log(`Y value: ${e.targetTouches.length}`);
 			console.log(`Y value: ${yValue}`);
-			console.log(`scrollTop: ${body.scrollTop}`);
+			// console.log(`scrollTop: ${body.scrollTop}`);
 		}
 		// console.dir(`Outside scrollable area: ${e.targetTouches[0]}`);
 	}, {passive: false});
