@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	// 	if (e.targetTouches.length === 1) {
 	// 		console.log("start: ", e.targetTouches);
 	// 	}
-	})
+	// })
 
 	scrollableArea.addEventListener('touchmove', function(e) {
 		if (e.targetTouches.length === 1) {
