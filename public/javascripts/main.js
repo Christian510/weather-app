@@ -38,8 +38,11 @@ window.addEventListener('DOMContentLoaded', function() {
 	let scrollableArea = document.querySelector('.scrollable-area');
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
-	let header = document.querySelector('header');
-	header.addEventListener('touchmove', preventTouchMoveOnBody)
+	let header = document.querySelector('.header');
+	let list = document.querySelector('.scrollable-area')
+
+	header.addEventListener('touchmove', preventTouchMoveOnBody);
+	list.addEventListener('touchmove', preventTouchMoveOnBody);
   
 })
 
