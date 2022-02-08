@@ -23,15 +23,16 @@ function savedMsg(e) {
 
 window.addEventListener('DOMContentLoaded', function() {
 	
+	let header = document.querySelector('header');
+	const preventDefault = e => { e.preventDefault() }
+
 	window.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 	
-	let header = document.querySelector('.bw-header');
 	header.addEventListener('touchmove', preventDefault, {passive: false});
 
-	const preventDefault = e => { e.preventDefault() }
 
   
 })
