@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	
 	scrollableArea.addEventListener('touchmove', function(e) {
 		if (e.targetTouches.length === 1) {
-			console.log(` scrolltop: ${this.scrollTop} | touches: ${e.touches}`);
+			console.log(` scrolltop: ${this.scrollTop} | touches: ${e.touches.touchList}`);
 		}
 	})
 
