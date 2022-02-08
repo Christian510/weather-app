@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 	
-	window.addEventListener('touchmove', preventDefault, {passive: false});
+	// window.addEventListener('touchmove', preventDefault, {passive: false});
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
 	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
