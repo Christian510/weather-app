@@ -28,30 +28,16 @@ window.addEventListener('DOMContentLoaded', function() {
 		e.preventDefault();
 		console.log('touch gestures prevented.')
 	}, {passive: false});
-	
-	function preventTouchMove() {
-		console.log("function triggered");
-		// window.addEventListener('touchmove', preventDefault, {passive: false});
-	}
 
-	function consoleTouches(e) {
-		console.log(`target touches${e.targetTouches}`);
+	function preventTouchMoveOnBody() {
+		window.addEventListener('touchmove', preventDefault, {passive: false});
 	}
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
 	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
-	scrollableArea.addEventListener('touchmove', function(e) {
-		if (e.targetTouches.length === 1) {
-			consoleTouches(e);
-		}
-	})
-
-	// scrollableArea.addEventListener('touchmove', function(e) {
-	// 	if (e.targetTouches.length === 1) {
-	// 		console.log("move: ", e.targetTouches);
-	// 	}
-	// })
+	let header = document.querySelector('header');
+	header.addEventListener('touchstart', preventTouchMoveOnBody)
   
 })
 
