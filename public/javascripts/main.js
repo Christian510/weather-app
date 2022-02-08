@@ -40,11 +40,11 @@ window.addEventListener('DOMContentLoaded', function() {
 	// 	}
 	// })
 
-	scrollableArea.addEventListener('touchmove', function(e) {
-		if (e.targetTouches.length === 1) {
-			console.log("move: ", e.targetTouches);
-		}
-	})
+	// scrollableArea.addEventListener('touchmove', function(e) {
+	// 	if (e.targetTouches.length === 1) {
+	// 		console.log("move: ", e.targetTouches);
+	// 	}
+	// })
   
 })
 
