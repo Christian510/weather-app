@@ -8,9 +8,9 @@
 		</div>
 		<div class="scrollable-area container contain-all d-flex justify-content-center">
 			<% if (cities.length> 0) { %>
-				<ul class="" role="">
+				<ul class="list-group" role="list">
 					<% cities.forEach(location => { %>
-						<li class="">
+						<li class="list-group-item">
 							<form action="/weather" method="GET">
 								<button type="submit" class="btn btn-primary btn-lg d-flex justify-content-start">
 									<% if (location.customName !== null) { %>
