@@ -29,19 +29,20 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 	
-	// window.addEventListener('touchmove', preventDefault, {passive: false});
+	window.addEventListener('touchmove', preventDefault, {passive: false});
 	
 	let scrollableArea = document.querySelector('.scrollable-area');
 	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
-	scrollableArea.addEventListener('touchstart', function() {
-		console.log("touch started")
-		if (this.scrollTop <= 0) {
-			this.scrollTo(0, 1);
-			return
+	scrollableArea.addEventListener('touchstart', function(e) {
+		if (e.targetTouches.length === 1) {
+			console.log("start: ", e.targetTouches);
 		}
-		if (this.scrollTop + this.offsetHeight >= this.scrollHeight) {
-			this.scrollTo(0, this.scrollHeight - this.offsetHeight - 1);
+	})
+
+	scrollableArea.addEventListener('touchmove', function(e) {
+		if (e.targetTouches.length === 1) {
+			console.log("move: ", e.targetTouches);
 		}
 	})
   
