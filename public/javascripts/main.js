@@ -23,10 +23,11 @@ function savedMsg(e) {
 
 window.addEventListener('DOMContentLoaded', function() {
 	let body = document.querySelector('body');
-	let scolling = document.querySelector('#scroll');
+	let scolling = document.querySelector('#scrolling');
 	let yValue = null,
 	scollStart = false;
 	
+	// Obviously this will disable touchmove on all pages;
 	body.addEventListener('gesturechange', function(e) {
 		e.preventDefault();
 	}, {passive: false});
@@ -35,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		e.preventDefault();
 	}, {passive: false})
 
-  scroll.addEventListener('touchstart', function(e) {
+  scrolling.addEventListener('touchstart', function(e) {
 		// e.preventDefault();
 		if (e.targetTouches.length === 1) {
 			yValue = e.targetTouches[0].clientY;
@@ -46,14 +47,14 @@ window.addEventListener('DOMContentLoaded', function() {
 		// console.dir(`Outside scrollable area: ${e.targetTouches[0]}`);
 	}, {passive: false});
 
-	scroll.addEventListener('touchmove', function(e) {
+	scrolling.addEventListener('touchmove', function(e) {
 		// console.log(`is 1? ${e.targetTouches.length}`)
 		if(e.targetTouches.length === 1) {
 			console.log(`touchmove started: ${e.targetTouches}`)
 		}
 	}, {passive: false});
 
-		scroll.addEventListener('touchend', function(){
+		scrolling.addEventListener('touchend', function(){
 			console.log(`touch ended: ${e.targetTouches}`)
 		}, {passive: false});
 
