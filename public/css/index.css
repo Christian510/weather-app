@@ -19,8 +19,8 @@ html, body {
 
 /* Save Search List Content */
 
-.scrolling {
-	
+.scrolling-area {
+	overflow-y: scroll;
 }
 .list-group-item {
     padding-top: 5px;
