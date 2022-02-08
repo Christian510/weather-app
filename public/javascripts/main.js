@@ -29,15 +29,15 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 	
-	window.addEventListener('touchmove', preventDefault, {passive: false});
+	// window.addEventListener('touchmove', preventDefault, {passive: false});
 	
-	let scrollableArea = document.querySelector('.scrollable-area');
-	console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
+	// let scrollableArea = document.querySelector('.scrollable-area');
+	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
 	
-	scrollableArea.addEventListener('touchstart', function(e) {
-		if (e.targetTouches.length === 1) {
-			console.log("start: ", e.targetTouches);
-		}
+	// scrollableArea.addEventListener('touchstart', function(e) {
+	// 	if (e.targetTouches.length === 1) {
+	// 		console.log("start: ", e.targetTouches);
+	// 	}
 	})
 
 	scrollableArea.addEventListener('touchmove', function(e) {
