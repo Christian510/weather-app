@@ -21,6 +21,7 @@ function savedMsg(e) {
     }   
 }
 
+// ----- TOUCH EVENTS ------ //
 window.addEventListener('DOMContentLoaded', function() {
 	const preventDefault = e => { e.preventDefault() }
 
