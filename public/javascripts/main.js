@@ -29,20 +29,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		console.log('touch gestures prevented.')
 	}, {passive: false});
 
-	function preventTouchMoveOnBody() {
-		window.addEventListener('touchmove', function(e) {
-			e.preventDefault();
-		}, {passive: false});
-	}
-	
-	let scrollableArea = document.querySelector('.scrollable-area');
-	// console.log(`scrollTop: ${scrollableArea.scrollTop} | scrollHeight: ${scrollableArea.scrollHeight} | offsetHeight: ${scrollableArea.offsetHeight}`);
-	
-	let header = document.querySelector('.header');
-	let list = document.querySelector('.scrollable-area')
-
-	header.addEventListener('touchmove', preventTouchMoveOnBody);
-	// list.addEventListener('touchmove', preventTouchMoveOnBody);
+	window.addEventListener('touchmove', function(e) {
+		console.log(`touches ${e.targetTouches}`);
+	}, {passive: false})
   
 })
 
