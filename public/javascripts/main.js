@@ -22,69 +22,81 @@ function savedMsg(e) {
 }
 
 // ----- TOUCH EVENTS ------ //
-window.addEventListener('DOMContentLoaded', function() {
-	const preventDefault = e => { e.preventDefault() }
-	const consoleFunc = e => { console.log(e.touches)};
-	const container = document.querySelector('.scrollable-area')
+// window.addEventListener('DOMContentLoaded', function() {
+// 	const preventDefault = e => { e.preventDefault() }
+// 	const consoleFunc = e => { console.log(e.touches)};
+// 	let container = document.querySelector('.js-list-container');
+// 	let ul = document.querySelector('.js-ul-list');
 
-	let elm = document.querySelector('.scrollable-area');
-	console.log("scroll height: ", elm.scrollHeight);
-
-	window.addEventListener('gesturechange', preventDefault, {passive: false});
-	// window.addEventListener('touchstart', touchStart, {passive: false})
-	// window.addEventListener('touchmove', preventDefault, {passive: false});
-	// window.addEventListener('touchstart', scrollArea, {passive: false})
+// 	window.addEventListener('gesturechange', preventDefault, {passive: false});
+// 	window.addEventListener('touchmove', preventDefault, {passive: false});
   
-	container.addEventListener('touchstart', touchStart, {passive: false});
-	container.addEventListener('touchmove', touchmove, {passive: false});
-	container.addEventListener('touchend', touchEnd, {passive: false});
+// 	container.addEventListener('touchstart', touchStart, {passive: false});
+// 	container.addEventListener('touchmove', touchmove, {passive: false});
+// 	container.addEventListener('touchend', touchEnd, {passive: false});
 
-	let scrolling = false;
-	let curY = null;
-	let offSet = container.offsetHeight
+// 	let isScrolling = false;
+// 	let curY = null;
+// 	let curX = null;
+// 	let offset = null;
+// 	let scrollHeight = container.scrollHeight
+// 	let scrollStart = null;
+// 	let scrollTop = container.scrollTop;
+// 	let scrollArea = container.scrollHeight - container.scrollTop === container.clientHeight
+	// function touchStart(e) {
+	// 	// Set values based on whether scrolling has started or not
+	// 	// if scrolling has started and a new touch is started then 
+	// 	// begin scrolling from that position.
+	// 	if (e.targetTouches.length === 1) {
+	// 		console.log(`scroll Height: ${container.scrollHeight} | scrollTop: ${container.scrollTop} | clientHeight: ${container.clientHeight}`)
+	// 		console.log(`scroll area: ${scrollArea}`);
+	// 		isScrolling = true;
+	// 		if(curY == null) {
+	// 			curY = e.touches[0].pageY;
+	// 			curX = e.touches[0].pageX;
+	// 		}
 
-	function touchStart(e) {
-		if (e.targetTouches.length === 1) {
-			console.log`touches: ${e.touches} | offsetHeight: ${offSet}`;
-			curY = e.touches[0].pageY;
-			console.log(`start point: ${curY}`)
-			scrolling = true;
-		}
-	}
+	// 		offset = curY - scrollHeight;
+	// 		scrollStart = curY + offset;
+	// 		// console.log`touches: ${e.touches} | offsetHeight: ${offset}`;
+	// 		// console.log(`start point: ${curY}`)
+	// 	}
+	// 	console.log(`curY: ${curY}`)
+	// 	console.log(`offset = curY - scrollHeight: ${offset}`)
+	// 	console.log(`scrollStart = curY + offset: ${scrollStart}`);
+	// 	console.log(`scrollHeight: ${scrollHeight}`)
+	// }
 
-	function touchmove(e) {
-		if (e.targetTouches.length === 1) {
-			console.log`${e.touches}`;
-			for (var i=0; i < e.changedTouches.length; i++) {
-				let scrolling = e.changedTouches[i].clientY;
-				console.log(`scrolling: ${scrolling}`);
-				container.style.transform = `translateY(${scrolling}px)`;
-			}
-		}
-	}
+	// function touchmove(e) {
+	// 	if (e.targetTouches.length === 1 && isScrolling) {
+	// 		for (var i=0; i < e.changedTouches.length; i++) {
+	// 			console.log(`last li in view? ${ul.lastElementChild.scrollIntoView(true)}`);
+	// 			scrolling = e.changedTouches[i].clientY - curY;
+	// 			// disableSwipe = e.changedTouches[i].clientX - curY
+	// 			console.log(`scrolling: ${scrolling}`);
+	// 			console.log`clientX: ${e.changedTouches[i].clientX}`;
+	// 			if (scrolling > 0) {
+	// 				// return;
+	// 				e.preventDefault();
+	// 				curY = e.changedTouches[i].clientY;
+	// 			} else {
+	// 				console.log(`scrolling: ${scrolling}`);
+	// 				container.style.transform = `translateY(${scrolling}px)`;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	function touchEnd(e) {
-		console.log(e.targetTouches);
-	}
+	// function touchEnd(e) {
+	// 	console.log('touch ended.');
+	// 	console.log(e.targetTouches);
+	// }
 	
-	function scrollArea(e) {
-		let listHeight = container.firstElementChild.offsetHeight
-		// console.log("scrollHeight: ", container.scrollHeight)
-		// console.log(container.offsetHeight)
-		// console.log(e.touches)
-		// console.log(container.firstElementChild.offsetHeight)
-		// console.log(window.visualViewport)
-		// console.log(`list hight: ${listHeight} | ${e.touches[0].clientY} | ${e.changedTouches[0]}`);
-		for (var i=0; i < e.changedTouches.length; i++) {
-			console.log("changedTouches[" + i + "].clientY = " + e.changedTouches[i].clientY);
-		}
-	}
-	
-})
-if (window.location.pathname !== '/') {
-	window.removeEventListener('gesturechange', preventDefault);
-	window.removeEventListener('touchmove', preventDefault);
-}
+// })
+// if (window.location.pathname !== '/') {
+// 	window.removeEventListener('gesturechange', preventDefault);
+// 	window.removeEventListener('touchmove', preventDefault);
+// }
 
 	
 	/* Dev Notes:
