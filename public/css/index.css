@@ -91,6 +91,7 @@ html, body {
     padding-right: 7.85rem;
 }
 
+
 .button-title {
     width: 150px;
 }
@@ -102,6 +103,10 @@ html, body {
     padding-right: 5rem;
     border: none;
     border-radius: 100px 100px 100px 100px;
+}
+
+.save-weather-form {
+	width: 100%;
 }
 
 .back-btn-layout {
