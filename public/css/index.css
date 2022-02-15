@@ -107,6 +107,7 @@ html, body {
 
 .save-weather-form {
 	width: 100%;
+	margin-top: .5vh;
 }
 
 .back-btn-layout {
